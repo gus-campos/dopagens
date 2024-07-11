@@ -1,0 +1,143 @@
+Geometry = GenFormat {
+12 S
+C
+1  1   0.000385         1.415478         0.002023
+2  1   0.000000         0.000000         0.000000
+3  1   1.226289        -0.706958         0.003878
+4  1   2.452068         0.000894         0.008366
+5  1   2.451953         1.416383         0.010681
+6  1   1.225898         2.123803         0.008166
+7  1   1.225524         3.518263         0.010765
+8  1   1.225432         4.848031         0.012751
+9  1   3.659328         2.113912         0.014483
+10  1   4.810674         2.779139         0.016452
+11  1   3.659718        -0.696251         0.009927
+12  1   4.811368        -1.360996         0.010358
+0.0 0.0 0.0
+6.0200 3.4734 0.0
+0.0 6.9502 0.0
+0.0 0.0 50.0
+}
+Driver = GeometryOptimization {
+  Optimiser = Rational {
+    DiagLimit = 1.0000000000000000E-002
+  }
+  LatticeOpt = Yes
+  MovedAtoms = 1:-1
+  FixAngles = No
+  Isotropic = No
+  MaxSteps = 10000
+  OutputPrefix = "geo_opt_out"
+  Convergence = {
+    Energy = inf
+    GradElem = 1e-4
+    GradNorm = inf
+    DispElem = inf
+    DispNorm = inf
+  }
+  AppendGeometries = Yes
+  FixLengths = {
+ No No No
+  }
+}
+Hamiltonian = DFTB {
+  Scc = Yes
+  SCCTolerance = 1e-5
+  MaxSCCIterations = 10000
+  ConvergentSccOnly = Yes
+  EwaldTolerance = 1e-9
+  ShellResolvedSCC = No
+  Mixer = Anderson {
+    MixingParameter = 5.0000000000000003E-002
+    Generations = 4
+    InitMixingParameter = 1.0000000000000000E-002
+    DynMixingParameters = {}
+    DiagonalRescaling = 1.0000000000000000E-002
+  }
+  MaxAngularMomentum = {
+    C = "p"
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = "/home/common/3ob-3-1_H_mod/"
+    Separator = "-"
+    Suffix = ".skf"
+    LowerCaseTypeName = No
+  }
+  KPointsAndWeights = SupercellFolding {
+1 0 0
+0 1 0
+0 0 1
+0.0 0.0 0.0
+  }
+  Dispersion = DftD3 {
+    Damping = BeckeJohnson {
+      a1 = 0.746
+      a2 = 4.191
+    }
+    s6 = 1.0
+    s8 = 3.209
+    cutoff = 94.868329805051374
+    cutoffcn = 40.000000000000000
+    threebody = No
+    hhrepulsion = No
+  }
+  ThirdOrderFull = Yes
+  HCorrection = Damping {
+    Exponent = 4.00
+  }
+  HubbardDerivs = C {
+-0.1492
+  }
+  PolynomialRepulsive = {}
+  OldSKInterpolation = No
+  RangeSeparated = None {}
+  ReadInitialCharges = No
+  InitialCharges = {}
+  EwaldParameter = 0.0000000000000000
+  SpinPolarisation = {}
+  ElectricField = {}
+  Solver = RelativelyRobust {}
+  Charge = 0.0000000000000000
+  OnSiteCorrection = {}
+  Solvation = {}
+  Electrostatics = GammaFunctional {}
+  ThirdOrder = No
+  Differentiation = FiniteDiff {
+    Delta = 1.2207031250000000E-004
+  }
+  ForceEvaluation = "Traditional"
+  Filling = Fermi {
+    Temperature = 0.0000000000000000
+    IndependentKFilling = No
+  }
+}
+Options = {
+  WriteDetailedXML = No
+  WriteAutotestTag = No
+  WriteResultsTag = No
+  WriteDetailedOut = Yes
+  RandomSeed = 0
+  WriteHS = No
+  WriteRealHS = No
+  MinimiseMemoryUsage = No
+  ShowFoldedCoords = No
+  TimingVerbosity = 1
+  WriteChargesAsText = No
+}
+Analysis = {
+  CalculateForces = Yes
+  ProjectStates = {}
+  WriteEigenvectors = No
+  WriteBandOut = Yes
+  MullikenAnalysis = Yes
+  WriteNetCharges = No
+  AtomResolvedEnergies = No
+}
+ParserOptions = {
+  ParserVersion = 12
+  WriteHSDInput = Yes
+  IgnoreUnprocessedNodes = No
+  StopAfterParsing = No
+}
+Reks = None {}
+ExcitedState = {}

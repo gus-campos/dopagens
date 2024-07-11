@@ -1,0 +1,13 @@
+*.pyc
+
+main_bonds_length.py
+
+*~
+
+EXTRA_PACKAGE
+EXTRA_PACKAGE/*
+
+EXTRA
+EXTRA/*
+
+DEADJOE

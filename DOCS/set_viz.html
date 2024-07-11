@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module set_viz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>set_viz</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/gfcampos/IC/dopagens/DOPINGS_PACKAGE/set_viz.py">/home/gfcampos/IC/dopagens/DOPINGS_PACKAGE/set_viz.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="set_viz.html#set_viz">set_viz</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="set_viz">class <strong>set_viz</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="set_viz-energ_elem_graphs"><strong>energ_elem_graphs</strong></a>(sets_list: list) -&gt; None</dt><dd><tt>Gera,&nbsp;para&nbsp;uma&nbsp;lista&nbsp;de&nbsp;conjuntos&nbsp;de&nbsp;dopagens,&nbsp;visualizações&nbsp;que<br>
+para&nbsp;cada&nbsp;sítio,&nbsp;compara&nbsp;a&nbsp;energia&nbsp;de&nbsp;ligação&nbsp;das&nbsp;dopagens&nbsp;<br>
+feitas&nbsp;com&nbsp;diferentes&nbsp;elementos.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+sets_list&nbsp;:&nbsp;list[dops_set]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;conjunto&nbsp;de&nbsp;dopagens&nbsp;para&nbsp;os&nbsp;quais&nbsp;se&nbsp;deseja&nbsp;gerar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;visualizações.</tt></dd></dl>
+
+<dl><dt><a name="set_viz-energ_site_graph"><strong>energ_site_graph</strong></a>(sets_list: list, second_var: str = None, show_cov: bool = True) -&gt; None</dt><dd><tt>Gera&nbsp;uma&nbsp;grade&nbsp;de&nbsp;gráficos,&nbsp;onde&nbsp;os&nbsp;gráficos&nbsp;da&nbsp;grade&nbsp;variam&nbsp;em<br>
+elementos&nbsp;no&nbsp;eixo&nbsp;x,&nbsp;e&nbsp;em&nbsp;bases&nbsp;no&nbsp;eixo&nbsp;y,&nbsp;e&nbsp;cada&nbsp;gráfico&nbsp;<br>
+relaciona&nbsp;o&nbsp;sítio&nbsp;no&nbsp;eixo&nbsp;x,&nbsp;com&nbsp;a&nbsp;energia&nbsp;de&nbsp;formação&nbsp;no&nbsp;eixo&nbsp;<br>
+y.&nbsp;A&nbsp;linha&nbsp;deste&nbsp;gráfico&nbsp;se&nbsp;dá&nbsp;na&nbsp;cor&nbsp;azul.<br>
+&nbsp;<br>
+Opcionalmente&nbsp;plota&nbsp;conjuntamente&nbsp;a&nbsp;relação&nbsp;entre&nbsp;alguma&nbsp;métrica<br>
+e&nbsp;o&nbsp;sítio,&nbsp;com&nbsp;plot&nbsp;em&nbsp;linha&nbsp;vermelha.&nbsp;<br>
+&nbsp;<br>
+Pode&nbsp;mostrar&nbsp;a&nbsp;covariância&nbsp;dos&nbsp;dois&nbsp;dados&nbsp;naquele&nbsp;gráfico,&nbsp;junto<br>
+ao&nbsp;título.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+sets_list&nbsp;:&nbsp;list[dops_set]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;donjunto&nbsp;de&nbsp;dopagens&nbsp;a&nbsp;serem&nbsp;plotadas.<br>
+&nbsp;<br>
+stat&nbsp;:&nbsp;{None,&nbsp;"dipole",&nbsp;"std"},&nbsp;default&nbsp;=&nbsp;None&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;a&nbsp;estatística&nbsp;norma&nbsp;do&nbsp;dipolo,&nbsp;desvio&nbsp;padrão&nbsp;das&nbsp;cargas,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ou&nbsp;nenhuma,&nbsp;deve&nbsp;ser&nbsp;plotada&nbsp;junto&nbsp;à&nbsp;energia.<br>
+&nbsp;<br>
+show_cov&nbsp;:&nbsp;bool,&nbsp;default&nbsp;=&nbsp;True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;a&nbsp;covariância&nbsp;das&nbsp;duas&nbsp;estatísticas&nbsp;deve&nbsp;ser&nbsp;impressa&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;junto&nbsp;ao&nbsp;título&nbsp;do&nbsp;gráfico.&nbsp;Se&nbsp;stat&nbsp;for&nbsp;None,&nbsp;show_cov&nbsp;é<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignorada.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+&nbsp;<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Invalid&nbsp;second_var&nbsp;option.<br>
+&nbsp;<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;At&nbsp;least&nbsp;two&nbsp;sets&nbsp;are&nbsp;needed&nbsp;in&nbsp;sets_list.</tt></dd></dl>
+
+<dl><dt><a name="set_viz-gap_elem_graph"><strong>gap_elem_graph</strong></a>(sets_list: list) -&gt; None</dt><dd><tt>Gera,&nbsp;para&nbsp;um&nbsp;conjunto&nbsp;completo&nbsp;de&nbsp;dopagens,&nbsp;vizualizações&nbsp;com&nbsp;<br>
+gráficos&nbsp;de&nbsp;linha,&nbsp;que&nbsp;relacionam&nbsp;o&nbsp;elemento&nbsp;da&nbsp;dopagem&nbsp;com&nbsp;o&nbsp;<br>
+gap&nbsp;da&nbsp;estrutura.&nbsp;É&nbsp;gerada&nbsp;uma&nbsp;visualizaçãp&nbsp;para&nbsp;cada&nbsp;par&nbsp;<br>
+base-sítio,&nbsp;onde&nbsp;são&nbsp;comparados&nbsp;lado&nbsp;a&nbsp;lado&nbsp;o&nbsp;gap&nbsp;dos&nbsp;<br>
+diversos&nbsp;elementos&nbsp;de&nbsp;dopagem,&nbsp;em&nbsp;tal&nbsp;base&nbsp;e&nbsp;sítio.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+set_list&nbsp;:&nbsp;list[dops_set]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Conjunto&nbsp;de&nbsp;dopagens&nbsp;para&nbsp;o&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;gerar&nbsp;a&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;visualizaçãp.</tt></dd></dl>
+
+<dl><dt><a name="set_viz-gap_site_graph"><strong>gap_site_graph</strong></a>(set: dops_set.dops_set) -&gt; None</dt><dd><tt>Gera,&nbsp;para&nbsp;um&nbsp;conjunto&nbsp;completo&nbsp;de&nbsp;dopagens,&nbsp;vizualizações&nbsp;com&nbsp;<br>
+gráficos&nbsp;de&nbsp;linha,&nbsp;que&nbsp;relacionam&nbsp;o&nbsp;sítio&nbsp;da&nbsp;dopagem&nbsp;com&nbsp;o&nbsp;gap<br>
+da&nbsp;estrutura.&nbsp;É&nbsp;gerada&nbsp;uma&nbsp;visualizaçãp&nbsp;para&nbsp;cada&nbsp;par&nbsp;<br>
+base-elemento,&nbsp;onde&nbsp;são&nbsp;comparados&nbsp;lado&nbsp;a&nbsp;lado&nbsp;o&nbsp;gap&nbsp;dos&nbsp;<br>
+diversos&nbsp;sítios&nbsp;de&nbsp;dopagem,&nbsp;em&nbsp;tal&nbsp;base,&nbsp;com&nbsp;tal&nbsp;elemento.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+set&nbsp;:&nbsp;dops_set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Conjunto&nbsp;de&nbsp;dopagens&nbsp;para&nbsp;o&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;gerar&nbsp;a&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;visualizaçãp.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>atoms_data</strong> = {'energ_atom': {'3ob': {'C': -38.0549, 'H': -6.4926, 'Li': -2.8762, 'Mg': -9.3976, 'Na': -2.7405, 'Zn': -117.3181}, 'matsci': {'Al': -16.4248, 'B': -22.0827, 'C': -37.5191, 'H': -6.2151, 'N': -57.8621, 'O': -83.4628, 'P': -43.4685, 'Si': -29.4873, 'Ti': -17.6801}}, 'hubbard_derivs': {'Br': -0.0573, 'C': -0.1492, 'Ca': -0.034, 'Cl': -0.0697, 'F': -0.1623, 'H': -0.1857, 'I': -0.0433, 'K': -0.0339, 'Mg': -0.02, 'N': -0.1535, ...}, 'max_ang_momentum': {'Al': 'd', 'B': 'p', 'C': 'p', 'H': 's', 'Li': 'p', 'Mg': 'p', 'N': 'p', 'Na': 'p', 'O': 'p', 'P': 'd', ...}, 'valency': {'Al': 3, 'B': 3, 'C': 4, 'H': 1, 'Li': 1, 'Mg': 2, 'N': 5, 'Na': 1, 'O': 6, 'P': 5, ...}}<br>
+<strong>dirs_data</strong> = {'bases': PosixPath('../INPUT/bases'), 'bin_dir': {'d1': PosixPath('/home/usr/bin/dftb_plus/dftbplus-22.2.x86_64-linux/bin/dftb+'), 'df12': PosixPath('/home/common/dftb/dftbplus-22.2.x86_64-linux/bin/dftb+')}, 'config': PosixPath('../INPUT/config_files'), 'dop_output': PosixPath('../../DOP_OUTPUT'), 'generic_hsd': {'3ob': PosixPath('../INPUT/generic_dftb_input/3ob.hsd'), '3ob+Li': PosixPath('../INPUT/generic_dftb_input/3ob+Li.hsd'), 'matsci': PosixPath('../INPUT/generic_dftb_input/matsci.hsd')}, 'h2_gen': PosixPath('../../H2_GEN'), 'proc_output': PosixPath('../../PROC_OUTPUT'), 'skf_dirs': {'3ob': PosixPath('../INPUT/slater_koster_files/3ob'), 'matsci': PosixPath('../INPUT/slater_koster_files/matsci')}}</td></tr></table>
+</body></html>

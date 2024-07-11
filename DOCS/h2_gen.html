@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module h2_gen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>h2_gen</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/gfcampos/IC/dopagens/H2_PACKAGE/h2_gen.py">/home/gfcampos/IC/dopagens/H2_PACKAGE/h2_gen.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="h2_gen.html#h2_gen">h2_gen</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="h2_gen">class <strong>h2_gen</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Classe&nbsp;de&nbsp;métodos&nbsp;estáticos&nbsp;para&nbsp;geração&nbsp;de&nbsp;estruturas&nbsp;cobertas&nbsp;por<br>
+moléculas&nbsp;de&nbsp;H2.<br>
+&nbsp;<br>
+Methods<br>
+-------<br>
+&nbsp;<br>
+<a href="#h2_gen-plot">plot</a>(xs,&nbsp;ys,&nbsp;zs,&nbsp;radius:&nbsp;float,&nbsp;C:&nbsp;np.ndarray=None)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gera&nbsp;um&nbsp;plot&nbsp;interativo&nbsp;de&nbsp;todos&nbsp;os&nbsp;átomos,&nbsp;dadas&nbsp;as&nbsp;coordenadas&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;todos&nbsp;eles.&nbsp;Se&nbsp;for&nbsp;passada&nbsp;uma&nbsp;matriz&nbsp;de&nbsp;coeficientes,&nbsp;plota&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;também&nbsp;a&nbsp;curva&nbsp;ajustada.<br>
+&nbsp;<br>
+<a href="#h2_gen-to_CM">to_CM</a>(struct&nbsp;:&nbsp;"structure")<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Recebe&nbsp;uma&nbsp;estrutura&nbsp;e&nbsp;retorna&nbsp;a&nbsp;mesma&nbsp;movida&nbsp;para&nbsp;o&nbsp;seu&nbsp;centro&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;massa.&nbsp;Só&nbsp;considera&nbsp;os&nbsp;carbonos&nbsp;no&nbsp;cálculo&nbsp;do&nbsp;centro&nbsp;de&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;massa.<br>
+&nbsp;<br>
+<a href="#h2_gen-gen_arrays">gen_arrays</a>(struct&nbsp;:&nbsp;"structure")<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gera&nbsp;arrays&nbsp;xs,&nbsp;ys,&nbsp;zs&nbsp;das&nbsp;coordenadas&nbsp;dos&nbsp;átomos&nbsp;de&nbsp;uma&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;estrutura.<br>
+&nbsp;<br>
+<a href="#h2_gen-lin_reg">lin_reg</a>(xs,&nbsp;ys,&nbsp;zs,&nbsp;n:&nbsp;int)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Calcula&nbsp;&nbsp;os&nbsp;coeficientes&nbsp;que&nbsp;ajustam,&nbsp;aos&nbsp;pontos&nbsp;fornecidos,&nbsp;uma&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;curva&nbsp;do&nbsp;tipo:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-g">g</a>(x,y)&nbsp;=&nbsp;C0&nbsp;*&nbsp;phi{0}(x,y)&nbsp;+&nbsp;...&nbsp;+&nbsp;C(2n+1)&nbsp;*&nbsp;phi{2n}(x,y)<br>
+&nbsp;<br>
+<a href="#-graphine_radius">graphine_radius</a>(struct:&nbsp;"structure")<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estima&nbsp;um&nbsp;raio&nbsp;aproximado&nbsp;para&nbsp;a&nbsp;estrutura&nbsp;de&nbsp;grafino.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Encontra&nbsp;o&nbsp;carbono&nbsp;mais&nbsp;afastado&nbsp;do&nbsp;centro&nbsp;de&nbsp;massa,&nbsp;e&nbsp;retorna&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;90%&nbsp;desta&nbsp;distância.&nbsp;Assume&nbsp;que&nbsp;o&nbsp;centro&nbsp;de&nbsp;massa&nbsp;da&nbsp;estrutura&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;está&nbsp;em&nbsp;(0,0,0).<br>
+&nbsp;<br>
+<a href="#h2_gen-gen_R2_coords_periodic">gen_R2_coords_periodic</a>(periodic_struct:&nbsp;"periodic_structure",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nH2:&nbsp;int)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gera,&nbsp;para&nbsp;uma&nbsp;estrutura&nbsp;periódica,&nbsp;vários&nbsp;pontos&nbsp;no&nbsp;R2,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dispostos&nbsp;em&nbsp;uma&nbsp;grade,&nbsp;que&nbsp;correspondem&nbsp;aos&nbsp;centros&nbsp;das&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;moléculas&nbsp;de&nbsp;H2.<br>
+&nbsp;<br>
+<a href="#h2_gen-gen_R2_coord_flake">gen_R2_coord_flake</a>(struct:&nbsp;"strucutre",&nbsp;nH2:&nbsp;int)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gera,&nbsp;para&nbsp;uma&nbsp;estrutura&nbsp;de&nbsp;formato&nbsp;arredondado,&nbsp;no&nbsp;R2,&nbsp;uma&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lista&nbsp;de&nbsp;com&nbsp;posições&nbsp;de&nbsp;H2.<br>
+&nbsp;<br>
+<a href="#h2_gen-gen_R3_H2">gen_R3_H2</a>(R2_coords,&nbsp;C,&nbsp;otherside=False,&nbsp;vertical=False)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Recebe&nbsp;pontos&nbsp;espalhados&nbsp;sobre&nbsp;um&nbsp;plano,&nbsp;e&nbsp;retorna&nbsp;pontos&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;espalhados&nbsp;sobre&nbsp;uma&nbsp;superfície&nbsp;ajustada&nbsp;sobre&nbsp;os&nbsp;átomos&nbsp;da&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;estrutura.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="h2_gen-gen_R2_coord_flake"><strong>gen_R2_coord_flake</strong></a>(struct: 'strucutre', nH2: int)</dt><dd><tt>Gera,&nbsp;para&nbsp;uma&nbsp;estrutura&nbsp;de&nbsp;formato&nbsp;arredondado,&nbsp;no&nbsp;R2,&nbsp;uma&nbsp;lista&nbsp;de&nbsp;<br>
+com&nbsp;posições&nbsp;de&nbsp;H2.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;a&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;gerar&nbsp;os&nbsp;centros&nbsp;de&nbsp;H2.<br>
+&nbsp;<br>
+nH2&nbsp;:&nbsp;int&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Número&nbsp;de&nbsp;H2&nbsp;desejado&nbsp;na&nbsp;molécula.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+list[np.ndarray]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista,&nbsp;de&nbsp;vetores&nbsp;no&nbsp;R2,&nbsp;com&nbsp;as&nbsp;posições&nbsp;geradas&nbsp;para&nbsp;os&nbsp;centros<br>
+&nbsp;&nbsp;&nbsp;&nbsp;de&nbsp;H2.</tt></dd></dl>
+
+<dl><dt><a name="h2_gen-gen_R2_coords_periodic"><strong>gen_R2_coords_periodic</strong></a>(periodic_struct: 'periodic_structure', nH2: int)</dt><dd><tt>Gera,&nbsp;para&nbsp;uma&nbsp;estrutura&nbsp;periódica,&nbsp;vários&nbsp;pontos&nbsp;no&nbsp;R2,&nbsp;<br>
+dispostos&nbsp;em&nbsp;uma&nbsp;grade,&nbsp;que&nbsp;correspondem&nbsp;aos&nbsp;centros&nbsp;das&nbsp;<br>
+moléculas&nbsp;de&nbsp;H2.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+periodic_struct&nbsp;:&nbsp;periodic_structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;periódica,&nbsp;dotada&nbsp;de&nbsp;vectores&nbsp;de&nbsp;célula.<br>
+&nbsp;<br>
+nH2&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Quantidade&nbsp;de&nbsp;moléculas&nbsp;de&nbsp;H2&nbsp;que&nbsp;deseja&nbsp;gerar&nbsp;para&nbsp;tal&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;estrutura.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+list[np.ndarray]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;vetores&nbsp;no&nbsp;R2,&nbsp;com&nbsp;a&nbsp;coordenada&nbsp;dos&nbsp;centros&nbsp;gerados&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;para&nbsp;as&nbsp;moléculas&nbsp;de&nbsp;H2.</tt></dd></dl>
+
+<dl><dt><a name="h2_gen-gen_R3_H2"><strong>gen_R3_H2</strong></a>(R2_coords, C, otherside=False, vertical=False)</dt><dd><tt>Recebe&nbsp;pontos&nbsp;espalhados&nbsp;sobre&nbsp;um&nbsp;plano,&nbsp;e&nbsp;retorna&nbsp;pontos&nbsp;<br>
+espalhados&nbsp;sobre&nbsp;uma&nbsp;superfície&nbsp;ajustada&nbsp;sobre&nbsp;os&nbsp;átomos&nbsp;da&nbsp;<br>
+estrutura.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+R2_coord&nbsp;:&nbsp;list[np.ndarray]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;de&nbsp;vetores&nbsp;no&nbsp;R2&nbsp;que&nbsp;dão&nbsp;a&nbsp;posição&nbsp;dos&nbsp;centros&nbsp;de&nbsp;H2&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dispostos&nbsp;no&nbsp;plano.<br>
+&nbsp;<br>
+C&nbsp;:&nbsp;np.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Matriz&nbsp;coluna&nbsp;de&nbsp;coeficientes&nbsp;da&nbsp;função&nbsp;ajustada&nbsp;sobre&nbsp;os&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pontos&nbsp;da&nbsp;estrutura.<br>
+&nbsp;<br>
+otherside&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;é&nbsp;desejado&nbsp;gerar&nbsp;tais&nbsp;pontos&nbsp;no&nbsp;lado&nbsp;oposto&nbsp;da&nbsp;estrutura,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ou&nbsp;seja,&nbsp;no&nbsp;lado&nbsp;onde&nbsp;z&nbsp;é&nbsp;negativo.<br>
+&nbsp;<br>
+vertical&nbsp;:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;é&nbsp;deseja&nbsp;que&nbsp;o&nbsp;eixo&nbsp;da&nbsp;molécula&nbsp;de&nbsp;H2&nbsp;esteja&nbsp;orientada&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;perpendicular&nbsp;à&nbsp;estrutura.&nbsp;Se&nbsp;False,&nbsp;o&nbsp;eixo&nbsp;será&nbsp;parelelo&nbsp;à<br>
+&nbsp;&nbsp;&nbsp;&nbsp;estrutura,&nbsp;e&nbsp;sua&nbsp;rotação&nbsp;será&nbsp;aleatória.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+list[np.ndarray]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;com&nbsp;vetores&nbsp;no&nbsp;R3&nbsp;das&nbsp;posições&nbsp;de&nbsp;cada&nbsp;átomo&nbsp;de&nbsp;H,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;com&nbsp;posição&nbsp;ajustada&nbsp;de&nbsp;acordo&nbsp;com&nbsp;a&nbsp;curvatura&nbsp;da&nbsp;estrutura.</tt></dd></dl>
+
+<dl><dt><a name="h2_gen-gen_arrays"><strong>gen_arrays</strong></a>(struct: 'structure')</dt><dd><tt>Gera&nbsp;arrays&nbsp;xs,&nbsp;ys,&nbsp;zs&nbsp;das&nbsp;coordenadas&nbsp;dos&nbsp;átomos&nbsp;de&nbsp;uma&nbsp;<br>
+estrutura.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;a&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;gerar&nbsp;os&nbsp;arrays.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+xs,&nbsp;ys,&nbsp;zs&nbsp;:&nbsp;np.array[float]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Arrays&nbsp;das&nbsp;coordenadas&nbsp;x,&nbsp;y&nbsp;e&nbsp;z&nbsp;dos&nbsp;átomos&nbsp;da&nbsp;estrutura.</tt></dd></dl>
+
+<dl><dt><a name="h2_gen-lin_reg"><strong>lin_reg</strong></a>(xs, ys, zs, n: int)</dt><dd><tt>Calcula&nbsp;&nbsp;os&nbsp;coeficientes&nbsp;que&nbsp;ajustam,&nbsp;aos&nbsp;pontos&nbsp;fornecidos,&nbsp;uma&nbsp;<br>
+curva&nbsp;do&nbsp;tipo:<br>
+&nbsp;<br>
+<a href="#-g">g</a>(x,y)&nbsp;=&nbsp;C0&nbsp;*&nbsp;phi{0}(x,y)&nbsp;+&nbsp;...&nbsp;+&nbsp;C(2n+1)&nbsp;*&nbsp;phi{2n}(x,y)<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+xs,&nbsp;ys,&nbsp;zs&nbsp;:&nbsp;np.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Arrays&nbsp;com&nbsp;as&nbsp;coordenadas&nbsp;dos&nbsp;pontos/átomos.&nbsp;<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+np.ndarray(shape=(2n+1))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Matriz&nbsp;coluna&nbsp;de&nbsp;coeficiente&nbsp;do&nbsp;ajuste&nbsp;de&nbsp;curva,&nbsp;na&nbsp;forma:<br>
+&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;C0&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;C1&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<br>
+|&nbsp;C(2n+1)&nbsp;|</tt></dd></dl>
+
+<dl><dt><a name="h2_gen-plot"><strong>plot</strong></a>(xs, ys, zs, radius: float, C: numpy.ndarray = None)</dt><dd><tt>Gera&nbsp;um&nbsp;plot&nbsp;interativo&nbsp;de&nbsp;todos&nbsp;os&nbsp;átomos,&nbsp;dadas&nbsp;as&nbsp;coordenadas&nbsp;de&nbsp;<br>
+todos&nbsp;eles.&nbsp;Se&nbsp;for&nbsp;passada&nbsp;uma&nbsp;matriz&nbsp;de&nbsp;coeficientes,&nbsp;plota&nbsp;também<br>
+a&nbsp;curva&nbsp;ajustada.<br>
+&nbsp;<br>
+Parameters&nbsp;<br>
+----------<br>
+&nbsp;<br>
+xs,&nbsp;ys,&nbsp;zs&nbsp;:&nbsp;np.array[float]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Array&nbsp;de&nbsp;floats&nbsp;das&nbsp;coordenadas&nbsp;dos&nbsp;átomos.<br>
+&nbsp;<br>
+radius&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Raio&nbsp;estimado&nbsp;da&nbsp;estrutura.<br>
+&nbsp;<br>
+C&nbsp;:&nbsp;np.ndarray[float],&nbsp;default&nbsp;=&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Matriz&nbsp;coluna&nbsp;de&nbsp;coeficientes&nbsp;do&nbsp;ajuste&nbsp;de&nbsp;curva.</tt></dd></dl>
+
+<dl><dt><a name="h2_gen-to_CM"><strong>to_CM</strong></a>(struct: 'structure')</dt><dd><tt>Recebe&nbsp;uma&nbsp;estrutura&nbsp;e&nbsp;retorna&nbsp;a&nbsp;mesma&nbsp;movida&nbsp;para&nbsp;o&nbsp;seu&nbsp;centro&nbsp;<br>
+de&nbsp;massa.&nbsp;Só&nbsp;considera&nbsp;os&nbsp;carbonos&nbsp;no&nbsp;cálculo&nbsp;do&nbsp;centro&nbsp;de&nbsp;<br>
+massa.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;a&nbsp;ser&nbsp;transladada.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+structure&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;transladada&nbsp;para&nbsp;o&nbsp;centro&nbsp;de&nbsp;massa.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-g"><strong>g</strong></a>(x: float, y: float, C: numpy.ndarray)</dt><dd><tt>Dado&nbsp;uma&nbsp;matrix&nbsp;coluna&nbsp;de&nbsp;coeficiente&nbsp;do&nbsp;ajuste,&nbsp;calcula&nbsp;a&nbsp;iamgem&nbsp;da<br>
+função:<br>
+&nbsp;<br>
+<a href="#-g">g</a>(x,y)&nbsp;=&nbsp;C0&nbsp;*&nbsp;phi{0}(x,y)&nbsp;+&nbsp;...&nbsp;+&nbsp;C(2n+1)&nbsp;*&nbsp;phi{2n}(x,y)<br>
+&nbsp;<br>
+tal&nbsp;que:<br>
+&nbsp;<br>
+phi{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1<br>
+phi{1}&nbsp;&nbsp;&nbsp;...&nbsp;phi{n}&nbsp;&nbsp;=&nbsp;x^n<br>
+phi{n+1}&nbsp;...&nbsp;phi{2n}&nbsp;=&nbsp;y^n<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+x&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valor&nbsp;de&nbsp;x.<br>
+&nbsp;<br>
+y:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valor&nbsp;de&nbsp;y.<br>
+&nbsp;<br>
+C&nbsp;:&nbsp;np.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Matriz&nbsp;coluna&nbsp;com&nbsp;os&nbsp;coeficientes&nbsp;do&nbsp;ajuste.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+z&nbsp;:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Imagem&nbsp;da&nbsp;função.</tt></dd></dl>
+ <dl><dt><a name="-graphine_radius"><strong>graphine_radius</strong></a>(struct: 'structure')</dt><dd><tt>"<br>
+Estima&nbsp;um&nbsp;raio&nbsp;aproximado&nbsp;para&nbsp;a&nbsp;estrutura&nbsp;de&nbsp;grafino.<br>
+&nbsp;<br>
+Encontra&nbsp;o&nbsp;carbono&nbsp;mais&nbsp;afastado&nbsp;do&nbsp;centro&nbsp;de&nbsp;massa,&nbsp;e&nbsp;retorna&nbsp;90%&nbsp;<br>
+desta&nbsp;distância.&nbsp;Assume&nbsp;que&nbsp;o&nbsp;centro&nbsp;de&nbsp;massa&nbsp;da&nbsp;estrutura&nbsp;está&nbsp;<br>
+em&nbsp;(0,0,0).<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;strucutre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;qual&nbsp;se&nbsp;calcular&nbsp;a&nbsp;estimativa.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Raio&nbsp;estimado&nbsp;para&nbsp;a&nbsp;estrutura.</tt></dd></dl>
+ <dl><dt><a name="-phi"><strong>phi</strong></a>(i: int, n: int, x, y)</dt><dd><tt>Retorna&nbsp;a&nbsp;imagem&nbsp;da&nbsp;n-ésima&nbsp;função&nbsp;phi,&nbsp;tal&nbsp;que:<br>
+&nbsp;<br>
+phi{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1<br>
+phi{1}&nbsp;&nbsp;&nbsp;...&nbsp;phi{n}&nbsp;&nbsp;=&nbsp;x^n<br>
+phi{n+1}&nbsp;...&nbsp;phi{2n}&nbsp;=&nbsp;y^n<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+i&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Índice&nbsp;da&nbsp;i-ésima&nbsp;função&nbsp;phi,&nbsp;ou&nbsp;seja&nbsp;phi{i}.<br>
+&nbsp;<br>
+x&nbsp;:&nbsp;float&nbsp;or&nbsp;np.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valor&nbsp;único&nbsp;de&nbsp;x,&nbsp;ou&nbsp;array&nbsp;de&nbsp;valores&nbsp;de&nbsp;x.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;array,&nbsp;precisa&nbsp;ter&nbsp;o&nbsp;mesmo&nbsp;tamanho&nbsp;de&nbsp;y.<br>
+&nbsp;<br>
+y&nbsp;:&nbsp;float&nbsp;or&nbsp;np.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valor&nbsp;único&nbsp;de&nbsp;y,&nbsp;ou&nbsp;array&nbsp;de&nbsp;valores&nbsp;de&nbsp;y.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;array,&nbsp;precisa&nbsp;ter&nbsp;o&nbsp;mesmo&nbsp;tamanho&nbsp;de&nbsp;x.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+z&nbsp;:&nbsp;float&nbsp;or&nbsp;np.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Imagem&nbsp;da&nbsp;função&nbsp;phi{i},&nbsp;ou&nbsp;array&nbsp;de&nbsp;imagens.</tt></dd></dl>
+</td></tr></table>
+</body></html>

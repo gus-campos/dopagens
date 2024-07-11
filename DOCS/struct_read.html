@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module struct_read</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>struct_read</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/gfcampos/IC/dopagens/DOPINGS_PACKAGE/struct_read.py">/home/gfcampos/IC/dopagens/DOPINGS_PACKAGE/struct_read.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="struct_read.html#struct_read">struct_read</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="struct_read">class <strong>struct_read</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Classe&nbsp;de&nbsp;métodos&nbsp;estáticos&nbsp;para&nbsp;a&nbsp;leitura&nbsp;de&nbsp;arquivos&nbsp;de&nbsp;<br>
+structures.<br>
+&nbsp;<br>
+Methods<br>
+-------<br>
+<a href="#struct_read-read_frame">read_frame</a>(struct:&nbsp;"structure")&nbsp;-&gt;&nbsp;list[list[str|int]]<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lê&nbsp;o&nbsp;último&nbsp;frame&nbsp;de&nbsp;um&nbsp;arquivo&nbsp;geo_end&nbsp;e&nbsp;o&nbsp;retorna&nbsp;como&nbsp;uma&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lista&nbsp;2D.<br>
+&nbsp;<br>
+<a href="#struct_read-read_energy">read_energy</a>(struct:&nbsp;"structure",&nbsp;extrapolated_0K=True)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lê&nbsp;a&nbsp;energia&nbsp;total&nbsp;da&nbsp;estrutura&nbsp;em&nbsp;eV&nbsp;no&nbsp;último&nbsp;passo&nbsp;de&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otimização&nbsp;e&nbsp;a&nbsp;retorna.<br>
+&nbsp;<br>
+<a href="#struct_read-read_bands">read_bands</a>(struct:&nbsp;"structure")&nbsp;-&gt;&nbsp;tuple[float,&nbsp;float]<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lê&nbsp;o&nbsp;arquivo&nbsp;band.out&nbsp;da&nbsp;estrutura&nbsp;e&nbsp;retorna&nbsp;a&nbsp;energia&nbsp;do&nbsp;HOMO&nbsp;e<br>
+&nbsp;&nbsp;&nbsp;&nbsp;do&nbsp;LUMO.<br>
+&nbsp;<br>
+<a href="#struct_read-read_dipole">read_dipole</a>(struct:&nbsp;"structure")&nbsp;-&gt;&nbsp;np.ndarray[float]:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lê&nbsp;o&nbsp;vetor&nbsp;dipolo&nbsp;da&nbsp;estrutura,&nbsp;retornando-o&nbsp;como&nbsp;um&nbsp;array.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="struct_read-read_bands"><strong>read_bands</strong></a>(struct: 'structure') -&gt; tuple</dt><dd><tt>Lê&nbsp;o&nbsp;arquivo&nbsp;band.out&nbsp;da&nbsp;estrutura&nbsp;e&nbsp;retorna&nbsp;a&nbsp;energia&nbsp;do&nbsp;HOMO&nbsp;e<br>
+do&nbsp;LUMO.<br>
+&nbsp;<br>
+Necessita&nbsp;que&nbsp;o&nbsp;número&nbsp;de&nbsp;elétrons&nbsp;na&nbsp;camada&nbsp;de&nbsp;valência&nbsp;do&nbsp;<br>
+elemento&nbsp;esteja&nbsp;definido&nbsp;em&nbsp;"atoms_data".<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;a&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;ler&nbsp;os&nbsp;dados.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+tuple[float,&nbsp;float]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Energia&nbsp;do&nbsp;homo,&nbsp;e&nbsp;energia&nbsp;do&nbsp;lumo.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+&nbsp;<br>
+KeyError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;valency&nbsp;of&nbsp;element&nbsp;[element]&nbsp;not&nbsp;found.</tt></dd></dl>
+
+<dl><dt><a name="struct_read-read_dipole"><strong>read_dipole</strong></a>(struct: 'structure') -&gt; numpy.ndarray</dt><dd><tt>Lê&nbsp;o&nbsp;vetor&nbsp;dipolo&nbsp;da&nbsp;estrutura,&nbsp;retornando-o&nbsp;como&nbsp;um&nbsp;array.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;a&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;ler&nbsp;os&nbsp;dados.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+np.ndarray[float]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Array&nbsp;do&nbsp;numpy&nbsp;com&nbsp;3&nbsp;floats&nbsp;que&nbsp;corresponde&nbsp;ao&nbsp;vetor&nbsp;dipolo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;da&nbsp;estrutura.<br>
+&nbsp;<br>
+None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;o&nbsp;arquivo&nbsp;não&nbsp;existir.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+&nbsp;<br>
+AssertionError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;detailed.out&nbsp;file&nbsp;exists,&nbsp;but&nbsp;dipole&nbsp;moment&nbsp;was&nbsp;not&nbsp;found.</tt></dd></dl>
+
+<dl><dt><a name="struct_read-read_energy"><strong>read_energy</strong></a>(struct: 'structure', extrapolated_0K=True) -&gt; float</dt><dd><tt>Retorna&nbsp;a&nbsp;energia&nbsp;total&nbsp;da&nbsp;estrutura&nbsp;(eV)&nbsp;no&nbsp;último&nbsp;passo&nbsp;de&nbsp;<br>
+otimização.<br>
+&nbsp;<br>
+Por&nbsp;padrão,&nbsp;já&nbsp;lê&nbsp;a&nbsp;energia&nbsp;extrapolada&nbsp;para&nbsp;o&nbsp;0K.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;a&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;ler&nbsp;os&nbsp;dados.<br>
+&nbsp;<br>
+extrapolated_0K&nbsp;:&nbsp;bool,&nbsp;default&nbsp;=&nbsp;True<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Se&nbsp;deve&nbsp;ser&nbsp;a&nbsp;energia&nbsp;extrapolada&nbsp;para&nbsp;o&nbsp;0K,&nbsp;ou&nbsp;só&nbsp;a&nbsp;energia<br>
+&nbsp;&nbsp;&nbsp;&nbsp;total.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Energia&nbsp;total&nbsp;da&nbsp;estrutura&nbsp;(eV)&nbsp;no&nbsp;último&nbsp;passo&nbsp;de&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otimização.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+&nbsp;<br>
+AssertionError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Energies&nbsp;not&nbsp;found&nbsp;in&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="struct_read-read_frame"><strong>read_frame</strong></a>(struct: 'structure') -&gt; list</dt><dd><tt>Lê&nbsp;o&nbsp;último&nbsp;frame&nbsp;de&nbsp;um&nbsp;arquivo&nbsp;geo_end&nbsp;e&nbsp;o&nbsp;retorna&nbsp;como&nbsp;uma&nbsp;<br>
+lista&nbsp;2D.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+&nbsp;<br>
+struct&nbsp;:&nbsp;structure<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estrutura&nbsp;para&nbsp;a&nbsp;qual&nbsp;se&nbsp;deseja&nbsp;ler&nbsp;os&nbsp;dados.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+&nbsp;<br>
+data&nbsp;:&nbsp;list[list[str|int]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lista&nbsp;2D&nbsp;onde&nbsp;o&nbsp;primeiro&nbsp;índice&nbsp;identifica&nbsp;uma&nbsp;linha,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;e&nbsp;o&nbsp;segundo&nbsp;índice&nbsp;identifica&nbsp;uma&nbsp;coluna&nbsp;de&nbsp;dados.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Elemento,&nbsp;X,&nbsp;Y,&nbsp;Z,&nbsp;Carga<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Exemplo:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['H',&nbsp;&nbsp;2.8054,&nbsp;&nbsp;6.321,&nbsp;-0.357,&nbsp;&nbsp;0.962]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['H',&nbsp;&nbsp;4.9574,&nbsp;&nbsp;5.091,&nbsp;-0.248,&nbsp;&nbsp;0.913]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['C',&nbsp;-9.1570,&nbsp;&nbsp;0.844,&nbsp;-0.195,&nbsp;&nbsp;4.002]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['C',&nbsp;-9.1580,&nbsp;-0.353,&nbsp;-0.028,&nbsp;&nbsp;4.214]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['C',&nbsp;&nbsp;2.8572,&nbsp;&nbsp;0.993,&nbsp;&nbsp;0.223,&nbsp;&nbsp;4.087]<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...]<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[3][0]&nbsp;-&gt;&nbsp;'C'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data[1][2]&nbsp;-&gt;&nbsp;5.091<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+&nbsp;<br>
+AssertionError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;file&nbsp;has&nbsp;no&nbsp;data&nbsp;lines.<br>
+&nbsp;<br>
+AssertionError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Unexpected&nbsp;number&nbsp;of&nbsp;data&nbsp;in&nbsp;geometry&nbsp;file.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>atoms_data</strong> = {'energ_atom': {'3ob': {'C': -38.0549, 'H': -6.4926, 'Li': -2.8762, 'Mg': -9.3976, 'Na': -2.7405, 'Zn': -117.3181}, 'matsci': {'Al': -16.4248, 'B': -22.0827, 'C': -37.5191, 'H': -6.2151, 'N': -57.8621, 'O': -83.4628, 'P': -43.4685, 'Si': -29.4873, 'Ti': -17.6801}}, 'hubbard_derivs': {'Br': -0.0573, 'C': -0.1492, 'Ca': -0.034, 'Cl': -0.0697, 'F': -0.1623, 'H': -0.1857, 'I': -0.0433, 'K': -0.0339, 'Mg': -0.02, 'N': -0.1535, ...}, 'max_ang_momentum': {'Al': 'd', 'B': 'p', 'C': 'p', 'H': 's', 'Li': 'p', 'Mg': 'p', 'N': 'p', 'Na': 'p', 'O': 'p', 'P': 'd', ...}, 'valency': {'Al': 3, 'B': 3, 'C': 4, 'H': 1, 'Li': 1, 'Mg': 2, 'N': 5, 'Na': 1, 'O': 6, 'P': 5, ...}}<br>
+<strong>config</strong> = {'charges_map': {'fig_size': [8, 8], 'values_limits': [-0.5, 0.5]}, 'histogram': {'bins_length': 0.01, 'bond_crit': {'graphene': {'Al-C': 2.1, 'Al-H': 1.6, 'B-C': 1.55, 'B-H': 1.3, 'C-C': 1.9, 'C-H': 1.15, 'C-Li': 2.15, 'C-Mg': 2.25, 'C-N': 1.4, 'C-Na': 2.3, ...}, 'graphine': {'Al-C': 2.1, 'Al-H': 1.6, 'B-C': 1.55, 'B-H': 1.3, 'C-C': 1.9, 'C-H': 1.15, 'C-Li': 2.08, 'C-Mg': 2.25, 'C-N': 1.4, 'C-Na': 2.3, ...}}, 'delta_tick_big': 0.05, 'delta_tick_small': 0.01, 'delta_y_ticks': 10, 'fig_size': [16, 8], 'x_limits': [1.0, 2.8]}}<br>
+<strong>dirs_data</strong> = {'bases': PosixPath('../INPUT/bases'), 'bin_dir': {'d1': PosixPath('/home/usr/bin/dftb_plus/dftbplus-22.2.x86_64-linux/bin/dftb+'), 'df12': PosixPath('/home/common/dftb/dftbplus-22.2.x86_64-linux/bin/dftb+')}, 'config': PosixPath('../INPUT/config_files'), 'dop_output': PosixPath('../../DOP_OUTPUT'), 'generic_hsd': {'3ob': PosixPath('../INPUT/generic_dftb_input/3ob.hsd'), '3ob+Li': PosixPath('../INPUT/generic_dftb_input/3ob+Li.hsd'), 'matsci': PosixPath('../INPUT/generic_dftb_input/matsci.hsd')}, 'h2_gen': PosixPath('../../H2_GEN'), 'proc_output': PosixPath('../../PROC_OUTPUT'), 'skf_dirs': {'3ob': PosixPath('../INPUT/slater_koster_files/3ob'), 'matsci': PosixPath('../INPUT/slater_koster_files/matsci')}}<br>
+<strong>dops_data</strong> = {'graphene': {'bases': ['ac', 'zz'], 'graphs_config': {'ylims': {'energy': {'ac': [-0.0157, -0.0144], 'zz': [-0.0157, -0.0144]}, 'gap': [-5, -3.75]}}, 'material': 'graphene', 'n_atoms': {'ac': 540, 'zz': 540}, 'n_ligs': {'ac': 750, 'zz': 756}, 'sites': {'ac': ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B14', 'B15', 'B16', 'B17', ...], 'zz': ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B14', 'B15', 'B16', 'C1', ...]}, 'sites_id': {'ac': {'A1': 352, 'A2': 118, 'A3': 338, 'B1': 103, 'B10': 312, 'B11': 77, 'B12': 297, 'B13': 63, 'B14': 298, 'B15': 64, ...}, 'zz': {'A1': 378, 'A2': 127, 'A3': 361, 'B1': 110, 'B10': 331, 'B11': 82, 'B12': 316, 'B13': 68, 'B14': 317, 'B15': 69, ...}}}, 'graphine': {'bases': ['g1', 'g2', 'g3', 'g4', 'g5'], 'graphs_config': {'ylims': {'energy': {'g1': [-0.092, -0.08], 'g2': [-0.072, -0.061], 'g3': [-0.06, -0.053], 'g4': [-0.051, -0.045], 'g5': [-0.044, -0.04]}, 'gap': [-6.25, -3]}}, 'material': 'graphine', 'n_atoms': {'g1': 84, 'g2': 108, 'g3': 132, 'g4': 156, 'g5': 180}, 'n_ligs': {'g1': 96, 'g2': 120, 'g3': 144, 'g4': 168, 'g5': 192}, 'sites': {'g1': ['A1', 'B1', 'B2', 'C1', 'C2', 'C3', 'C4', 'D1'], 'g2': ['A1', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2'], 'g3': ['A1', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3'], 'g4': ['A1', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4'], 'g5': ['A1', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4', 'D5']}, 'sites_id': {'g1': {'A1': 6, 'B1': 7, 'B2': 8, 'C1': 9, 'C2': 58, 'C3': 59, 'C4': 60, 'D1': 83}, 'g2': {'A1': 6, 'B1': 22, 'B2': 23, 'B3': 24, 'B4': 25, 'C1': 26, 'C2': 75, 'C3': 74, 'C4': 73, 'D1': 100, ...}, 'g3': {'A1': 6, 'B1': 28, 'B2': 29, 'B3': 30, 'B4': 31, 'B5': 32, 'B6': 33, 'C1': 109, 'C2': 81, 'C3': 80, ...}, 'g4': {'A1': 6, 'B1': 52, 'B2': 53, 'B3': 54, 'B4': 55, 'B5': 56, 'B6': 57, 'B7': 58, 'B8': 59, 'C1': 60, ...}, 'g5': {'A1': 6, 'B1': 51, 'B10': 60, 'B2': 52, 'B3': 53, 'B4': 54, 'B5': 55, 'B6': 56, 'B7': 57, 'B8': 58, ...}}}, 'param_dict': {'Al': 'matsci', 'B': 'matsci', 'Li': '3ob', 'Mg': '3ob', 'N': 'matsci', 'Na': '3ob', 'O': 'matsci', 'P': 'matsci', 'Si': 'matsci', 'Ti': 'matsci', ...}}<br>
+<strong>main_config</strong> = {'maquina': 'd1', 'output_name': 'output', 'redo_steps_limits': 30000, 'resume_dir_name': 'before_restart'}</td></tr></table>
+</body></html>
