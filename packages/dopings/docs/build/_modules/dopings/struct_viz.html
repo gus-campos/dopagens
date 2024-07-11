@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dopings.struct_viz &#8212; Documentação dopings 0.1</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=88519e4e"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=000972dd"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fonte para dopings.struct_viz</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">dopings.config</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">atoms_data</span><span class="p">,</span> <span class="n">dops_data</span><span class="p">,</span> <span class="n">dirs_data</span>
+<span class="kn">from</span> <span class="nn">dopings.structure</span> <span class="kn">import</span> <span class="n">structure</span>
+
+<div class="viewcode-block" id="struct_viz">
+<a class="viewcode-back" href="../../dopings.html#dopings.struct_viz.struct_viz">[documentos]</a>
+<span class="k">class</span> <span class="nc">struct_viz</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe de métodos estáticos que geram vizualizações para dados de </span>
+<span class="sd">    estruturas em forma de arquivos.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    def histogram(struct: structure, hist_out: str|Path) -&gt; None</span>
+
+<span class="sd">        Gera um histograma dos comprimentos de ligação da estrutura, no </span>
+<span class="sd">        caminho informado.</span>
+
+<span class="sd">    charges_map(struct: structure, map_out: str|Path=None, </span>
+<span class="sd">                picking_mode=False) -&gt; None</span>
+<span class="sd">        </span>
+<span class="sd">        Gera uma visualizaçãp de mapa de cargas para dada estrutura, no </span>
+<span class="sd">        caminho informado.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="struct_viz.histogram">
+<a class="viewcode-back" href="../../dopings.html#dopings.struct_viz.struct_viz.histogram">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">histogram</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">,</span> <span class="n">hist_out</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="p">,</span> 
+                  <span class="n">gen_dat</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gera um histograma dos comprimentos de ligação da estrutura, no </span>
+<span class="sd">        caminho informado.</span>
+
+<span class="sd">        Depende da definição dos limites de comprimentos de ligações, </span>
+<span class="sd">        por par de elementos, no arquivo viz_config.json.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : structure</span>
+<span class="sd">            Estrutura para qual se deseja gerar o histograma.</span>
+
+<span class="sd">        hist_out : str|Path</span>
+<span class="sd">            Endereço de saída do histograma, com extensão.</span>
+
+<span class="sd">        gen_dat : bool, default = False</span>
+<span class="sd">            Se os dados devem ser escritos na forma de um arquivo dat, </span>
+<span class="sd">            ao lado das plotagens do histograma.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">bonds_lengths</span><span class="p">(</span><span class="n">struct</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Gera uma lista com o comprimento de cada ligação da </span>
+<span class="sd">            estrutura.</span>
+
+<span class="sd">            Depende da definição do comprimento máximo de uma ligação </span>
+<span class="sd">            entre os pares de elementos, em viz_config.json.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+
+<span class="sd">            list[float]</span>
+<span class="sd">                Lista dos comprimentos de cada ligação da estrutura.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># TRANSFORMAR EM DICIONÁRIO DE LABELS</span>
+            <span class="n">bond_crit</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;histogram&#39;</span><span class="p">][</span><span class="s1">&#39;bond_crit&#39;</span><span class="p">]</span>
+            
+            <span class="c1"># Lista para receber comprimentos de ligação</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Salvando quantidade de átomos na estrutura</span>
+            <span class="n">tam</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Para o índice de cada átomo na estrutura</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tam</span><span class="p">):</span>
+
+                <span class="c1"># Para o índice de cada átomo seguinte na estrutura</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">tam</span><span class="p">):</span>
+
+                    <span class="c1"># Calcular e salvar comprimento da ligação</span>
+                    <span class="n">bond_length</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+                    <span class="c1"># Label do par</span>
+                    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span><span class="p">,</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span><span class="p">]))</span>
+
+                    <span class="c1"># Se o comprimento calculado for menor que o critério utilizado</span>
+                    <span class="k">if</span> <span class="n">bond_length</span> <span class="o">&lt;</span> <span class="n">bond_crit</span><span class="p">[</span><span class="n">struct</span><span class="o">.</span><span class="n">material</span><span class="p">][</span><span class="n">label</span><span class="p">]:</span>
+
+                        <span class="c1"># Listar valor do comprimento como sendo de uma ligação</span>
+                        <span class="c1"># válida </span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bond_length</span><span class="p">)</span>
+
+            <span class="c1"># Retornar dados</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="k">def</span> <span class="nf">hist_dat</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">dat_out</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Função que gera um arquivo .dat com a contagem de ligações em cada</span>
+<span class="sd">            intervalo, no formato do xmgrace.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+
+<span class="sd">            lengths : numpy.array</span>
+<span class="sd">                Array com todos os comprimentos de ligação da estrutura.</span>
+
+<span class="sd">            dat_out : str|Path</span>
+<span class="sd">                Endereço do arquivo de arquivo .dat de saída.  </span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Importando bibliotecas necessárias</span>
+            <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+            <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+            <span class="c1">##################################################################</span>
+
+            <span class="c1"># Criando lista de bins </span>
+            <span class="n">bins</span> <span class="o">=</span> <span class="n">minor_ticks</span>
+
+            <span class="c1"># Fatiando os dados de comprimentos de ligação em bins, </span>
+            <span class="c1"># e armazenando contagens de cada bin</span>
+            <span class="n">cortes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">lengths</span><span class="p">,</span> 
+                            <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> 
+                            <span class="n">ordered</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
+                            <span class="n">include_lowest</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+            <span class="c1"># Armazenando os intervalos e as contagens em uma lista</span>
+            <span class="n">bins_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">cortes</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+
+                <span class="n">bins_values</span><span class="o">.</span><span class="n">append</span><span class="p">([</span> <span class="n">index</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">index</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">cortes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">])</span>
+
+            <span class="c1">####################### Formatando para o arquivo dat</span>
+
+            <span class="c1"># Lista pra armazenar strings de intervalos</span>
+            <span class="n">dat_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Armazenar primeiro limite de intervalo com o valor 0</span>
+            <span class="n">dat_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bins_values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="mi">0</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Para as demais, listar cada limite do intervalo duas vezes: </span>
+            <span class="c1"># Uma com o valor anterior, e outra com o próprio valor</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bins_values</span><span class="p">)):</span>
+
+                <span class="n">dat_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bins_values</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">bins_values</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">dat_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bins_values</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">bins_values</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Transformando endereço em objeto Path</span>
+            <span class="n">dat_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dat_out</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+
+            <span class="c1"># Criar diretórios necessários</span>
+            <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dat_out</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">parents</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+            <span class="c1"># Abrir arquivo em modo de escrita, e escrever linha a linha os dados</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dat_out</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                
+                <span class="k">for</span> <span class="n">linha</span> <span class="ow">in</span> <span class="n">dat_data</span><span class="p">:</span>
+                    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">linha</span><span class="p">)</span>
+
+            <span class="c1"># Relatar que arquivo dat foi gerado</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dat_out</span><span class="p">)</span>
+
+        <span class="c1"># Visualização de dados</span>
+        <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+        <span class="c1"># Refinamento de visualização</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="c1"># Biblioteca de diretórios</span>
+        <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+        <span class="c1"># Numpy</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+        <span class="c1">################</span>
+        <span class="c1">## Atribuindo</span>
+        <span class="c1">################</span>
+
+        <span class="c1"># Limites do eixo X</span>
+        <span class="n">x_limits</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;histogram&#39;</span><span class="p">][</span><span class="s2">&quot;x_limits&quot;</span><span class="p">])</span>  
+        <span class="c1"># Comprimento individual do bin</span>
+        <span class="n">bins_length</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;histogram&#39;</span><span class="p">][</span><span class="s2">&quot;bins_length&quot;</span><span class="p">]</span>      
+        <span class="c1"># Distância entre ticks</span>
+        <span class="n">minor_tick_delta</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;histogram&#39;</span><span class="p">][</span><span class="s2">&quot;delta_tick_small&quot;</span><span class="p">]</span>   
+        <span class="n">major_tick_delta</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;histogram&#39;</span><span class="p">][</span><span class="s2">&quot;delta_tick_big&quot;</span><span class="p">]</span>  
+        <span class="c1">#delta_y_ticks = config[&#39;histogram&#39;][&quot;delta_y_ticks&quot;]</span>
+        <span class="c1">###################################################################</span>
+
+        <span class="c1"># Obtendo lista de comprimento e transformando em array</span>
+        <span class="n">lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bonds_lengths</span><span class="p">(</span><span class="n">struct</span><span class="p">))</span>
+        
+        <span class="c1"># Guardando quantidade de ligações</span>
+        <span class="n">n_ligs</span> <span class="o">=</span> <span class="n">lengths</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">n_ligs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Zero bonds found.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">struct</span><span class="o">.</span><span class="n">material</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">y_limits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">dops_data</span><span class="p">[</span><span class="n">struct</span><span class="o">.</span><span class="n">material</span><span class="p">][</span><span class="s2">&quot;n_ligs&quot;</span><span class="p">][</span><span class="n">struct</span><span class="o">.</span><span class="n">base</span><span class="p">])]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y_limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_ligs</span><span class="p">]</span>
+
+        <span class="c1">####################################################</span>
+
+        <span class="c1">###############################</span>
+        <span class="c1">#     Gerando histograma      # </span>
+        <span class="c1">###############################</span>
+        
+        <span class="c1"># Criando figura e eixos</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
+
+        <span class="c1"># Plotando gráfico</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">binwidth</span> <span class="o">=</span> <span class="n">bins_length</span><span class="p">,</span> <span class="n">binrange</span> <span class="o">=</span> <span class="n">x_limits</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Transformando endereço de saída em objeto Path</span>
+        <span class="n">hist_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">hist_out</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+
+        <span class="c1"># Definindo nome dos eixos</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Comprimento de ligação&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Contagem&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">})</span>
+
+        <span class="c1"># Limites de valor dos eixos x e y no plot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">*</span><span class="n">x_limits</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">*</span><span class="n">y_limits</span><span class="p">)</span>
+
+        <span class="c1">############## TICKS X</span>
+
+        <span class="c1"># Valores dos ticks pequenos, calculando apenas uma vez por execução da main</span>
+        <span class="k">if</span> <span class="s1">&#39;minor_ticks&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+
+            <span class="n">Delta</span> <span class="o">=</span> <span class="n">x_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">minor_tick_delta</span>
+
+            <span class="k">global</span> <span class="n">minor_ticks</span>
+            <span class="n">minor_ticks</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Delta</span><span class="o">/</span><span class="n">delta</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span>
+
+        <span class="c1"># Valores dos ticks grandes, calculando apenas uma vez por execução da main</span>
+        <span class="k">if</span> <span class="s1">&#39;major_ticks&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+
+            <span class="n">Delta</span> <span class="o">=</span> <span class="n">x_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">major_tick_delta</span>
+
+            <span class="k">global</span> <span class="n">major_ticks</span>
+            <span class="n">major_ticks</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Delta</span><span class="o">/</span><span class="n">delta</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span> 
+
+        <span class="c1"># Ticks do eixo y: calculando apenas uma vez para cada tamanho de molécula</span>
+        <span class="k">global</span> <span class="n">last_size</span>
+
+        <span class="c1"># Se a lista ainda não foi declada, ou se o último tamanho tiver mudado</span>
+        <span class="k">if</span> <span class="s1">&#39;y_ticks&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="ow">or</span> <span class="p">(</span><span class="n">last_size</span> <span class="o">!=</span> <span class="n">n_ligs</span><span class="p">):</span>
+
+            <span class="c1">############ Substituir último com valor máximo</span>
+            
+            <span class="c1"># Atualizar último tamanho</span>
+            <span class="n">last_size</span> <span class="o">=</span> <span class="n">n_ligs</span>
+
+            <span class="c1"># Calcular deltas</span>
+            <span class="n">Delta</span> <span class="o">=</span> <span class="n">y_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Valor tal que haja 40 intervalos no eixo y</span>
+            <span class="n">delta_y_ticks</span> <span class="o">=</span> <span class="n">Delta</span> <span class="o">//</span> <span class="mi">20</span>
+
+            <span class="c1"># Chamando de &quot;delta&quot;</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">delta_y_ticks</span>
+
+            <span class="c1"># Calcular ticks</span>
+            <span class="k">global</span> <span class="n">y_ticks</span>
+            <span class="n">y_ticks</span> <span class="o">=</span> <span class="p">[</span> <span class="n">y_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta</span><span class="p">)</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Delta</span><span class="o">/</span><span class="n">delta</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span>
+            
+            <span class="c1"># Substituir último tick pelo valor máximo</span>
+            <span class="n">y_ticks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Atualizar último tamanho</span>
+            <span class="n">last_size</span> <span class="o">=</span> <span class="n">n_ligs</span>
+
+        <span class="c1">### Atribuindo lista de ticks aos eixos</span>
+        <span class="c1"># eixo x, ticks menores</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">minor_ticks</span><span class="p">,</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># eixo x, ticks maiores</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">major_ticks</span><span class="p">,</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># eixo y</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y_ticks</span><span class="p">,</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1">### Tamanho das labels, e dos traços dos ticks</span>
+        <span class="c1"># eixo x, ticks menores</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># eixo x, ticks maiores</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># eixo y</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># Inclinação da label dos ticks: 45 graus, sentido horário</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">45</span><span class="p">)</span>
+
+        <span class="c1">###################### FIGURA</span>
+
+        <span class="c1"># Salvando tamanho que deve ter a figura</span>
+        <span class="n">fig_size</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;histogram&#39;</span><span class="p">][</span><span class="s1">&#39;fig_size&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Definindo tamanho da figura</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">fig_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fig_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Convertendo endereço para Path</span>
+        <span class="n">hist_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">hist_out</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+
+        <span class="c1"># Criando diretório para receber resultados (se ele já não existir)</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">hist_out</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1">#####################################################</span>
+
+
+        <span class="c1"># Criando e definindo título</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">hist_out</span><span class="o">.</span><span class="n">stem</span> <span class="o">+</span> <span class="s1">&#39; - nº de ligações: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_ligs</span><span class="p">),</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+
+        <span class="c1">######### Quando há informações de dopagem #########</span>
+            
+        <span class="c1"># Calculando quantidade de ligações esperadas</span>
+        <span class="k">if</span> <span class="n">struct</span><span class="o">.</span><span class="n">material</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                
+            <span class="n">expected</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dops_data</span><span class="p">[</span><span class="n">struct</span><span class="o">.</span><span class="n">material</span><span class="p">][</span><span class="s2">&quot;n_ligs&quot;</span><span class="p">][</span><span class="n">struct</span><span class="o">.</span><span class="n">base</span><span class="p">])</span>
+
+            <span class="c1"># Se for diferente do esperado, avisar</span>
+            <span class="k">if</span> <span class="n">n_ligs</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">:</span>
+
+                <span class="c1"># Aviso</span>
+                <span class="n">warning</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;[Quantidade de ligações encontradas] - [Quantidade de ligações esperadas] = </span><span class="si">{</span><span class="n">n_ligs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">expected</span><span class="si">:</span><span class="s1">+</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="c1"># Imprimir na tela</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">warning</span><span class="p">)</span>
+                <span class="c1"># Imprimir no gráfico</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">warning</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Salvando figura e fechando</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">hist_out</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># Imprimindo endereço do arquivo gerado</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">hist_out</span><span class="p">)</span>
+
+        <span class="c1"># Gerar dat no mesmo endereço, porém com extensão diferente</span>
+        <span class="k">if</span> <span class="n">gen_dat</span><span class="p">:</span>
+            <span class="k">pass</span>
+            <span class="n">hist_dat</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">hist_out</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.dat&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="struct_viz.charges_map">
+<a class="viewcode-back" href="../../dopings.html#dopings.struct_viz.struct_viz.charges_map">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">charges_map</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">,</span> <span class="n">map_out</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                    <span class="n">picking_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gera uma visualizaçãp de mapa de cargas para dada estrutura, no </span>
+<span class="sd">        caminho informado.</span>
+
+<span class="sd">        Necessita que o número de elétrons na camada de valência do </span>
+<span class="sd">        elemento esteja definido em &quot;atoms_data&quot;.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : structure</span>
+<span class="sd">            Estrutura para qual se deseja gerar o mapa de cargas.</span>
+
+<span class="sd">        map_out : str</span>
+<span class="sd">            Endereço de saída do mapa de cargas, com extensão inclusa.</span>
+
+<span class="sd">        picking_mode : bool, default = False</span>
+<span class="sd">            Se True, invés de gerar um arquivo com a plotagem, inicia</span>
+<span class="sd">            um plot interativo, onde é possível clicar em um átomo</span>
+<span class="sd">            para que sua carga seja impressa no terminal com 3 casas de</span>
+<span class="sd">            precisão.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+        <span class="c1"># Definindo escala usada</span>
+        <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rev</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Converte valores de &quot;x&quot; para valores da escala empregada.</span>
+<span class="sd">            </span>
+<span class="sd">            Esta escala é usada para que </span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+
+<span class="sd">            rev : bool, default = False</span>
+<span class="sd">                Faz o cálculo inverso, tansformando escala em valor.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+
+<span class="sd">            float</span>
+<span class="sd">                Valor na escala.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">exp</span>
+
+            <span class="c1"># Limite da escala</span>
+            <span class="n">x_max</span> <span class="o">=</span> <span class="mf">0.5</span>
+            <span class="c1"># Curvatura</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="mf">3.5</span>    <span class="c1"># Antigo -&gt; 5.0</span>
+            <span class="c1"># Transladador - Função passa por (0,0)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">)</span>
+            <span class="c1"># Escalador - Função passa por (x_max, x_max)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">x_max</span> <span class="o">/</span> <span class="p">(</span> <span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x_max</span> <span class="o">+</span> <span class="n">d</span><span class="p">))</span> <span class="o">+</span> <span class="n">c</span> <span class="p">)</span>
+
+            <span class="c1"># Se for reverso</span>
+            <span class="k">if</span> <span class="n">rev</span><span class="p">:</span>
+
+                <span class="c1"># Chamando valor de y</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">value</span>
+
+                <span class="c1"># Se positivo</span>
+                <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+
+                    <span class="k">return</span> <span class="n">exp</span><span class="p">((</span><span class="n">y</span><span class="o">/</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">d</span>
+                
+                <span class="c1"># Se negativo</span>
+                <span class="k">elif</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+
+                    <span class="k">return</span> <span class="o">-</span><span class="n">exp</span><span class="p">((</span><span class="n">y</span><span class="o">/-</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span>
+
+            <span class="c1"># Se não for reverso</span>
+            <span class="k">else</span><span class="p">:</span>
+                
+                <span class="c1"># Chamando valor de x</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">value</span>
+
+                <span class="c1"># Se positivo</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+                
+                <span class="c1"># Se negativo</span>
+                <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">+</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="c1"># Carga dados da estrutura como data frame</span>
+        <span class="k">def</span> <span class="nf">data_to_df</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Cria um pd.DataFrame com os dados da estrura. O DataFrame é </span>
+<span class="sd">            melhor compreendido pelo seaborn, biblioteca que gera as </span>
+<span class="sd">            vizualizações.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+
+<span class="sd">            struct : structure</span>
+<span class="sd">                Estrutura da qual se quer extrair os dados.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+
+<span class="sd">            pd.DataFrame</span>
+<span class="sd">                Dados da estrutura em formato DataFrame.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Lista para acumular dados de cada átomo</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Para cada átomo na estrutura...</span>
+            <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+
+                <span class="c1"># Ordenar dados em uma lista, e anexá-la na lista 2D &quot;data&quot;, </span>
+                <span class="c1"># onde cada linha é um átomo e cada coluna um dado desse átomo</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">elem</span><span class="p">,</span> <span class="n">atom</span><span class="o">.</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">atom</span><span class="o">.</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+                                 <span class="n">atom</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span> 
+                                 <span class="n">atoms_data</span><span class="p">[</span><span class="s2">&quot;valency&quot;</span><span class="p">][</span><span class="n">atom</span><span class="o">.</span><span class="n">elem</span><span class="p">]])</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;valency not found for element </span><span class="si">{</span><span class="n">atom</span><span class="o">.</span><span class="n">elem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Transformar lista &quot;data&quot; em um DataFrame com as colunas </span>
+            <span class="c1"># devidamente nomeadas</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="c1"># Mudando colunas para números de 0 a 4</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+            <span class="c1"># Renomeando colunas adicionadas, e armazenando em &quot;df&quot;</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;Elem&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s2">&quot;Charge&quot;</span><span class="p">,</span> 
+                                        <span class="mi">4</span><span class="p">:</span><span class="s2">&quot;Valency&quot;</span><span class="p">})</span>
+        
+        <span class="c1"># Dados</span>
+        <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+        <span class="c1"># Visualização de dados</span>
+        <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+        <span class="c1"># Refinamento de visualização</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="c1"># Biblioteca de diretórios</span>
+        <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+        <span class="c1">###################### Lendo e tratando dados ######################</span>
+
+        <span class="c1"># Carregando dados</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data_to_df</span><span class="p">(</span><span class="n">struct</span><span class="p">)</span>
+
+        <span class="c1"># Se qualquer carga for None, reportar</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Elem&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Not all atoms have defined element values.&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Se qualquer coordenada for None, reportar</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Not all atoms have a defined coordinates value.&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Se qualquer carga for None, reportar</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Charge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Not all atoms have defined charges values.&quot;</span><span class="p">)</span>
+
+        <span class="c1">################## TRANSFORMANDO DADOS DE CARGA #########################</span>
+
+        <span class="c1">###### Transformações</span>
+
+        <span class="c1">#### Mudando de &quot;População de Elétrons&quot; para &quot;Cargas Elementares Ganhas&quot;.</span>
+        
+        <span class="c1"># Subtraindo número de elétrons de valência da população de elétrons.</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Charge&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Valency&#39;</span><span class="p">]</span>
+        
+        <span class="c1"># Verificando soma</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Charge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.001</span> <span class="ow">or</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Charge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Charges total sum is not zero.&quot;</span><span class="p">)</span>
+                
+        <span class="c1"># Arredondando em 3 casas decimais</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Charge&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Excluindo dado não mais necessário</span>
+        <span class="k">del</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Valency&#39;</span><span class="p">]</span>
+
+        <span class="c1">############### Criando colunas de escala ################</span>
+
+        <span class="c1"># Criando coluna de valores de carga escalonados</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Charge&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1">####################################################</span>
+
+        <span class="c1"># Verificando se nos dados há valores fora dos limites da escala </span>
+        <span class="c1"># Salvando valores limites</span>
+        <span class="n">values_limits</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;charges_map&quot;</span><span class="p">][</span><span class="s2">&quot;values_limits&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Lista para receber cargas fora dos limites</span>
+        <span class="n">out_of_bounds</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Para cada carga nos dados...</span>
+        <span class="k">for</span> <span class="n">charge</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Charge&#39;</span><span class="p">]:</span>
+
+            <span class="c1"># Se abaixo do valor inferior...</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">charge</span> <span class="o">&lt;</span> <span class="n">values_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">charge</span> <span class="o">&gt;</span> <span class="n">values_limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+
+                <span class="c1"># Anexar à lista de cargas fora dos limites</span>
+                <span class="n">out_of_bounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">charge</span><span class="p">)</span>
+
+        <span class="c1">################### Configuraçõs do plot ##############################</span>
+
+        <span class="c1">## Estimando um bom tamanho médio dos pontos</span>
+        <span class="c1">#tam =  800/(sqrt(struct.size) - 5) + 50</span>
+        <span class="c1">## Amplitude de tamanhos</span>
+        <span class="c1">#tam_raio = 100</span>
+        <span class="c1">## Tamanhos máximos e mínimos</span>
+        <span class="c1">#tam_norm = (tam-tam_raio, tam+tam_raio)</span>
+                
+        <span class="n">tam_norm</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+        <span class="c1"># Paleta de cores usada --- &quot;Spectral&quot;</span>
+        <span class="c1"># mais negativo / mais elétron -&gt; mais vermelo (e maior)</span>
+        <span class="c1"># menos positivo / menos elétrons -&gt; mais azul (e menor)</span>
+        <span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Spectral_r&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1">######################### PLOTANDO ###########################</span>
+
+        <span class="c1"># Criando eixo e figura</span>
+        <span class="n">figura</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Plotando átomos de C</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot; Elem == &#39;C&#39; &quot;</span><span class="p">)</span>
+
+        <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+                        <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> 
+                        <span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">hue_norm</span> <span class="o">=</span> <span class="n">values_limits</span><span class="p">,</span> 
+                        <span class="n">size</span> <span class="o">=</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">tam_norm</span><span class="p">,</span> <span class="n">size_norm</span> <span class="o">=</span> <span class="n">values_limits</span><span class="p">,</span> 
+                        <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
+                        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">picker</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Plotando átomos de H</span>
+        <span class="c1"># Nesse caso os cículos terão a metade do tamanho, e contarão com um </span>
+        <span class="c1"># contorno para diferenciá-los dos demais</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot; Elem == &#39;H&#39; &quot;</span><span class="p">)</span>
+
+        <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+                        <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span>
+                        <span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">hue_norm</span> <span class="o">=</span> <span class="n">values_limits</span><span class="p">,</span> 
+                        <span class="n">size</span> <span class="o">=</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">tam_norm</span><span class="p">,</span> <span class="n">size_norm</span> <span class="o">=</span> <span class="n">values_limits</span><span class="p">,</span> 
+                        <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">picker</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+        
+
+        <span class="c1"># Listando elementos dopantes</span>
+        <span class="n">dop_elems</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span> <span class="s2">&quot;Elem != &#39;C&#39; and Elem != &#39;H&#39; &quot;</span> <span class="p">)[</span><span class="s2">&quot;Elem&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+        <span class="c1"># Se tiver átomos dopantes</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dop_elems</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="c1"># Para cada elemento dopante</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">dop_elems</span><span class="p">:</span>
+
+                <span class="c1"># Separar dados</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Elem == &#39;</span><span class="si">{</span><span class="n">elem</span><span class="si">}</span><span class="s2">&#39; &quot;</span><span class="p">)</span>
+
+                <span class="c1"># Plotando átomos dos dopantes </span>
+                <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> 
+                                <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> 
+                                <span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">hue_norm</span> <span class="o">=</span> <span class="n">values_limits</span><span class="p">,</span> 
+                                <span class="n">size</span> <span class="o">=</span> <span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">tam_norm</span><span class="p">,</span> <span class="n">size_norm</span> <span class="o">=</span> <span class="n">values_limits</span><span class="p">,</span> 
+                                <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                                <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">picker</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+                
+        <span class="c1"># Abrir scatterplot interativo</span>
+        <span class="k">if</span> <span class="n">picking_mode</span><span class="p">:</span>
+
+            <span class="c1"># Seletor de cargas</span>
+            <span class="k">def</span> <span class="nf">onpick</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                Imprime elemento e carga do átomo selecionado.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+
+                <span class="c1"># Pegando id</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># Coordenadas</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">artist</span><span class="o">.</span><span class="n">get_offsets</span><span class="p">()[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">artist</span><span class="o">.</span><span class="n">get_offsets</span><span class="p">()[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="c1"># Imprimindo linha do dataframe que tem coordenadas coincidentes</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Y&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">)]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># Imprimir cargas</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s2">&quot;pick_event&quot;</span><span class="p">,</span> <span class="n">onpick</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+            <span class="k">return</span>
+
+        <span class="c1">####################  LEGENDA DE VALORES FIXOS #########################</span>
+
+        <span class="kn">import</span> <span class="nn">matplotlib.lines</span> <span class="k">as</span> <span class="nn">mlines</span>
+
+        <span class="c1"># Valores equidistantes da escala de cores</span>
+        <span class="n">legend_scale_values</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+
+        <span class="c1"># Transformando lista de valores de escala, para lista de valores de carga</span>
+        <span class="n">legend_charge_values</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span> <span class="nb">round</span><span class="p">(</span><span class="n">scale</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">rev</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">legend_scale_values</span> <span class="p">])</span>
+
+        <span class="c1">#########################################################</span>
+        <span class="c1">#   OCULTANDO LINHAS DESNECESSÁRIAS </span>
+        <span class="c1">#</span>
+        <span class="c1">#   Mesmo se houver valor fora da norma, </span>
+        <span class="c1">#   será exibido apenas até o valor máximo definido</span>
+        <span class="c1">#########################################################</span>
+
+        <span class="c1"># Achando valores extremos de cargas</span>
+        <span class="n">max_charge</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Charge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">min_charge</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Charge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+        <span class="c1">#######################################################################</span>
+        <span class="c1"># Para a legenda não queremos exibir valores desnecessários, mas é</span>
+        <span class="c1"># desejado que haja pelo 1 valor maior que a maior carga, e um valor</span>
+        <span class="c1"># menor que a menor carga.</span>
+        <span class="c1">#######################################################################</span>
+
+        <span class="c1"># Valores da legenda</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">legend_charge_values</span>
+
+        <span class="c1">############ Valor maior ##################</span>
+
+        <span class="c1"># Inicializando maior valor</span>
+        <span class="n">max_index</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Encontrando primeiro valor maior que o maior</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+
+            <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">max_charge</span><span class="p">:</span>
+
+                <span class="n">max_index</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Se não foi encontrado valor maior, usar o valor máximo</span>
+        <span class="k">if</span> <span class="n">max_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">max_index</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="c1">###########################################</span>
+
+        <span class="c1"># Inicializando menor valor</span>
+        <span class="n">min_index</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Encontrando primeiro valor maior que o maior</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))):</span>
+
+            <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">min_charge</span><span class="p">:</span>
+
+                <span class="n">min_index</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Se não foi encontrado valor maior, usar o valor mínimo</span>
+        <span class="k">if</span> <span class="n">min_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">min_index</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="c1">############## Criando legenda final de valores exibidos na legenda #####################</span>
+            
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Para cada index na lista de valores</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))):</span>
+
+            <span class="c1"># Se estiverem entre os index máximo e o mínimo (ou forem os próprios)</span>
+            <span class="k">if</span> <span class="n">min_index</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="ow">and</span> <span class="n">index</span> <span class="o">&lt;=</span> <span class="n">max_index</span><span class="p">:</span>
+
+                <span class="c1"># Anexar o valor correspondente à lista temporária</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+        <span class="c1"># Sobrescrevendo lista total dos valores de legenda</span>
+        <span class="n">legend_charge_values</span> <span class="o">=</span> <span class="n">temp</span>
+
+        <span class="c1">###########################################</span>
+
+        <span class="c1">#################################</span>
+        <span class="c1"># Criando legenda</span>
+        <span class="c1">#################################</span>
+
+        <span class="c1"># Lista para receber cada linha da legenda</span>
+        <span class="n">handles</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="n">values_amplitude</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">legend_scale_values</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">legend_scale_values</span><span class="p">)</span>
+
+        <span class="c1"># Normalizador dos valores</span>
+        <span class="k">def</span> <span class="nf">values_normalizer</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">to_size</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>    
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Normaliza os valores para a escala usada.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">normalized_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">values_limits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">values_amplitude</span>
+
+            <span class="k">if</span> <span class="n">to_size</span><span class="p">:</span>
+                <span class="c1"># Tamanho pode ir de 3 até 13 (3+10), já que o valor está normalizado</span>
+                <span class="k">return</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">normalized_value</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">normalized_value</span>
+
+        <span class="c1"># Pra cada valor, uma linha de legenda. Varrer na ordem inversa da lista, para valores positivos ficarem em cima</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">legend_charge_values</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+
+            <span class="c1"># Modificando valor para a escala utilizada</span>
+            <span class="n">color_value</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+            <span class="c1"># Criando linha</span>
+            <span class="c1"># Encontrando cores, definindo marcador, </span>
+            <span class="c1"># convertendo tamanho, definindo label</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">(</span><span class="n">values_normalizer</span><span class="p">(</span><span class="n">color_value</span><span class="p">)),</span>
+                                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                                <span class="n">markersize</span> <span class="o">=</span> <span class="n">values_normalizer</span><span class="p">(</span><span class="n">color_value</span><span class="p">,</span> <span class="n">to_size</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                                <span class="n">label</span> <span class="o">=</span> <span class="n">value</span><span class="p">)</span>
+
+            <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+        <span class="c1"># Definindo título da legenda, tamanhos das fontes e criando legenda</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Elets. ganhos&quot;</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;upper left&quot;</span><span class="p">,</span>
+                        <span class="n">title_fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                        <span class="n">shadow</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="n">handles</span> <span class="o">=</span> <span class="n">handles</span><span class="p">)</span>
+
+        <span class="c1">######################## Título e eixos #######################</span>
+
+        <span class="c1"># Se tiver sido passado endereço de saída</span>
+        <span class="k">if</span> <span class="n">map_out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        
+            <span class="c1"># Transformando caminho em objetos Path</span>
+            <span class="n">map_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">map_out</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+
+            <span class="c1"># Criando e definindo título</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">map_out</span><span class="o">.</span><span class="n">stem</span> <span class="o">+</span> <span class="s1">&#39; - nº de átomos: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+
+        <span class="c1"># Subtítulo avisando sobre a presença de cargas fora dos limites</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_of_bounds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Imprimindo no subtítulo do gráfico</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cargas fora dos limites da escala: </span><span class="si">{</span><span class="n">out_of_bounds</span><span class="si">}</span><span class="s2"> - Limites: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">values_limits</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Desabilitando ticks</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span> 
+
+        <span class="c1"># Removendo legenda dos eixos</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1">######################## SALVANDO ##########################</span>
+
+        <span class="c1"># Tamanho da figura</span>
+        <span class="n">fig_size</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;charges_map&quot;</span><span class="p">][</span><span class="s2">&quot;fig_size&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Difinindo dimensões da figura</span>
+        <span class="n">figura</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">fig_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fig_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Se tiver sido passado endereço de saída</span>
+        <span class="k">if</span> <span class="n">map_out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="c1"># Criando diretório para receber resultados (se ele já não existir)</span>
+            <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">map_out</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+            <span class="c1">#Salvando como                           </span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">map_out</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># Relatar gráfico gerado</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">map_out</span><span class="p">)</span>
+
+        <span class="c1"># Subtítulo avisando sobre a presença de cargas fora dos limites</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_of_bounds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Reportando pelo terminal</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cargas fora dos limites da escala: </span><span class="si">{</span><span class="n">out_of_bounds</span><span class="si">}</span><span class="s2"> - Limites: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">values_limits</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">dopings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegação</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Código do módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Busca rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Gustavo Campos.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

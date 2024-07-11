@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dopings.structure &mdash; Documentação dopings 0.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=88519e4e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=000972dd"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            dopings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">dopings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dopings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código do módulo</a></li>
+      <li class="breadcrumb-item active">dopings.structure</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fonte para dopings.structure</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">dopings.atom_data</span> <span class="kn">import</span> <span class="n">atom_data</span>
+<span class="kn">from</span> <span class="nn">dopings.struct_read</span> <span class="kn">import</span> <span class="n">struct_read</span>
+<span class="kn">from</span> <span class="nn">dopings.config</span> <span class="kn">import</span> <span class="n">atoms_data</span><span class="p">,</span> <span class="n">dirs_data</span><span class="p">,</span> <span class="n">main_config</span>
+
+<span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="structure">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure">[documentos]</a>
+<span class="k">class</span> <span class="nc">structure</span><span class="p">:</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Representa uma estrutura formada por um conjunto de átomos.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    atoms : np.ndarray[atom_data]</span>
+<span class="sd">        Array de atom objects na estrutura.</span>
+<span class="sd">    </span>
+<span class="sd">    size : int</span>
+<span class="sd">        Número de átomos na estrutura.</span>
+<span class="sd">        Se atualiza sozinho.</span>
+<span class="sd">    </span>
+<span class="sd">    dir : Path, default: None</span>
+<span class="sd">        Diretório de otimização da molécula.</span>
+
+<span class="sd">    material : str</span>
+<span class="sd">        Material dopado.</span>
+
+<span class="sd">    param : str</span>
+<span class="sd">        Set of parameters used in the optimization.</span>
+<span class="sd">        Used only in formation energy.</span>
+<span class="sd">    </span>
+<span class="sd">    dop_elem : str</span>
+<span class="sd">        Elemento da dopagem.</span>
+<span class="sd">        </span>
+<span class="sd">    base : str</span>
+<span class="sd">        Base da estrutura.</span>
+
+<span class="sd">    site : str</span>
+<span class="sd">        Sítio de dopagem da estrutura.</span>
+
+<span class="sd">    param : str</span>
+<span class="sd">        Conjunto de parâmetros usado na otimização. Usado apenas para</span>
+<span class="sd">        cálculo da energia de formação.</span>
+<span class="sd">    </span>
+<span class="sd">    total_energy : float</span>
+<span class="sd">        Energia total da estrutura, lida a partir do arquivo</span>
+
+<span class="sd">    homo : float</span>
+<span class="sd">        Energia do homo da estrutura, lida a partir do arquivo</span>
+
+<span class="sd">    lumo : float</span>
+<span class="sd">        Energia do lumo da estrutura, lida a partir do arquivo</span>
+
+<span class="sd">    dipole : numpy.ndarray[float]</span>
+<span class="sd">        Vetor momento dipolo da estrutura.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    __init__(self, atoms : list[atom_data]=None, dir : str|Path=None, read_from_dir : bool=False, material: str=None, base: str=None, dop_elem: str=None, site: str=None, param : str=None) -&gt; None</span>
+
+<span class="sd">        Inicializa o objeto structure.</span>
+<span class="sd">    </span>
+<span class="sd">    append(self, atoms: atom_data|list[atom_data]) -&gt; None</span>
+
+<span class="sd">        Anexa um atom_data object, ou uma lista de atom_data objects </span>
+<span class="sd">        à lista de átomos da estrutura.</span>
+<span class="sd">    </span>
+<span class="sd">    redo_files_for_resume(self) -&gt; None</span>
+
+<span class="sd">        No caso de uma otimização ser encerrada antes de concluída, este</span>
+<span class="sd">        método refaz os arquivos de otimização de forma que parta do </span>
+<span class="sd">        último frame escrito, guardando o progresso até então em uma </span>
+<span class="sd">        pasta no diretório, que recebe o nome definido em &quot;main_config&quot; </span>
+<span class="sd">        (resume_dir_name), que por padrão é &quot;before_restart&quot;.</span>
+
+<span class="sd">    data_from_file(self) -&gt; None</span>
+
+<span class="sd">        A partir do diretório da estrutura, lê os arquivos de dados e os </span>
+<span class="sd">        carrega como propriedades do objeto structure.</span>
+<span class="sd">    </span>
+<span class="sd">    opt(self, overwrite: bool=False, verbose: bool=True, skip_hard_to_conv_SCC: bool=True, resume_unfineshed: bool=True) -&gt; None</span>
+
+<span class="sd">        Executa uma otimização no diretório da estrutura, espera </span>
+<span class="sd">        a otimização terminar e relata o status ao final.</span>
+<span class="sd">    </span>
+<span class="sd">    report(self, return_SCC: bool=False, return_conv: bool=False, verbose: bool=True, return_written: bool=False) -&gt; None|bool|list[int]</span>
+
+<span class="sd">        Reporta o estado da otimização da estrutura a partir do</span>
+<span class="sd">        arquivo de no seu diretório, </span>
+<span class="sd">    </span>
+<span class="sd">    dope_out(self, dop_elem: str, id: int, kwargs: dict=None) -&gt; structure</span>
+
+<span class="sd">        Gera uma versão (dopada) de uma estrutura, onde o átomo </span>
+<span class="sd">        especificado é substituído por um de outro elemento.</span>
+<span class="sd">    </span>
+<span class="sd">    formation_energy(self) -&gt; tuple[float, float]</span>
+
+<span class="sd">        Retorna a energia de formação da estrutura, além de sua média </span>
+<span class="sd">        por átomo.</span>
+<span class="sd">    </span>
+<span class="sd">    homo_lumo(self) -&gt; tuple[float, float, float]</span>
+
+<span class="sd">        Retorna as energias de HOMO, LUMO, e o módulo da diferença </span>
+<span class="sd">        HOMO-LUMO de uma estrutura a partir de seu arquivo band.out.</span>
+<span class="sd">    </span>
+<span class="sd">    shortest_distances(self, elem1: str, elem2: str, n: int) -&gt; list[float]</span>
+
+<span class="sd">        Retorna as &quot;n&quot; menores distâncias entre átomos de dados </span>
+<span class="sd">        elementos, na estrutura.</span>
+<span class="sd">    </span>
+<span class="sd">    frame(self, frame_out: str|Path) -&gt; None</span>
+
+<span class="sd">        Gera e escreve o arquivo xyz do último frame da estrutura.</span>
+<span class="sd">        Cria diretórios necessários caso não existam.</span>
+<span class="sd">    </span>
+<span class="sd">    output(self, output_dest: str|Path) -&gt; None</span>
+
+<span class="sd">        Copia o output de otimização da estrutura para o endereço </span>
+<span class="sd">        passado.</span>
+
+<span class="sd">    copy(self) -&gt; structure</span>
+<span class="sd">        </span>
+<span class="sd">        Retorna uma estrutura que contém os mesmo átomos que a original.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+     
+<div class="viewcode-block" id="structure.__init__">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.__init__">[documentos]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span> <span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">atom_data</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">dir</span> <span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                 <span class="n">read_from_dir</span> <span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">material</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                 <span class="n">base</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dop_elem</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">site</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                 <span class="n">param</span> <span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicializa o objeto structure.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        atoms : list[atom_data], default = None</span>
+<span class="sd">            Lista de átomos da estrutura criada.</span>
+
+<span class="sd">        dir : str or Path, default: None</span>
+<span class="sd">            Diretório de otimização da molécula.</span>
+<span class="sd">            Obrigatório se read_from_dir for True.</span>
+
+<span class="sd">        material : str</span>
+<span class="sd">            Material dopado.</span>
+
+<span class="sd">        param : str</span>
+<span class="sd">            Set of parameters used in the optimization.</span>
+<span class="sd">            Used only in formation energy.</span>
+<span class="sd">        </span>
+<span class="sd">        dop_elem : str</span>
+<span class="sd">            Elemento da dopagem.</span>
+<span class="sd">            </span>
+<span class="sd">        base : str</span>
+<span class="sd">            Base da estrutura.</span>
+
+<span class="sd">        site : str</span>
+<span class="sd">            Sítio de dopagem da estrutura.</span>
+
+<span class="sd">        read_from_dir : bool, default=False</span>
+<span class="sd">            Se dados devem ser lidos do diretório ou não.</span>
+<span class="sd">            Se True, dir deve ser passada.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            &quot;dir must be string or Path.&quot;</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            &quot;If dir it&#39;s not given, read_from_dir must be False.&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Diretório de otimização da molécula</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">atom_data</span><span class="p">)</span>
+        
+        <span class="c1"># -- Dop info --</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="c1"># -- Proc data --</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">homo</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lumo</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dipole</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_energy</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1">####### Checando tipos e guardando variáveis</span>
+
+        <span class="k">if</span> <span class="nb">dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;dir must be string or Path.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Se pediu pra ler dos arquivos</span>
+        <span class="k">if</span> <span class="n">read_from_dir</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data_from_file</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;If read_from_dir True, dir must be given.&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Decidindo se será anexado</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nb">dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">read_from_dir</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+
+            <span class="c1"># Adicionar átomos que foram passados</span>
+            <span class="c1"># Internamente o tamanho é atualizado e o type é verificado</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+        
+        <span class="c1"># Verificando propriedade &quot;param&quot;</span>
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="n">param</span>
+
+        <span class="k">if</span> <span class="n">material</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">material</span> <span class="o">=</span> <span class="n">material</span>
+
+        <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">base</span>
+
+        <span class="k">if</span> <span class="n">dop_elem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dop_elem</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span> <span class="o">=</span> <span class="n">dop_elem</span>
+
+        <span class="k">if</span> <span class="n">site</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">site</span></div>
+
+
+    <span class="c1">############# Adicionar novos átomos à estrutura - Sem dados obrigatórios</span>
+             
+<div class="viewcode-block" id="structure.append">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.append">[documentos]</a>
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">:</span> <span class="n">atom_data</span><span class="o">|</span><span class="nb">list</span><span class="p">[</span><span class="n">atom_data</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Anexa um atom_data object, ou uma lista de atom_data objects </span>
+<span class="sd">        à lista de átomos da estrutura.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        atoms: list[atom_data] | atom_data</span>
+<span class="sd">            Lista de átomos a ser adicionada.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            &quot;atoms must be a non-empty list of atoms objects&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Se for atom_data object, tranformar em lista unitária</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">atom_data</span><span class="p">):</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">atoms</span><span class="p">]</span>
+        
+        <span class="c1"># Transformando em array</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+        <span class="c1"># Se for array, composto por atoms objects</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">atoms</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span> 
+            <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">atom_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">)):</span>
+            
+            <span class="c1"># Anexar a lista passada ao array de atoms.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+            <span class="c1"># Acrescentar ao tamanho, a quantidade adicionada</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">((</span><span class="s2">&quot;atoms must be a non-empty list of atom_data&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;objects, or atom_data.&quot;</span><span class="p">))</span></div>
+
+
+    <span class="c1">############# Otimização e relatório</span>
+
+<div class="viewcode-block" id="structure.redo_files_for_resume">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.redo_files_for_resume">[documentos]</a>
+    <span class="k">def</span> <span class="nf">redo_files_for_resume</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        No caso de uma otimização ser encerrada antes de concluída, este</span>
+<span class="sd">        método refaz os arquivos de otimização de forma que parta do </span>
+<span class="sd">        último frame escrito, guardando o progresso até então em uma </span>
+<span class="sd">        pasta no diretório, que recebe o nome definido em &quot;main_config&quot; </span>
+<span class="sd">        (resume_dir_name), que por padrão é &quot;before_restart&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">shutil</span>
+
+        <span class="c1"># Diretório de backup</span>
+        <span class="n">backup_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;resume_dir_name&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Criando diretório</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">backup_file</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Para cada arquivo do diretório</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">):</span>
+            <span class="c1"># Se for um arquivo</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="c1"># Se for um arquivo dinâmico</span>
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;geo_end.xyz&quot;</span> <span class="ow">or</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span>
+                    
+                    <span class="c1"># Abrir sua versão no diretório &quot;before_restart&quot;</span>
+                    <span class="k">with</span> <span class="p">(</span><span class="n">backup_file</span> <span class="o">/</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">copy_file</span><span class="p">:</span>
+                        <span class="c1"># Abrir arquivo a ser copiado</span>
+                        <span class="k">with</span> <span class="n">file</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">src_file</span><span class="p">:</span>
+
+                            <span class="c1"># Adicionar arquivo a ser copiado no final </span>
+                            <span class="c1"># do arquivo backup</span>
+                            <span class="n">copy_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">src_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+                <span class="c1"># Se for qualquer outro arquivo, apenas copiar</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Copiar pra pasta backup</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">backup_file</span> <span class="o">/</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Lendo dados da structure (lê os dados mesmo que esteja em look mode)</span>
+        <span class="n">struct</span> <span class="o">=</span> <span class="n">structure</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">read_from_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Gerando novos arquivos de otimização, e sobrescrevendo antigos </span>
+        <span class="kn">from</span> <span class="nn">dops_set</span> <span class="kn">import</span> <span class="n">dops_set</span>
+        
+        <span class="c1"># Tentar gerar arquivos, com ReadInitialCharges</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dops_set</span><span class="o">.</span><span class="n">gen_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_initial_charges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">redo</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Se não for possível, restaurar estado anterior</span>
+        <span class="k">except</span><span class="p">:</span>
+
+            <span class="c1"># Para cada arquivo do diretório</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">backup_file</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">):</span>
+
+                <span class="c1"># Copiar de volta os arquivos guardados em backup (sobrescreve)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">backup_file</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+
+            <span class="c1"># Remover pasta de backup</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">backup_file</span><span class="p">)</span>
+
+            <span class="c1"># Anunciando que dados não foram alterados</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OPT FILES RESTORED BECAUSE REDO COULD NOT BE DONE&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Relançando erro do último bloco</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;It was not possible to gen files for restart.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Copiando o último frame do geo_end.xyz como inp.xyz </span>
+        <span class="c1"># (sobrescreve o inp.xyz gerado)</span>
+        <span class="n">struct</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="s2">&quot;inp.xyz&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Removendo todos os arquivos, exceto os que serão usados</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">):</span>
+            <span class="c1"># Se for um aquivo</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="c1"># Se não for charges.dat</span>
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;inp.xyz&quot;</span><span class="p">,</span> <span class="s2">&quot;charges.dat&quot;</span><span class="p">,</span> <span class="s2">&quot;dftb_in.hsd&quot;</span><span class="p">]:</span>
+
+                    <span class="c1"># Remover</span>
+                    <span class="n">Path</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="structure.data_from_file">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.data_from_file">[documentos]</a>
+    <span class="k">def</span> <span class="nf">data_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A partir do diretório da estrutura, lê os arquivos de dados e os </span>
+<span class="sd">        carrega como propriedades do objeto structure.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Lendo coordenadas</span>
+        <span class="n">frame_data</span> <span class="o">=</span> <span class="n">struct_read</span><span class="o">.</span><span class="n">read_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Quantidade de dados</span>
+        <span class="k">if</span> <span class="n">frame_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            
+            <span class="n">number_of_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frame_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="c1"># Para cada átomo da estrutura</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frame_data</span><span class="p">)):</span>
+                
+                <span class="c1"># Juntando argumentos em um dict</span>
+                <span class="n">temp_dict</span> <span class="o">=</span> <span class="p">{</span>
+
+                    <span class="s2">&quot;elem&quot;</span>      <span class="p">:</span>   <span class="n">frame_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">frame_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+
+                    <span class="s2">&quot;coord&quot;</span>     <span class="p">:</span>   <span class="p">[</span><span class="n">frame_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+                                    <span class="n">frame_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> 
+                                    <span class="n">frame_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]]</span> <span class="k">if</span> <span class="n">frame_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+
+                                                                                <span class="c1"># e se houverem 5 dados por átomo</span>
+                    <span class="s2">&quot;charge&quot;</span>    <span class="p">:</span>   <span class="n">frame_data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="p">((</span><span class="n">frame_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">number_of_data</span><span class="o">==</span><span class="mi">5</span><span class="p">))</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="p">}</span>
+
+                <span class="c1"># Passando pares de chaves e valores do dicionário como </span>
+                <span class="c1"># argumentos, usando &quot;**&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom_data</span><span class="p">(</span><span class="o">**</span><span class="n">temp_dict</span><span class="p">))</span>  
+
+        <span class="c1"># Lendo energia</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_energy</span> <span class="o">=</span> <span class="n">struct_read</span><span class="o">.</span><span class="n">read_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Lendo homo e lumo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">homo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lumo</span> <span class="o">=</span> <span class="n">struct_read</span><span class="o">.</span><span class="n">read_bands</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Lendo momento dipolo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dipole</span> <span class="o">=</span> <span class="n">struct_read</span><span class="o">.</span><span class="n">read_dipole</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="structure.opt">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.opt">[documentos]</a>
+    <span class="k">def</span> <span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+            <span class="n">skip_hard_to_conv_SCC</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resume_unfineshed</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executa uma otimização no diretório da estrutura, espera </span>
+<span class="sd">        a otimização terminar e relata o status ao final.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        overwrite</span>
+<span class="sd">        verbose</span>
+<span class="sd">        skip_hard_to_conv_SCC</span>
+<span class="sd">        resume_unfineshed</span>
+
+<span class="sd">        overwrite : bool, default=False</span>
+<span class="sd">            Se a otimização deve ser executada mesmo que já exista no </span>
+<span class="sd">            diretório output de otimização anterior. Se True, a </span>
+<span class="sd">            otimização será iniciada e os arquivos anteriores serão </span>
+<span class="sd">            sobrescritos.</span>
+
+<span class="sd">        verbose : bool, default=True</span>
+<span class="sd">            Se, como informação extra, os passos onde não houve </span>
+<span class="sd">            convergência do SCC devem ser impressos também.</span>
+
+<span class="sd">        skip_hard_to_conv_SCC : bool, default=True</span>
+<span class="sd">            Se otimizações com demasiados passos SCC não convergidos </span>
+<span class="sd">            devem ser puladas.</span>
+
+<span class="sd">            Regra para determinar uma otimizão com demasiados passos:</span>
+<span class="sd">            </span>
+<span class="sd">            Ter mais de 30 passos não convergidos; ou ter mais de 20</span>
+<span class="sd">            passos não convergidos, antes de chegar no passo 30 da </span>
+<span class="sd">            otimização.</span>
+
+<span class="sd">        resume_unfineshed : bool, default=True</span>
+<span class="sd">            Se True, ao realizar a otimização que foi anteriormente </span>
+<span class="sd">            interrompida, gera os arquivos necessários para recomeçar do</span>
+<span class="sd">            último passo escrito e inicia tal otimização.</span>
+
+<span class="sd">            Se False, recomeça do primeiro frame escrito.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">subprocess</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+        <span class="k">def</span> <span class="nf">run_opt</span><span class="p">(</span><span class="n">opt_dir</span><span class="p">):</span>
+
+            <span class="c1"># Rodar otimização no diretório e guardar pid</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nohup </span><span class="si">{</span><span class="n">bin_dir</span><span class="si">}</span><span class="s2"> &gt;&amp; </span><span class="si">{</span><span class="n">main_config</span><span class="p">[</span><span class="s1">&#39;output_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &amp; echo $!&quot;</span><span class="p">,</span> 
+                                 <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,</span> 
+                                 <span class="n">cwd</span><span class="o">=</span><span class="n">opt_dir</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span>
+                                 <span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            
+            <span class="k">return</span> <span class="n">pid</span>
+        
+        <span class="k">def</span> <span class="nf">kill_pid</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;try to kill </span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;kill </span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                                    <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            
+        <span class="k">def</span> <span class="nf">pid_running</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+
+            <span class="n">running</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;if $(ps -p </span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2"> &gt; /dev/null); then echo True; else echo False; fi&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                                     <span class="n">executable</span><span class="o">=</span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span>
+                                     <span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> 
+            
+            <span class="k">return</span> <span class="n">running</span> <span class="o">==</span> <span class="s2">&quot;True&quot;</span>
+
+        <span class="c1"># Transformando endereço em Path      </span>
+        <span class="c1"># Usar diretório da estrutura como o de otimização</span>
+        <span class="n">opt_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+
+        <span class="c1"># Endereço do binário</span>
+        <span class="n">bin_dir</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;bin_dir&quot;</span><span class="p">][</span><span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;maquina&quot;</span><span class="p">]]</span>
+
+        <span class="c1"># Se o arquivo output existir</span>
+        <span class="k">if</span> <span class="n">Path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">opt_dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;output_name&quot;</span><span class="p">]):</span>
+
+            <span class="c1"># Abrir o arquivo e verificar nele o status</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">opt_dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;output_name&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+
+                <span class="c1"># Buscar no arquivo se convergiu</span>
+                <span class="n">converged</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Geometry converged&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="c1"># Se o arquivo não existir, considerar como &quot;não convergido&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Guardar quantos passos foram escritos</span>
+        <span class="n">written</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">return_written</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># A exigência de 1 passo escrito é para evitar que ele refaça os </span>
+        <span class="c1"># arquivos em caso de já estarem refeitos</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">resume_unfineshed</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">overwrite</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">converged</span><span class="p">)</span> 
+            <span class="ow">and</span> <span class="p">(</span><span class="n">written</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">written</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)):</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Refazendo diretórios...&quot;</span><span class="p">)</span>
+            <span class="c1"># Faz backup e refaz os arquivos para continuar de onde parou</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">redo_files_for_resume</span><span class="p">()</span>
+
+        <span class="c1"># Se ainda não convergiu ou for pedido para sobrescrever</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">converged</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">overwrite</span><span class="p">):</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="n">run_opt</span><span class="p">(</span><span class="n">opt_dir</span><span class="p">)</span>
+    
+            <span class="c1"># Em loop infinito</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+                <span class="c1"># Se estiver configurado para pular estruturas com grande </span>
+                <span class="c1"># dificuldade de convergir o SCC</span>
+                <span class="k">if</span> <span class="n">skip_hard_to_conv_SCC</span><span class="p">:</span>
+
+                    <span class="c1"># Encontrar lista de SCC não convergido</span>
+                    <span class="n">nConv_SCC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">return_SCC</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                    <span class="c1"># Se tiver mais que 30 SCC não convergido,</span>
+                    <span class="c1"># ou chegar a 20 nconv antes do passo 30</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nConv_SCC</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">30</span> 
+                        <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nConv_SCC</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nConv_SCC</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">30</span> 
+                        <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">nConv_SCC</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)):</span>
+
+                        <span class="c1"># Encerrar dftb+</span>
+                        <span class="n">kill_pid</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+                        
+                <span class="c1"># Se o dftb+ não estiver rodando mais, sair do loop</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">pid_running</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+
+                    <span class="k">break</span>
+                
+                <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="c1"># Reportar status a partir do diretório da estrutura </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="structure.report">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.report">[documentos]</a>
+    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">return_SCC</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_conv</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+               <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+               <span class="n">return_written</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="o">|</span><span class="nb">bool</span><span class="o">|</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reporta o estado da otimização da estrutura a partir do</span>
+<span class="sd">        arquivo de no seu diretório, </span>
+<span class="sd">        </span>
+<span class="sd">        Relata:</span>
+
+<span class="sd">        - Ausência de arquivo de output.</span>
+<span class="sd">        </span>
+<span class="sd">        - Se convergiu e com quantos passos convergiu.</span>
+<span class="sd">        - Se houve divergência de SCC, em quais passos isso</span>
+<span class="sd">        ocorreu e que porcentagem isso representa do total de passos.</span>
+<span class="sd">        - Se houve divergência de SCC no último passo de otimização.</span>
+<span class="sd">        </span>
+<span class="sd">        - Se não convergiu.</span>
+<span class="sd">        - Se houve divergência de SCC, em quais passos isso</span>
+<span class="sd">        ocorreu e que porcentagem isso representa do total de passos.</span>
+<span class="sd">        </span>
+<span class="sd">        - Se o estado está indefinido.</span>
+<span class="sd">        - Se nenhum passo foi escrito no arquivo.</span>
+<span class="sd">        - Qual o último passo escrito no arquivo.</span>
+<span class="sd">        - Se houve divergência de SCC, em quais passos isso</span>
+<span class="sd">        ocorreu e que porcentagem isso representa do total de passos.</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        return_SCC : bool, default=False</span>
+<span class="sd">            Se True, retorna uma lista dos passos não convergidos do </span>
+<span class="sd">            SCC.</span>
+<span class="sd">    </span>
+<span class="sd">        return_conv : bool, default=False</span>
+<span class="sd">            Se True, retorna se a otimização convergiu ou não.</span>
+
+<span class="sd">        verbose : bool, default=True</span>
+<span class="sd">            Se, como informação extra, os passos onde não houve </span>
+<span class="sd">            convergência do SCC devem ser impressos também.</span>
+
+<span class="sd">        return_written : bool, default=False</span>
+<span class="sd">            Se True, retorna uma lista dos passos escritos no arquivo.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        list[int]</span>
+<span class="sd">            No caso de return_SCC ou return_written for True.</span>
+
+<span class="sd">        bool          </span>
+<span class="sd">            No caso de return_conv for True.</span>
+
+<span class="sd">        None</span>
+<span class="sd">            No caso de nenhuma opção de retorno ser True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">os</span>
+
+        <span class="c1"># Diretório de otimização</span>
+        <span class="n">opt_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">opt_dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;output_name&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Encontra todas as ocorrências de uma substring</span>
+        <span class="k">def</span> <span class="nf">find_all</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">substring</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Função que encontra a posição de todas as ocorrências de uma </span>
+<span class="sd">            substring em uma string maior (como de um documento).</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+
+<span class="sd">            list[int]</span>
+<span class="sd">                Lista de posições onde a substring foi encontrada.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Inicializando lista de passos</span>
+            <span class="n">steps</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># Inicializando primeiro passo condiderado como -1</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+                <span class="c1"># Continuar na posição seguinte à última encontrada</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">substring</span><span class="p">,</span> <span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="c1"># Se encontrar próxima ocorrência</span>
+                <span class="k">if</span> <span class="n">step</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+                <span class="c1"># Do contrário, sair do loop</span>
+                <span class="k">else</span><span class="p">:</span> 
+                    <span class="k">break</span>
+
+            <span class="k">return</span> <span class="n">steps</span>
+
+        <span class="c1"># Função para encontrar em que passo se encontra uma posição </span>
+        <span class="c1"># de caracter</span>
+        <span class="k">def</span> <span class="nf">indexes_to_steps</span><span class="p">(</span><span class="n">steps_indexes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> 
+                             <span class="n">searched_indexes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Função que identifica em que passo da otimização se encontra</span>
+<span class="sd">            um índice qualquer buscado.</span>
+
+<span class="sd">            No caso, recebe uma lista de indexes, e devolve uma lista </span>
+<span class="sd">            com os passos onde cada um dos indexes se encontra.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+
+<span class="sd">            steps_indexes : list[int]</span>
+<span class="sd">                Lista dos índeces de início dos passos.</span>
+
+<span class="sd">            searched_indexes : list[int]</span>
+<span class="sd">                Lista de indexes procurados dentro dos passos.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+
+<span class="sd">            list[int]</span>
+<span class="sd">                Lista de mesmo tamanho que searched_indexes, onde cada </span>
+<span class="sd">                item é o passo onde foi encontrado o index buscado</span>
+<span class="sd">                correspondente.</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            AssertionError</span>
+<span class="sd">                index not found in file.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Lista para acumular passos</span>
+            <span class="n">found_steps</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Número de passos da otimização</span>
+            <span class="n">steps_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">steps_indexes</span><span class="p">)</span>
+            <span class="c1"># Atribundo a última posição do arquivo como sendo um passo posterior ao último</span>
+            <span class="n">steps_indexes</span> <span class="o">=</span> <span class="n">steps_indexes</span> <span class="o">+</span> <span class="p">[</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
+
+            <span class="c1"># Para cada index buscado</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">searched_indexes</span><span class="p">:</span>
+            
+                <span class="c1"># Avaliar cada passo:</span>
+                <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">steps_num</span><span class="p">):</span>
+
+                    <span class="c1"># Se o index buscado for maior que o do passo atual,</span>
+                    <span class="c1"># e menor que o do passo seguinte</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">steps_indexes</span><span class="p">[</span><span class="n">step</span><span class="p">]</span> 
+                        <span class="ow">and</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">steps_indexes</span><span class="p">[</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+
+                        <span class="c1"># Anexar o passo avaliado como sendo o de tal index</span>
+                        <span class="n">found_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+                        <span class="k">break</span>
+                    
+                    <span class="c1"># Se não achou, e já processou o último passo</span>
+                    <span class="k">elif</span> <span class="n">step</span> <span class="o">==</span> <span class="n">steps_num</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;index not found in file.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Retornar dados</span>
+            <span class="k">return</span> <span class="n">found_steps</span>
+
+        <span class="c1"># Imprime status</span>
+        <span class="k">def</span> <span class="nf">print_status</span><span class="p">(</span><span class="n">exists</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                         <span class="n">converged</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                         <span class="n">not_converged</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">steps_written</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">not_conv_SCC</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Imprime o estado dos arquivos. De acordo com os parâmetros</span>
+<span class="sd">            passados.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+
+<span class="sd">            exists : bool, default=None</span>
+<span class="sd">                Se o arquivo de output existe.</span>
+
+<span class="sd">            converged : bool, default=None</span>
+<span class="sd">                Se foi relatada convergência.</span>
+
+<span class="sd">            not_converged : bool, default=None</span>
+<span class="sd">                Se foi relatada a não convergência.</span>
+<span class="sd">            </span>
+<span class="sd">            steps_written : list[int], default=None</span>
+<span class="sd">                Passos escritos no arquivo de output.</span>
+<span class="sd">            </span>
+<span class="sd">            not_conv_SCC : list[int], default=None</span>
+<span class="sd">                Passos onde o SCC não convergiu. </span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Se arquivo não existe, imprimir que não existe</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">:</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2"> - the output file doesn&#39;t exists&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Se arquivo existe</span>
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="c1"># Se convergiu</span>
+                <span class="k">if</span> <span class="n">converged</span><span class="p">:</span>
+                    
+                    <span class="c1"># Adicionar às mensagens que convergiu</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="s1">&#39;Converged&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> | Last step: </span><span class="si">{</span><span class="n">steps_written</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                
+                <span class="c1"># Se foi EXPLICITAMENTE encontrado que não convergiu</span>
+                <span class="k">elif</span> <span class="n">not_converged</span><span class="p">:</span>
+
+                    <span class="c1"># Reportat a não convergência</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="s1">&#39;NOT converged&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> | Last step: </span><span class="si">{</span><span class="n">steps_written</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Se não convergiu, mas não foi explicitamente encontrado que não convergiu</span>
+                <span class="k">else</span><span class="p">:</span>
+
+                    <span class="c1"># Se tiver passos escritos</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">steps_written</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    
+                        <span class="c1"># Relatar que está indefinido</span>
+                        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="s1">&#39;Undefined&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> | Last step: </span><span class="si">{</span><span class="n">steps_written</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Se nenhum passo foi escrito no arquivo, reportar   </span>
+                    <span class="k">else</span><span class="p">:</span>
+
+                        <span class="c1"># Relatar que está indefinido</span>
+                        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="s1">&#39;Undefined&#39;</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> | No steps written to file&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Se houve SCC não convergente</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">not_conv_SCC</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">verbose</span><span class="p">:</span>
+
+                    <span class="c1"># Calcular porcentagem não convergente, não considerando o </span>
+                    <span class="c1"># último passo, que ainda está sendo escrito</span>
+                    <span class="n">percent</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">not_conv_SCC_steps</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps_written</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+                    <span class="c1"># Caso a leitura ocorra no pequeno intervalo que onde o passo acabou se ser escrito</span>
+                    <span class="c1"># E o pŕoximo não se iniciou, gerando mais que 100%, jogar de volta para 100</span>
+                    <span class="n">percent</span> <span class="o">=</span> <span class="n">percent</span> <span class="k">if</span> <span class="p">(</span><span class="n">percent</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="k">else</span> <span class="mi">100</span>
+
+                    <span class="c1"># Nova linha</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Adicionar à mensagem os não convergentes</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Not converged SCC&#39;s: </span><span class="si">{</span><span class="n">not_conv_SCC_steps</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">{</span><span class="n">percent</span><span class="si">}</span><span class="s2">% of total&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Nova linha</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Se o último passo da otimização teve SCC não convergente</span>
+                    <span class="c1"># Verificar se o SCC divergiu no último passo</span>
+                    <span class="k">if</span> <span class="n">not_conv_SCC_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                        
+                        <span class="c1"># Adicionar warning às mensagens</span>
+                        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;WARNING: SCC was not converged in the final step.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Imprimir todas as mensagens</span>
+            <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="c1">######################### VERIFICANDO SE ARQUIVO EXISTE ###############</span>
+
+        <span class="c1"># Se o arquivo não existir</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_file</span><span class="p">):</span>
+
+            <span class="c1"># Se tiver em modo de retorno de passos escritos, retornar None</span>
+            <span class="k">if</span> <span class="n">return_written</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="c1"># Se tiver em modo de retorno da convergência, retornar que não </span>
+            <span class="c1"># convergiu</span>
+            <span class="k">if</span> <span class="n">return_conv</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            
+            <span class="c1"># Imprimir status</span>
+            <span class="n">print_status</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1">#######################################################################</span>
+
+        <span class="c1"># Do contrário...</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># Ler arquivo output</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="c1">################### LISTANDO PASSOS DO SCC ########################</span>
+
+            <span class="c1"># Listando posição de todos os passos =&gt; [12, 157, 368, ...]</span>
+            <span class="n">steps_indexes</span> <span class="o">=</span> <span class="n">find_all</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;Geometry step:&quot;</span><span class="p">)</span>
+            <span class="c1"># Criando lista dos números dos passos =&gt; [0, 1, 2, 3, 4, ...]</span>
+            <span class="n">steps</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps_indexes</span><span class="p">))]</span>
+
+            <span class="c1"># Se estiver no modo de retorno dos passos escritos no arquivo</span>
+            <span class="k">if</span> <span class="n">return_written</span><span class="p">:</span>
+                <span class="c1"># Retornar passos</span>
+                <span class="k">return</span> <span class="n">steps</span>
+
+            <span class="c1"># Listando posição de SCC&#39;s não convergentes</span>
+            <span class="n">not_conv_SCC_indexes</span> <span class="o">=</span> <span class="n">find_all</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;SCC is NOT converged&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Encontrando passos onde o SCC não convergiu</span>
+            <span class="n">not_conv_SCC_steps</span> <span class="o">=</span> <span class="n">indexes_to_steps</span><span class="p">(</span><span class="n">steps_indexes</span><span class="p">,</span> 
+                                                  <span class="n">not_conv_SCC_indexes</span><span class="p">)</span>
+
+            <span class="c1"># Se for modo de retorno, retornar os SCC não conv</span>
+            <span class="k">if</span> <span class="n">return_SCC</span><span class="p">:</span>
+
+                <span class="k">return</span> <span class="n">not_conv_SCC_steps</span>
+
+            <span class="c1">############## VERIFICANDO ESTADO DA OTIMIZAÇÃO ###################</span>
+
+            <span class="c1"># Se achar no arquivo, que a otmização convergiu...</span>
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Geometry converged&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                
+                <span class="c1"># Se estiver nesse modo de retorno de convergência, retornar </span>
+                <span class="c1"># que convergiu</span>
+                <span class="k">if</span> <span class="n">return_conv</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+
+                <span class="c1"># Imprimir status</span>
+                <span class="n">print_status</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                             <span class="n">converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">not_conv_SCC</span><span class="o">=</span><span class="n">not_conv_SCC_indexes</span><span class="p">,</span> 
+                             <span class="n">steps_written</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+
+            <span class="c1"># Se achar no arquivo que a otimização não convergiu, reportar</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Geometry NOT converged&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> 
+                  <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;Geometry did NOT converge&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                
+                <span class="c1"># Se estiver nesse modo, retornar que não convergiu</span>
+                <span class="k">if</span> <span class="n">return_conv</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                
+                <span class="c1"># Imprimir status</span>
+                <span class="n">print_status</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                             <span class="n">converged</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                             <span class="n">not_converged</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">not_conv_SCC</span><span class="o">=</span><span class="n">not_conv_SCC_indexes</span><span class="p">,</span> 
+                             <span class="n">steps_written</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+                
+            <span class="c1"># Se não foi encontrado que convergiu, mas também não foi </span>
+            <span class="c1"># encontrado que não convergiu</span>
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="c1"># Se estiver nesse modo, retornar que não convergiu</span>
+                <span class="k">if</span> <span class="n">return_conv</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                
+                <span class="c1"># Imprimir status</span>
+                <span class="n">print_status</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                            <span class="n">converged</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                            <span class="n">not_conv_SCC</span><span class="o">=</span><span class="n">not_conv_SCC_indexes</span><span class="p">,</span>
+                            <span class="n">steps_written</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span></div>
+
+                
+    <span class="c1">############# Dopagem</span>
+
+<div class="viewcode-block" id="structure.dope_out">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.dope_out">[documentos]</a>
+    <span class="k">def</span> <span class="nf">dope_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dop_elem</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">structure</span><span class="p">:</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gera uma versão (dopada) de uma estrutura, onde o átomo </span>
+<span class="sd">        especificado é substituído por um de outro elemento.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        dop_elem : str</span>
+<span class="sd">            Elemento do átomo que substituirá o antigo.</span>
+
+<span class="sd">        id : int</span>
+<span class="sd">            ID do átomo que será substituído.</span>
+
+<span class="sd">        **kwargs</span>
+<span class="sd">            Passado para o construtor de structure.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        structure</span>
+<span class="sd">            Estrutura dopada, onde o átomo especificado foi substituído </span>
+<span class="sd">            por um de outro elemento. Obs: As cargas originais são </span>
+<span class="sd">            substituídas por None.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            dop_elem must be string</span>
+<span class="sd">        </span>
+<span class="sd">        TypeError</span>
+<span class="sd">            id must be int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">#######################################################################</span>
+
+        <span class="c1"># Verificando validade</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dop_elem</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;dop_elem must be string&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;id must be int&quot;</span><span class="p">)</span>
+
+        <span class="c1">#######################################################################</span>
+        
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        
+        <span class="c1"># Criando cópias dos valores invés de copiar o ponteiro</span>
+        <span class="n">atoms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">))</span>
+
+        <span class="c1"># Apagando cargas</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">:</span>
+            <span class="n">atom</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Modificando o símbolo de elemento químico no átomo especificado</span>
+        <span class="n">atoms</span><span class="p">[</span><span class="nb">id</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span> <span class="o">=</span> <span class="n">dop_elem</span>
+
+        <span class="c1"># Criando outro objeto structure, agora dopado</span>
+        <span class="n">doped_out</span> <span class="o">=</span> <span class="n">structure</span><span class="p">(</span><span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Retornando</span>
+        <span class="k">return</span> <span class="n">doped_out</span></div>
+
+
+    <span class="c1">############# </span>
+
+<div class="viewcode-block" id="structure.formation_energy">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.formation_energy">[documentos]</a>
+    <span class="k">def</span> <span class="nf">formation_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna a energia de formação da estrutura, além de sua média </span>
+<span class="sd">        por átomo.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        </span>
+<span class="sd">        tuple[float, float]</span>
+
+<span class="sd">            Os seguintes valores:</span>
+
+<span class="sd">            Energia de formação da estrutura (eV) no último passo de </span>
+<span class="sd">            otimização, energia média de formação por átomo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Lista que receberá os dados</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Para cada átomo, anexar sua energia à lista &quot;data&quot;</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atoms_data</span><span class="p">[</span><span class="s2">&quot;energ_atom&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">][</span><span class="n">atom</span><span class="o">.</span><span class="n">elem</span><span class="p">])</span>
+
+        <span class="c1"># Retornando como array ao final da iteração</span>
+        <span class="n">atoms_energies_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="c1">############# Valência e energia dos átomos</span>
+
+        <span class="n">energy</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">total_energy</span> <span class="o">-</span> <span class="n">atoms_energies_sum</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># A energia total, menos a soma da energia de cada átomo</span>
+        <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">energy</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="structure.homo_lumo">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.homo_lumo">[documentos]</a>
+    <span class="k">def</span> <span class="nf">homo_lumo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna as energias de HOMO, LUMO, e o módulo da diferença </span>
+<span class="sd">        HOMO-LUMO de uma estrutura a partir de seu arquivo band.out.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        tuple[float, float, float]</span>
+
+<span class="sd">            Os seguintes valores (todos arredondados em 3 casas </span>
+<span class="sd">            decimais):</span>
+<span class="sd">                </span>
+<span class="sd">            homo, lumo, homo-lumo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Retornar valores</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">homo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lumo</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lumo</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">homo</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div>
+
+
+    <span class="c1">##### Análise das ligações</span>
+
+<div class="viewcode-block" id="structure.shortest_distances">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.shortest_distances">[documentos]</a>
+    <span class="k">def</span> <span class="nf">shortest_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elem1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">elem2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                           <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna as &quot;n&quot; menores distâncias entre átomos de dados </span>
+<span class="sd">        elementos, na estrutura.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        elem1 : str</span>
+<span class="sd">            Símbolo do elementos do átomo 1.</span>
+
+<span class="sd">        elem2 : str</span>
+<span class="sd">            Símbolo do elementos do átomo 2.</span>
+
+<span class="sd">        n : int</span>
+<span class="sd">            Número de comprimentos retornados.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        list[float]</span>
+<span class="sd">            Lista com as &quot;n&quot; menores comprimentos entre átomos da estrutura.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="c1"># Lista para receber comprimentos de ligação</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Salvando quantidade de átomos na estrutura</span>
+        <span class="n">tam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Para o índice de cada átomo na estrutura, procuar o átomo buscado</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tam</span><span class="p">):</span>
+
+            <span class="c1"># Se dado átomo é o buscado</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span> <span class="o">==</span> <span class="n">elem1</span><span class="p">:</span>
+
+                <span class="c1"># Para o índice de cada outro átomo na estrutura</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tam</span><span class="p">):</span>
+
+                    <span class="c1"># Se dado átomo é o buscado</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span> <span class="o">==</span> <span class="n">elem2</span><span class="p">:</span>
+
+                        <span class="c1"># Calcular comprimento da ligação</span>
+                        <span class="n">bond_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dist_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+                        <span class="c1"># Listar valor do comprimento </span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bond_length</span><span class="p">)</span>
+
+        <span class="c1"># Retornar primeiros &quot;n&quot; resultados da lista ordenada</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span></div>
+
+
+    <span class="c1">############ Escrita/cópia de arquivos</span>
+
+<div class="viewcode-block" id="structure.frame">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.frame">[documentos]</a>
+    <span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_out</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gera e escreve o arquivo xyz do último frame da estrutura.</span>
+<span class="sd">        Cria diretórios necessários caso não existam.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        frame_out: str or Path</span>
+<span class="sd">            Endereço de saída do frame.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            &quot;frame_out must be str or Path.&quot;</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            This structure has no atoms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Se frame_out não for string, nem Path, apontar erro</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame_out</span><span class="p">,</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;frame_out must be str or Path.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Lista para receber dados</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Adicionando cabeçalho - Quantidade de átomos da estrutura</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+
+        <span class="c1"># Imprimir nome do diretório na segunda linha do cabeçalho</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Para cada átomo, adicionar uma linha com: elemento, X, Y, Z </span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">charge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>           
+                <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span> <span class="n">atom</span><span class="o">.</span><span class="n">elem</span> <span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">atom</span><span class="o">.</span><span class="n">coord</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">charge</span><span class="p">)]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span> <span class="n">atom</span><span class="o">.</span><span class="n">elem</span> <span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">atom</span><span class="o">.</span><span class="n">coord</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This structure has no atoms.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Convertendo tudo em texto (string formatada)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Convertendo endereço em caminho Path</span>
+        <span class="n">frame_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">frame_out</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="c1"># Criando diretórios necessários para a escrita</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">frame_out</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Escrevendo em arquivo no endereço passado</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">frame_out</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Imprimir endereço do arquivo escrito</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">frame_out</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="structure.output">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.output">[documentos]</a>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dest</span><span class="p">:</span> <span class="nb">str</span><span class="o">|</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Copia o output de otimização da estrutura para o endereço </span>
+<span class="sd">        passado.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        output_dest : str | Path</span>
+<span class="sd">            Destino do arquivo output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copyfile</span>
+
+        <span class="c1"># Convertendo endereço em objeto Path</span>
+        <span class="n">output_origin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;output_name&quot;</span><span class="p">]</span>
+        <span class="n">output_dest</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dest</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">output_origin</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;output file not found.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Criando diretórios necessário</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_dest</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Coopiando arquivo</span>
+        <span class="n">copyfile</span><span class="p">(</span><span class="n">output_origin</span><span class="p">,</span> <span class="n">output_dest</span><span class="p">)</span>
+
+        
+
+        <span class="c1"># Imprimir endereço do arquivo escrito</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">output_dest</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="structure.copy">
+<a class="viewcode-back" href="../../dopings.html#dopings.structure.structure.copy">[documentos]</a>
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">structure</span><span class="p">:</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna uma estrutura que contém os mesmo átomos que a original.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">structure</span><span class="p">(</span><span class="n">atoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1">####################################################################################</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Direitos autorais 2024, Gustavo Campos.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

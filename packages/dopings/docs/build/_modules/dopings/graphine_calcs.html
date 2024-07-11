@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dopings.graphine_calcs &#8212; Documentação dopings 0.1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="../../_static/documentation_options.js?v=4941e4e1"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=000972dd"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/dopings/graphine_calcs';</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentação dopings 0.1</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../modules.html">
+                        dopings
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../modules.html">
+                        dopings
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Código do módulo</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">dopings.graphine_calcs</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Código fonte para dopings.graphine_calcs</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">dopings.config</span> <span class="kn">import</span> <span class="n">graphine_data</span><span class="p">,</span> <span class="n">dops_data</span><span class="p">,</span> <span class="n">atoms_data</span>
+<span class="kn">from</span> <span class="nn">dopings.structure</span> <span class="kn">import</span> <span class="n">structure</span>
+<span class="kn">from</span> <span class="nn">dopings.atom_data</span> <span class="kn">import</span> <span class="n">atom_data</span>
+
+<span class="c1"># Dados de sítios extras</span>
+<span class="n">sites_id</span> <span class="o">=</span> <span class="n">dops_data</span><span class="p">[</span><span class="s2">&quot;graphine&quot;</span><span class="p">][</span><span class="s2">&quot;sites_id&quot;</span><span class="p">]</span>
+<span class="n">extra_sites_id</span> <span class="o">=</span> <span class="n">graphine_data</span><span class="p">[</span><span class="s2">&quot;sites_id&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="dihedral_angle">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.dihedral_angle">[documentos]</a>
+<span class="k">def</span> <span class="nf">dihedral_angle</span><span class="p">(</span><span class="n">atoms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">atom_data</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula o ângulo diedral, ou ângulo de torção, entre 4 átomos.</span>
+
+<span class="sd">    Código adaptado de:</span>
+<span class="sd">    https://stackoverflow.com/questions/20305272/dihedral-torsion-angle-from-four-points-in-cartesian-coordinates-in-python</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    atoms : list[atom_data]</span>
+<span class="sd">        Lista de 4 átomos sobre os quais deseja-se calcular a </span>
+<span class="sd">        torção.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    float</span>
+<span class="sd">        Ângulo diedral entre os 4 átomos.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span>
+    <span class="n">p3</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span>
+
+    <span class="n">b0</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">p1</span> <span class="o">-</span> <span class="n">p0</span><span class="p">)</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">p3</span> <span class="o">-</span> <span class="n">p2</span>
+
+    <span class="c1"># normalize b1 so that it does not influence magnitude of vector</span>
+    <span class="c1"># rejections that come next</span>
+    <span class="n">b1</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
+
+    <span class="c1"># vector rejections</span>
+    <span class="c1"># v = projection of b0 onto plane perpendicular to b1</span>
+    <span class="c1">#   = b0 minus component that aligns with b1</span>
+    <span class="c1"># w = projection of b2 onto plane perpendicular to b1</span>
+    <span class="c1">#   = b2 minus component that aligns with b1</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">b0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span><span class="o">*</span><span class="n">b1</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">b2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b2</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span><span class="o">*</span><span class="n">b1</span>
+
+    <span class="c1"># angle between v and w in a plane is the torsion angle</span>
+    <span class="c1"># v and w may not be normalized but that&#39;s fine since tan is y/x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="graphine_calcs">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.graphine_calcs">[documentos]</a>
+<span class="k">class</span> <span class="nc">graphine_calcs</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe de métodos estáticos que trás implementações de calculos </span>
+<span class="sd">    sobre estruturas dopadas de grafinos.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    axis_torsion_angle(struct: structure, arm: int) -&gt; float</span>
+<span class="sd">        Calcula a torção de um eixo da estrutura, usando o braço &quot;arm&quot;</span>
+<span class="sd">        e o seu oposto para cacular um ângulo diedral.</span>
+<span class="sd">    </span>
+<span class="sd">    int_arm_length(struct: structure) -&gt; float</span>
+<span class="sd">        Calcula a soma de distâncias entre os carbonos no braço interno</span>
+<span class="sd">        da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</span>
+
+<span class="sd">        [A1, B1, B2, B3, ..., B{2N}, D4]</span>
+<span class="sd">    </span>
+<span class="sd">    ext_arm_length(struct: structure) -&gt; float</span>
+<span class="sd">        Calcula a soma de distâncias entre os carbonos no braço externo</span>
+<span class="sd">        da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</span>
+
+<span class="sd">        [C2, D1, D2, ..., D{2N+1}]</span>
+<span class="sd">    </span>
+<span class="sd">    dop_atom_angle(struct: structure) -&gt; float|None</span>
+<span class="sd">        Se o átomo dopante pertencer a um sítio B ou D, calcula o </span>
+<span class="sd">        ângulo da ligação do átomo dopado com seus dois vizinhos.</span>
+<span class="sd">    </span>
+<span class="sd">    dop_atom_torsion(struct: structure) -&gt; float|None</span>
+<span class="sd">        Quando o dopante se encontra em um anel benzênico, calcula a </span>
+<span class="sd">        torção de um sequência de 4 átomos, onde o dopante é o segundo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="graphine_calcs.axis_torsion_angle">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.graphine_calcs.axis_torsion_angle">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">axis_torsion_angle</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">,</span> <span class="n">arm</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcula a torção de um eixo da estrutura, usando o braço &quot;arm&quot;</span>
+<span class="sd">        e o seu oposto para cacular um ângulo diedral.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : strucutre</span>
+<span class="sd">            Estrutura de grafino sobre a qual se deseja fazer o cálculo.</span>
+
+<span class="sd">        arm : int</span>
+<span class="sd">            Braço da estrutura usado de referência para o cálculo da </span>
+<span class="sd">            torção. Considera o próprio braço, e o seu oposto no </span>
+<span class="sd">            cálculo.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        float</span>
+<span class="sd">            Ângulo de torção no eixo do braço especificado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Transforma uma torção que parte do 0 para uma torção que parte do </span>
+<span class="sd">            180.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Deixando todos os ângulos positivos</span>
+            <span class="k">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">angle</span> <span class="o">+=</span> <span class="mi">360</span>
+
+            <span class="c1"># Retornando sua diferença em relação ao ângulo raso</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="mi">360</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="mi">180</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">arms_seq</span><span class="p">(</span><span class="n">initial</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Partindo do braço &quot;initial&quot;, encontra o &quot;n&quot;-ésimo braço na</span>
+<span class="sd">            sequência, em sentido horário.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="c1"># Trazendo pro intervalo 0, 5</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">initial</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span>
+
+        <span class="c1"># Extra_sites</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">base</span>
+
+        <span class="c1"># Próximo sítio D</span>
+        <span class="n">next_d</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;D</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Átomos</span>
+        <span class="n">atom1</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">extra_sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">arms_seq</span><span class="p">(</span><span class="n">arm</span><span class="p">,</span> <span class="mi">0</span><span class="p">)][</span><span class="n">next_d</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">atom2</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">extra_sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">arms_seq</span><span class="p">(</span><span class="n">arm</span><span class="p">,</span> <span class="mi">2</span><span class="p">)][</span> <span class="s2">&quot;A1&quot;</span> <span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">atom3</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">extra_sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">arms_seq</span><span class="p">(</span><span class="n">arm</span><span class="p">,</span> <span class="mi">5</span><span class="p">)][</span> <span class="s2">&quot;A1&quot;</span> <span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">atom4</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">extra_sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">arms_seq</span><span class="p">(</span><span class="n">arm</span><span class="p">,</span> <span class="mi">3</span><span class="p">)][</span><span class="n">next_d</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">dihedral_angle</span><span class="p">([</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">angle</span></div>
+
+
+<div class="viewcode-block" id="graphine_calcs.int_arm_length">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.graphine_calcs.int_arm_length">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">int_arm_length</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcula a soma de distâncias entre os carbonos no braço interno</span>
+<span class="sd">        da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</span>
+
+<span class="sd">        [A1, B1, B2, B3, ..., B{2N}, D4]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : strucutre</span>
+<span class="sd">            Estrutura de grafino sobre a qual se deseja fazer o cálculo.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        float</span>
+<span class="sd">            Soma das distâncias entre carbonos no braço interno da </span>
+<span class="sd">            dopagem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Inicializando comprimento total como 0</span>
+        <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Base</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">base</span>
+
+        <span class="c1"># Sites_names list</span>
+        <span class="n">sites_names</span> <span class="o">=</span> <span class="n">dops_data</span><span class="p">[</span><span class="s2">&quot;graphine&quot;</span><span class="p">][</span><span class="s2">&quot;sites&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]</span>
+
+        <span class="c1"># Separando sites B</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Adicionando</span>
+        <span class="n">sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Para cada site da lista, se for site B, adicionar a lista B_sites</span>
+        <span class="k">for</span> <span class="n">site_name</span> <span class="ow">in</span> <span class="n">sites_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">site_name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span>
+
+                <span class="c1"># Apenas se for carbono</span>
+                <span class="k">if</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">site_name</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+
+                    <span class="c1"># Adicionar à lista</span>
+                    <span class="n">sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site_name</span><span class="p">)</span>
+
+        <span class="c1"># Adicionar C4</span>
+        <span class="n">sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Para cada sítio B, exceto o último</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sites</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+
+            <span class="c1"># Átomo do i, e do i+1 na lista de sítios</span>
+            <span class="n">atom1</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">sites</span><span class="p">[</span><span class="n">i</span>  <span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">atom2</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="n">sites</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Incrementar o comprimento total com a distância entre eles</span>
+            <span class="n">total_length</span> <span class="o">+=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">dist_to</span><span class="p">(</span><span class="n">atom2</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">total_length</span></div>
+
+
+<div class="viewcode-block" id="graphine_calcs.ext_arm_length">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.graphine_calcs.ext_arm_length">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">ext_arm_length</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcula a soma de distâncias entre os carbonos no braço externo</span>
+<span class="sd">        da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</span>
+
+<span class="sd">        [C2, D1, D2, ..., D{2N+1}]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : strucutre</span>
+<span class="sd">            Estrutura de grafino sobre a qual se deseja fazer o cálculo.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        float</span>
+<span class="sd">            Soma das distâncias entre carbonos no braço interno da </span>
+<span class="sd">            dopagem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Inicializando comprimento total como 0</span>
+        <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Base</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">base</span>
+
+        <span class="c1"># Sites_names list</span>
+        <span class="n">sites_id_copy</span> <span class="o">=</span> <span class="n">sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">extra_sites_id_copy</span> <span class="o">=</span> <span class="n">extra_sites_id</span><span class="p">[</span><span class="n">base</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Juntando os dois dicionários</span>
+        <span class="n">sites_id_copy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_sites_id_copy</span><span class="p">)</span>
+
+        <span class="c1"># Criando novo dicionário</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Para cada chave  no dict original</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sites_id_copy</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+            <span class="c1"># Se atender ao critério</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;C2&quot;</span> <span class="ow">or</span> <span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;D&quot;</span> <span class="ow">and</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites_id_copy</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">elem</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">):</span> 
+
+                <span class="c1"># Usar para formar novo par chave-valor</span>
+                <span class="n">sites</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">sites_id_copy</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sites</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># Incrementando comprimento total baseado nos sitios separados</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+
+            <span class="c1"># Átomo do i, e do i+1 na lista de sítios</span>
+            <span class="n">atom1</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span>  <span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">atom2</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Incrementar o comprimento total com a distância entre eles</span>
+            <span class="n">total_length</span> <span class="o">+=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">dist_to</span><span class="p">(</span><span class="n">atom2</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">total_length</span></div>
+
+
+<div class="viewcode-block" id="graphine_calcs.dop_atom_angle">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.graphine_calcs.dop_atom_angle">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">dop_atom_angle</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="o">|</span><span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se o átomo dopante pertencer a um sítio B ou D, calcula o </span>
+<span class="sd">        ângulo da ligação do átomo dopado com seus dois vizinhos.</span>
+<span class="sd">        </span>
+<span class="sd">        Se não for o caso, retorna None.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : strucutre</span>
+<span class="sd">            Estrutura de grafino sobre a qual se deseja fazer o cálculo.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        float </span>
+<span class="sd">            O ângulo entre o dopante e os 2 átomos ligados a ele, se o</span>
+<span class="sd">            dopante for de um sítio B ou D.</span>
+
+<span class="sd">        None</span>
+<span class="sd">            Se o dopante não pertencer a um sítio B ou D.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">bond_angle</span><span class="p">(</span><span class="n">atoms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">atom_data</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Calcula o ângulo da ligação de uma sequência de 3 átomos.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">vec1</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span> <span class="o">-</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span>
+            <span class="n">vec2</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span> <span class="o">-</span> <span class="n">atoms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span>
+
+            <span class="k">return</span> <span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vec1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vec2</span><span class="p">)))</span>
+
+        <span class="c1"># Base</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">base</span>
+        <span class="c1"># Sítio</span>
+        <span class="n">site</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">site</span>
+
+        <span class="k">if</span> <span class="n">site</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span> <span class="ow">or</span> <span class="n">site</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span>
+
+            <span class="c1"># Dicionários de sítios</span>
+            <span class="n">sites</span> <span class="o">=</span> <span class="n">dops_data</span><span class="p">[</span><span class="s2">&quot;graphine&quot;</span><span class="p">][</span><span class="s2">&quot;sites_id&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">sites2</span> <span class="o">=</span> <span class="n">graphine_data</span><span class="p">[</span><span class="s2">&quot;sites_id&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1"># Juntando dicionários</span>
+            <span class="n">sites</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sites2</span><span class="p">)</span>
+
+            <span class="c1"># Lista de nomes de sites</span>
+            <span class="n">sites_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sites</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+            <span class="c1"># Removendo sitíos não usados</span>
+            <span class="k">for</span> <span class="n">rm_site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C5&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">]:</span>
+                <span class="n">sites_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">rm_site</span><span class="p">)</span>
+
+            <span class="c1"># Achando a posição do site do átomo dopante na lista de </span>
+            <span class="c1"># nomes de sites</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">sites_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+
+            <span class="c1"># Listando átomos envolvidos na ligação</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+
+                <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites</span><span class="p">[</span><span class="n">sites_names</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="n">i</span><span class="p">]]</span> <span class="o">-</span><span class="mi">1</span> <span class="p">])</span>
+
+            <span class="c1">#print(base, site, struct.dop_elem, bond_angle(atoms))</span>
+            <span class="c1"># Retornar a diferença para o ângulo na estrutura base</span>
+            <span class="k">return</span> <span class="n">bond_angle</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span> 
+
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="graphine_calcs.dop_atom_torsion">
+<a class="viewcode-back" href="../../dopings.html#dopings.graphine_calcs.graphine_calcs.dop_atom_torsion">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">dop_atom_torsion</span><span class="p">(</span><span class="n">struct</span><span class="p">:</span> <span class="n">structure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="o">|</span><span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se o dopante se encontra em um anel benzênico, calcula a </span>
+<span class="sd">        torção de um sequência de 4 átomos, onde o dopante é o segundo.</span>
+<span class="sd">        Do contrário, retorna None.</span>
+
+<span class="sd">        Essa métrica busca representar o quão pra fora do plano da </span>
+<span class="sd">        estrutura o átomo dopante se encontra.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : strucutre</span>
+<span class="sd">            Estrutura de grafino sobre a qual se deseja fazer o cálculo.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        </span>
+<span class="sd">        float </span>
+<span class="sd">            Ângulo de torção, caso o dopantes esteja em um sítio A ou C.</span>
+
+<span class="sd">        None</span>
+<span class="sd">            Se o dopante não pertencer a um sítio A ou C.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">            Caso o dopantes não esteja em um sítio A ou C.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">base</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">base</span>
+        <span class="n">site</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">site</span>
+
+        <span class="c1"># Dicionários de sítios</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="n">dops_data</span><span class="p">[</span><span class="s2">&quot;graphine&quot;</span><span class="p">][</span><span class="s2">&quot;sites_id&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">sites2</span> <span class="o">=</span> <span class="n">graphine_data</span><span class="p">[</span><span class="s2">&quot;sites_id&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Se sítio A1</span>
+        <span class="k">if</span> <span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;A1&quot;</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+                <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;A1&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">return</span> <span class="n">dihedral_angle</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span><span class="s2">&quot;C4&quot;</span><span class="p">]:</span>
+
+            <span class="c1"># Juntando dicionários</span>
+            <span class="n">sites</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sites2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="n">aux_sites</span> <span class="o">=</span> <span class="p">{</span>
+
+                <span class="s2">&quot;C1&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C5&quot;</span><span class="p">,</span> <span class="s2">&quot;C6&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;C2&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C6&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C3&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;C3&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;C4&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;C5&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+
+            <span class="k">for</span> <span class="n">aux_site</span> <span class="ow">in</span> <span class="n">aux_sites</span><span class="p">[</span><span class="n">site</span><span class="p">]:</span>
+
+                <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">sites</span><span class="p">[</span><span class="n">aux_site</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">return</span> <span class="n">dihedral_angle</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+</div>
+
+
+    <span class="c1">################################################################################################</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2024, Gustavo Campos.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

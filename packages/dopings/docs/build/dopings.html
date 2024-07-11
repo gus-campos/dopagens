@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dopings package &mdash; Documentação dopings 0.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=88519e4e"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=000972dd"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="prev" title="dopings" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dopings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">dopings</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dopings package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.atom_data">dopings.atom_data module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.atom_data.atom_data"><code class="docutils literal notranslate"><span class="pre">atom_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.dops_set">dopings.dops_set module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.dops_set.dops_set"><code class="docutils literal notranslate"><span class="pre">dops_set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.config">dopings.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.graphine_calcs">dopings.graphine_calcs module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.dihedral_angle"><code class="docutils literal notranslate"><span class="pre">dihedral_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.graphine_calcs"><code class="docutils literal notranslate"><span class="pre">graphine_calcs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.graphine_viz">dopings.graphine_viz module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_viz.graphine_viz"><code class="docutils literal notranslate"><span class="pre">graphine_viz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.set_viz">dopings.set_viz module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.set_viz.set_viz"><code class="docutils literal notranslate"><span class="pre">set_viz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.struct_read">dopings.struct_read module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.struct_read"><code class="docutils literal notranslate"><span class="pre">struct_read</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.struct_viz">dopings.struct_viz module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_viz.struct_viz"><code class="docutils literal notranslate"><span class="pre">struct_viz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.structure">dopings.structure module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.structure"><code class="docutils literal notranslate"><span class="pre">structure</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dopings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">dopings</a></li>
+      <li class="breadcrumb-item active">dopings package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dopings.rst.txt" rel="nofollow"> Ver código-fonte da página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dopings-package">
+<h1>dopings package<a class="headerlink" href="#dopings-package" title="Link para este cabeçalho"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link para este cabeçalho"></a></h2>
+</section>
+<section id="module-dopings.atom_data">
+<span id="dopings-atom-data-module"></span><h2>dopings.atom_data module<a class="headerlink" href="#module-dopings.atom_data" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.atom_data.atom_data">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.atom_data.</span></span><span class="sig-name descname"><span class="pre">atom_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">charge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dopings/atom_data.html#atom_data"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.atom_data.atom_data" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representa um átomo, a partir do seu símbolo de elemento, posição e
+carga.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.atom_data.atom_data.elem">
+<span class="sig-name descname"><span class="pre">elem</span></span><a class="headerlink" href="#dopings.atom_data.atom_data.elem" title="Link para esta definição"></a></dt>
+<dd><p>Símbolo do elemento do átomo (maiúsculas e minúsculas são
+diferenciadas).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.atom_data.atom_data.coord">
+<span class="sig-name descname"><span class="pre">coord</span></span><a class="headerlink" href="#dopings.atom_data.atom_data.coord" title="Link para esta definição"></a></dt>
+<dd><p>Aray de tamanho 3, para armazenar na ordem coordenadas X, Y, Z
+do átomo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray[float, float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.atom_data.atom_data.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><a class="headerlink" href="#dopings.atom_data.atom_data.charge" title="Link para esta definição"></a></dt>
+<dd><p>Carga do átomo, em população de elétrons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">elem:</span> <span class="pre">str=None,</span> <span class="pre">coord:</span> <span class="pre">list[float]=None,</span> <span class="pre">charge:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></span></dt>
+<dd><p>Inicializa objeto atom_data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">def</span> <span class="pre">dist_to(self,</span> <span class="pre">atom2:</span> <span class="pre">atom_data)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></span></dt>
+<dd><p>Calcula distância de si, até outro atom_data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.atom_data.atom_data.dist_to">
+<span class="sig-name descname"><span class="pre">dist_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/atom_data.html#atom_data.dist_to"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.atom_data.atom_data.dist_to" title="Link para esta definição"></a></dt>
+<dd><p>Calcula distância de si, até outro átomo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>atom2</strong> (<a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><em>atom_data</em></a>) – Outro objeto atom_data.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Distância até o outro átomo.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – Both atoms must have defined positions.</p></li>
+<li><p><strong>TypeError</strong> – atom2 must be an atom_data object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.dops_set">
+<span id="dopings-dops-set-module"></span><h2>dopings.dops_set module<a class="headerlink" href="#module-dopings.dops_set" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.dops_set.</span></span><span class="sig-name descname"><span class="pre">dops_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dops_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'read'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_write</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de objetos que representam um conjunto completo de dopagens,
+com atributos e métodos para gerar seus arquivos, organizar
+diretórios, otimizar, e processar seus resultados em massa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>structs</strong> (<em>list</em><em>[</em><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a><em>]</em>) – Lista de estruturas do conjunto.</p></li>
+<li><p><strong>param</strong> (<em>str</em>) – Conjunto de dopagens usado nas otimizações.</p></li>
+<li><p><strong>main_dir</strong> (<em>Path</em>) – Diretório raíz de resultados de processamento dos dados.</p></li>
+<li><p><strong>bases</strong> (<em>{ str : structure }</em>) – Dicionário que relaciona o nome da base com a structure da
+mesma.</p></li>
+<li><p><strong>dops_info</strong> (<em>dict</em>) – <p>Dicionário com dados gerais do conjunto de dopagens.</p>
+<p>self.dops_info = {</p>
+<blockquote>
+<div><p>“material”  : list[str],
+“bases”     : list[str]
+“sites”     : { str : list[str] },
+“sites_id”  : { str : { str : int }},
+“n_atoms”   : int,
+“n_ligs”    : int</p>
+</div></blockquote>
+<p>}</p>
+</p></li>
+<li><p><strong>mode</strong> (<em>{ &quot;look&quot;</em><em>, </em><em>&quot;read&quot;</em><em>, </em><em>&quot;write&quot; }</em>) – In whick mode dops_set object was initialized.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dops_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'read'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_write</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.__init__"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.__init__" title="Link para esta definição"></a></dt>
+<dd><p>Contrutor de objetos dops_set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method:</span> <span class="pre">&quot;function&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">\*\*kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.map"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.map" title="Link para esta definição"></a></dt>
+<dd><p>Executa uma função para cada estrutura do conjunto de
+estruturas.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.map_to_csv">
+<span class="sig-name descname"><span class="pre">map_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method:</span> <span class="pre">&quot;function&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">\*\*kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.map_to_csv"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.map_to_csv" title="Link para esta definição"></a></dt>
+<dd><p>Executa uma função para cada estrutura do conjunto, recolhendo
+os retornos para escrever em um arquivo csv final.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.map_opt">
+<span class="sig-name descname"><span class="pre">map_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_report</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_hard_to_conv_SCC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_unfineshed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverse_order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.map_opt"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.map_opt" title="Link para esta definição"></a></dt>
+<dd><p>Otimiza um conjunto inteiro de dopagens em fila.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.atom_id">
+<span class="sig-name descname"><span class="pre">atom_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.atom_id"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.atom_id" title="Link para esta definição"></a></dt>
+<dd><p>Retorna o ID do átomo correspondente ao sítio de dopagem da
+estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.infer_base_dir">
+<span class="sig-name descname"><span class="pre">infer_base_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.infer_base_dir"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.infer_base_dir" title="Link para esta definição"></a></dt>
+<dd><p>Infere o diretório da estrutura base que origina a estrutura
+dopada em questão.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.infer_dir_out">
+<span class="sig-name descname"><span class="pre">infer_dir_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">struct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.infer_dir_out"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.infer_dir_out" title="Link para esta definição"></a></dt>
+<dd><p>Faz a inferência do diretório de escrita dos arquivos, baseado
+em outros dados do conjunto.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.valid_dops_info">
+<span class="sig-name descname"><span class="pre">valid_dops_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dops_info</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.valid_dops_info"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.valid_dops_info" title="Link para esta definição"></a></dt>
+<dd><p>Valida um dicionário dops_info, que descreve a estrutura do
+conjunto de dopagens.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.infer_dops_dir">
+<span class="sig-name descname"><span class="pre">infer_dops_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.infer_dops_dir"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.infer_dops_dir" title="Link para esta definição"></a></dt>
+<dd><p>Faz inferência do diretório de dopagem da estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.dops_set.dops_set.gen_files">
+<span class="sig-name descname"><span class="pre">gen_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_initial_charges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.gen_files"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.dops_set.dops_set.gen_files" title="Link para esta definição"></a></dt>
+<dd><p>Gera os arquivos de otimização de uma estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">atom_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.atom_id"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id0" title="Link para esta definição"></a></dt>
+<dd><p>Retorna o ID do átomo correspondente ao sítio de dopagem da
+estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base</strong> (<em>str</em>) – Base da estrutura.</p></li>
+<li><p><strong>site</strong> (<em>str</em>) – Sítio de dopagem da estrutura.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>ID do átomo buscado.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_initial_charges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.gen_files"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id1" title="Link para esta definição"></a></dt>
+<dd><p>Gera os arquivos de otimização de uma estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para a qual deseja-se gerar arquivos de
+otimização.</p></li>
+<li><p><strong>read_initial_charges</strong> (<em>bool</em>) – Se deve ser especificado no arquivo hsd que as cargas
+iniciais devem ser lidas a partir de arquivo antes de
+iniciar a otimização.</p></li>
+<li><p><strong>redo</strong> (<em>bool</em>) – Se os arquivos estão sendo refeitos, e portanto o limite de
+passos na otimização deve ser maior que o normal.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">infer_base_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.infer_base_dir"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id2" title="Link para esta definição"></a></dt>
+<dd><p>Infere o diretório da estrutura base que origina a estrutura
+dopada em questão.</p>
+<p>=&gt; Formato</p>
+<p>[bases root dir] / [material] / [base]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>base</strong> (<em>srt</em>) – Base da qual se busca o diretório.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Diretório da base correspondente.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">infer_dir_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.infer_dir_out"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id3" title="Link para esta definição"></a></dt>
+<dd><p>Faz a inferência do diretório de escrita dos arquivos, baseado
+em outros dados do conjunto.</p>
+<p>Os diretórios seguem a seguinte estrutura:</p>
+<p>=&gt; Diretório CSV</p>
+<p>[raíz] / [method name] / [method name]-[nome do conjunto].csv</p>
+<p>=&gt; Diretório dos arquivos individuais</p>
+<p>[raíz] / [method name] / [nome do conjunto] / [nome do conjunto]
+-[nome do diretório mãe]-[nome do diretório].[sufixo]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura que terá diretório inferido.</p></li>
+<li><p><strong>method</strong> (<em>function</em>) – Função a ser mapeada nas estruturas.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) – Extensão do arquivo de saída</p></li>
+<li><p><strong>as_csv</strong> (<em>bool</em>) – Se for True, infere diretório de um arquivo csv, que
+representa o conjunto como um todo.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Caminho inferido para o arquivo de saída.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">infer_dops_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.infer_dops_dir"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id4" title="Link para esta definição"></a></dt>
+<dd><p>Faz inferência do diretório de dopagem da estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura sobre a qual se quer fazer a inferência.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.map"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id5" title="Link para esta definição"></a></dt>
+<dd><p>Executa uma função para cada estrutura do conjunto de
+estruturas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>function</em>) – Função a ser executada em todas as estruturas.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em><em> or </em><em>Path</em>) – Extensão do arquivo de saída.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – read mode is needed for proper processing results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">map_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">only_report</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_hard_to_conv_SCC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_unfineshed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverse_order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.map_opt"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id6" title="Link para esta definição"></a></dt>
+<dd><p>Otimiza um conjunto inteiro de dopagens em fila.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>only_report</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Não realiza otimização, apenas faz o report do estado dos
+dos arquivos.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Se a otimização deve ser executada mesmo que já exista no
+diretório output de otimização anterior. Se True, a
+otimização será iniciada e os arquivos anteriores serão
+sobrescritos.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Se, como informação extra, os passos onde não houve
+convergência do SCC devem ser impressos também.</p></li>
+<li><p><strong>skip_hard_to_conv_SCC</strong> (<em>bool</em><em>, </em><em>default=True</em>) – <p>Se otimizações com demasiados passos SCC não convergidos
+devem ser puladas.</p>
+<p>Regra para determinar uma otimizão com demasiados passos:</p>
+<p>Ter mais de 30 passos não convergidos; ou ter mais de 20
+passos não convergidos, antes de chegar no passo 30 da
+otimização.</p>
+</p></li>
+<li><p><strong>resume_unfineshed</strong> (<em>bool</em><em>, </em><em>default=True</em>) – <p>Se True, ao realizar a otimização que foi anteriormente
+interrompida, gera os arquivos necessários para recomeçar do
+último passo escrito e inicia tal otimização.</p>
+<p>Se False, recomeça do primeiro frame escrito.</p>
+</p></li>
+<li><p><strong>inverse_order</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Se a ordem das otimizações devem seguir a ordem inversa da
+lista de estruturas.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">map_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.map_to_csv"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id7" title="Link para esta definição"></a></dt>
+<dd><p>Executa uma função para cada estrutura do conjunto, recolhendo
+os retornos para escrever em um arquivo csv final.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>method</strong> (<em>function</em>) – Função a ser executada em todas as estruturas.</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – There is no structs on this struct_set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id8">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">valid_dops_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dops_info</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/dopings/dops_set.html#dops_set.valid_dops_info"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id8" title="Link para esta definição"></a></dt>
+<dd><p>Valida um dicionário dops_info, que descreve a estrutura do
+conjunto de dopagens.</p>
+<p>Tal dicionário deve seguir o seguinte formato:</p>
+<p>self.dops_info = {</p>
+<blockquote>
+<div><p>“graphs_ylims”  : { str : { str : list[float] }}
+“material”      : list[str],
+“bases”         : list[str],
+“sites”         : { str : list[str] },
+“sites_id”      : { str : { str : int }},
+“n_atoms”       : int,
+“n_ligs”        : int</p>
+</div></blockquote>
+<p>}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dops_info</strong> (<em>dict</em>) – Dicionário dops_info a ser validado.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Se é o dicionário é valido ou não.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.config">
+<span id="dopings-global-vars-module"></span><h2>dopings.config module<a class="headerlink" href="#module-dopings.config" title="Link para este cabeçalho"></a></h2>
+</section>
+<section id="module-dopings.graphine_calcs">
+<span id="dopings-graphine-calcs-module"></span><h2>dopings.graphine_calcs module<a class="headerlink" href="#module-dopings.graphine_calcs" title="Link para este cabeçalho"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.dihedral_angle">
+<span class="sig-prename descclassname"><span class="pre">dopings.graphine_calcs.</span></span><span class="sig-name descname"><span class="pre">dihedral_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#dihedral_angle"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.dihedral_angle" title="Link para esta definição"></a></dt>
+<dd><p>Calcula o ângulo diedral, ou ângulo de torção, entre 4 átomos.</p>
+<p>Código adaptado de:
+<a class="reference external" href="https://stackoverflow.com/questions/20305272/dihedral-torsion-angle-from-four-points-in-cartesian-coordinates-in-python">https://stackoverflow.com/questions/20305272/dihedral-torsion-angle-from-four-points-in-cartesian-coordinates-in-python</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>atoms</strong> (<em>list</em><em>[</em><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><em>atom_data</em></a><em>]</em>) – Lista de 4 átomos sobre os quais deseja-se calcular a
+torção.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ângulo diedral entre os 4 átomos.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.graphine_calcs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.graphine_calcs.</span></span><span class="sig-name descname"><span class="pre">graphine_calcs</span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.graphine_calcs" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de métodos estáticos que trás implementações de calculos
+sobre estruturas dopadas de grafinos.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.graphine_calcs.axis_torsion_angle">
+<span class="sig-name descname"><span class="pre">axis_torsion_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.axis_torsion_angle"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.graphine_calcs.axis_torsion_angle" title="Link para esta definição"></a></dt>
+<dd><p>Calcula a torção de um eixo da estrutura, usando o braço “arm”
+e o seu oposto para cacular um ângulo diedral.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.graphine_calcs.int_arm_length">
+<span class="sig-name descname"><span class="pre">int_arm_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.int_arm_length"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.graphine_calcs.int_arm_length" title="Link para esta definição"></a></dt>
+<dd><p>Calcula a soma de distâncias entre os carbonos no braço interno
+da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</p>
+<p>[A1, B1, B2, B3, …, B{2N}, D4]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.graphine_calcs.ext_arm_length">
+<span class="sig-name descname"><span class="pre">ext_arm_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.ext_arm_length"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.graphine_calcs.ext_arm_length" title="Link para esta definição"></a></dt>
+<dd><p>Calcula a soma de distâncias entre os carbonos no braço externo
+da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</p>
+<p>[C2, D1, D2, …, D{2N+1}]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.graphine_calcs.dop_atom_angle">
+<span class="sig-name descname"><span class="pre">dop_atom_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.dop_atom_angle"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.graphine_calcs.dop_atom_angle" title="Link para esta definição"></a></dt>
+<dd><p>Se o átomo dopante pertencer a um sítio B ou D, calcula o
+ângulo da ligação do átomo dopado com seus dois vizinhos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.graphine_calcs.graphine_calcs.dop_atom_torsion">
+<span class="sig-name descname"><span class="pre">dop_atom_torsion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.dop_atom_torsion"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_calcs.graphine_calcs.dop_atom_torsion" title="Link para esta definição"></a></dt>
+<dd><p>Quando o dopante se encontra em um anel benzênico, calcula a
+torção de um sequência de 4 átomos, onde o dopante é o segundo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">axis_torsion_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.axis_torsion_angle"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id9" title="Link para esta definição"></a></dt>
+<dd><p>Calcula a torção de um eixo da estrutura, usando o braço “arm”
+e o seu oposto para cacular um ângulo diedral.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura de grafino sobre a qual se deseja fazer o cálculo.</p></li>
+<li><p><strong>arm</strong> (<em>int</em>) – Braço da estrutura usado de referência para o cálculo da
+torção. Considera o próprio braço, e o seu oposto no
+cálculo.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ângulo de torção no eixo do braço especificado.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id10">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dop_atom_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.dop_atom_angle"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id10" title="Link para esta definição"></a></dt>
+<dd><p>Se o átomo dopante pertencer a um sítio B ou D, calcula o
+ângulo da ligação do átomo dopado com seus dois vizinhos.</p>
+<p>Se não for o caso, retorna None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura de grafino sobre a qual se deseja fazer o cálculo.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – O ângulo entre o dopante e os 2 átomos ligados a ele, se o
+dopante for de um sítio B ou D.</p></li>
+<li><p><em>None</em> – Se o dopante não pertencer a um sítio B ou D.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id11">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dop_atom_torsion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.dop_atom_torsion"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id11" title="Link para esta definição"></a></dt>
+<dd><p>Se o dopante se encontra em um anel benzênico, calcula a
+torção de um sequência de 4 átomos, onde o dopante é o segundo.
+Do contrário, retorna None.</p>
+<p>Essa métrica busca representar o quão pra fora do plano da
+estrutura o átomo dopante se encontra.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura de grafino sobre a qual se deseja fazer o cálculo.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>float</em> – Ângulo de torção, caso o dopantes esteja em um sítio A ou C.</p></li>
+<li><p><em>None</em> – Se o dopante não pertencer a um sítio A ou C.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Levanta<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Caso o dopantes não esteja em um sítio A ou C.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id12">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ext_arm_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.ext_arm_length"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id12" title="Link para esta definição"></a></dt>
+<dd><p>Calcula a soma de distâncias entre os carbonos no braço externo
+da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</p>
+<p>[C2, D1, D2, …, D{2N+1}]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura de grafino sobre a qual se deseja fazer o cálculo.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Soma das distâncias entre carbonos no braço interno da
+dopagem.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id13">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">int_arm_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/graphine_calcs.html#graphine_calcs.int_arm_length"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id13" title="Link para esta definição"></a></dt>
+<dd><p>Calcula a soma de distâncias entre os carbonos no braço interno
+da dopagem, ou seja, no braço 0, dentre os seguintes sítios:</p>
+<p>[A1, B1, B2, B3, …, B{2N}, D4]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura de grafino sobre a qual se deseja fazer o cálculo.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Soma das distâncias entre carbonos no braço interno da
+dopagem.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.graphine_viz">
+<span id="dopings-graphine-viz-module"></span><h2>dopings.graphine_viz module<a class="headerlink" href="#module-dopings.graphine_viz" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.graphine_viz.graphine_viz">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.graphine_viz.</span></span><span class="sig-name descname"><span class="pre">graphine_viz</span></span><a class="reference internal" href="_modules/dopings/graphine_viz.html#graphine_viz"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_viz.graphine_viz" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.graphine_viz.graphine_viz.geometry_graph">
+<span class="sig-name descname"><span class="pre">geometry_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/graphine_viz.html#graphine_viz.geometry_graph"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.graphine_viz.graphine_viz.geometry_graph" title="Link para esta definição"></a></dt>
+<dd><p>Gera uma visualização composta dos dados de geometria do
+grafino, que conta, por estrutura, com a torção da superfície em
+três eixos, a dilatação nos braços interno e externo, e o ângulo
+da ligação/torção do átomo no anel, dependendo da estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>set</strong> (<a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><em>dops_set</em></a>) – Conjunto de dopagens de grafino para o qual se deseja gerar
+a visualização.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.set_viz">
+<span id="dopings-set-viz-module"></span><h2>dopings.set_viz module<a class="headerlink" href="#module-dopings.set_viz" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.set_viz.set_viz">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.set_viz.</span></span><span class="sig-name descname"><span class="pre">set_viz</span></span><a class="reference internal" href="_modules/dopings/set_viz.html#set_viz"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.set_viz.set_viz" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.set_viz.set_viz.energ_elem_graphs">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">energ_elem_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sets_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><span class="pre">dops_set</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/set_viz.html#set_viz.energ_elem_graphs"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.set_viz.set_viz.energ_elem_graphs" title="Link para esta definição"></a></dt>
+<dd><p>Gera, para uma lista de conjuntos de dopagens, visualizações que
+para cada sítio, compara a energia de ligação das dopagens
+feitas com diferentes elementos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sets_list</strong> (<em>list</em><em>[</em><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><em>dops_set</em></a><em>]</em>) – Lista de conjunto de dopagens para os quais se deseja gerar
+as visualizações.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.set_viz.set_viz.energ_site_graph">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">energ_site_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sets_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><span class="pre">dops_set</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second_var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_cov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/set_viz.html#set_viz.energ_site_graph"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.set_viz.set_viz.energ_site_graph" title="Link para esta definição"></a></dt>
+<dd><p>Gera uma grade de gráficos, onde os gráficos da grade variam em
+elementos no eixo x, e em bases no eixo y, e cada gráfico
+relaciona o sítio no eixo x, com a energia de formação no eixo
+y. A linha deste gráfico se dá na cor azul.</p>
+<p>Opcionalmente plota conjuntamente a relação entre alguma métrica
+e o sítio, com plot em linha vermelha.</p>
+<p>Pode mostrar a covariância dos dois dados naquele gráfico, junto
+ao título.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sets_list</strong> (<em>list</em><em>[</em><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><em>dops_set</em></a><em>]</em>) – Lista de donjunto de dopagens a serem plotadas.</p></li>
+<li><p><strong>stat</strong> (<em>{None</em><em>, </em><em>&quot;dipole&quot;</em><em>, </em><em>&quot;std&quot;}</em><em>, </em><em>default = None</em>) – Se a estatística norma do dipolo, desvio padrão das cargas,
+ou nenhuma, deve ser plotada junto à energia.</p></li>
+<li><p><strong>show_cov</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Se a covariância das duas estatísticas deve ser impressa
+junto ao título do gráfico. Se stat for None, show_cov é
+ignorada.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – Invalid second_var option.</p></li>
+<li><p><strong>ValueError</strong> – At least two sets are needed in sets_list.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.set_viz.set_viz.gap_elem_graph">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gap_elem_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sets_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><span class="pre">dops_set</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/set_viz.html#set_viz.gap_elem_graph"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.set_viz.set_viz.gap_elem_graph" title="Link para esta definição"></a></dt>
+<dd><p>Gera, para um conjunto completo de dopagens, vizualizações com
+gráficos de linha, que relacionam o elemento da dopagem com o
+gap da estrutura. É gerada uma visualizaçãp para cada par
+base-sítio, onde são comparados lado a lado o gap dos
+diversos elementos de dopagem, em tal base e sítio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>set_list</strong> (<em>list</em><em>[</em><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><em>dops_set</em></a><em>]</em>) – Conjunto de dopagens para o qual se deseja gerar a
+visualizaçãp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.set_viz.set_viz.gap_site_graph">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gap_site_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><span class="pre">dops_set</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/set_viz.html#set_viz.gap_site_graph"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.set_viz.set_viz.gap_site_graph" title="Link para esta definição"></a></dt>
+<dd><p>Gera, para um conjunto completo de dopagens, vizualizações com
+gráficos de linha, que relacionam o sítio da dopagem com o gap
+da estrutura. É gerada uma visualizaçãp para cada par
+base-elemento, onde são comparados lado a lado o gap dos
+diversos sítios de dopagem, em tal base, com tal elemento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>set</strong> (<a class="reference internal" href="#dopings.dops_set.dops_set" title="dopings.dops_set.dops_set"><em>dops_set</em></a>) – Conjunto de dopagens para o qual se deseja gerar a
+visualizaçãp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.struct_read">
+<span id="dopings-struct-read-module"></span><h2>dopings.struct_read module<a class="headerlink" href="#module-dopings.struct_read" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.struct_read.struct_read">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.struct_read.</span></span><span class="sig-name descname"><span class="pre">struct_read</span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_read.struct_read" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de métodos estáticos para a leitura de arquivos de
+structures.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_read.struct_read.read_frame">
+<span class="sig-name descname"><span class="pre">read_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_frame"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_read.struct_read.read_frame" title="Link para esta definição"></a></dt>
+<dd><p>Lê o último frame de um arquivo geo_end e o retorna como uma
+lista 2D.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_read.struct_read.read_energy">
+<span class="sig-name descname"><span class="pre">read_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrapolated_0K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_energy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_read.struct_read.read_energy" title="Link para esta definição"></a></dt>
+<dd><p>Lê a energia total da estrutura em eV no último passo de
+otimização e a retorna.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_read.struct_read.read_bands">
+<span class="sig-name descname"><span class="pre">read_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_bands"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_read.struct_read.read_bands" title="Link para esta definição"></a></dt>
+<dd><p>Lê o arquivo band.out da estrutura e retorna a energia do HOMO e
+do LUMO.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_read.struct_read.read_dipole">
+<span class="sig-name descname"><span class="pre">read_dipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">np.ndarray[float]:</span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_dipole"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_read.struct_read.read_dipole" title="Link para esta definição"></a></dt>
+<dd><p>Lê o vetor dipolo da estrutura, retornando-o como um array.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id14">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_bands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_bands"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id14" title="Link para esta definição"></a></dt>
+<dd><p>Lê o arquivo band.out da estrutura e retorna a energia do HOMO e
+do LUMO.</p>
+<p>Necessita que o número de elétrons na camada de valência do
+elemento esteja definido em “atoms_data”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para a qual se deseja ler os dados.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Energia do homo, e energia do lumo.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float]</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – valency of element [element] not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id15">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_dipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_dipole"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id15" title="Link para esta definição"></a></dt>
+<dd><p>Lê o vetor dipolo da estrutura, retornando-o como um array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para a qual se deseja ler os dados.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.ndarray[float]</em> – Array do numpy com 3 floats que corresponde ao vetor dipolo
+da estrutura.</p></li>
+<li><p><em>None</em> – Se o arquivo não existir.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Levanta<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AssertionError</strong> – detailed.out file exists, but dipole moment was not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id16">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrapolated_0K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_energy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id16" title="Link para esta definição"></a></dt>
+<dd><p>Retorna a energia total da estrutura (eV) no último passo de
+otimização.</p>
+<p>Por padrão, já lê a energia extrapolada para o 0K.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para a qual se deseja ler os dados.</p></li>
+<li><p><strong>extrapolated_0K</strong> (<em>bool</em><em>, </em><em>default = True</em>) – Se deve ser a energia extrapolada para o 0K, ou só a energia
+total.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Energia total da estrutura (eV) no último passo de
+otimização.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – Energies not found in file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id17">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/struct_read.html#struct_read.read_frame"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id17" title="Link para esta definição"></a></dt>
+<dd><p>Lê o último frame de um arquivo geo_end e o retorna como uma
+lista 2D.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para a qual se deseja ler os dados.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><p><strong>data</strong> – Lista 2D onde o primeiro índice identifica uma linha,
+e o segundo índice identifica uma coluna de dados.
+Elemento, X, Y, Z, Carga</p>
+<p>Exemplo:</p>
+<blockquote>
+<div><p>[‘H’,  2.8054,  6.321, -0.357,  0.962]
+[‘H’,  4.9574,  5.091, -0.248,  0.913]
+[‘C’, -9.1570,  0.844, -0.195,  4.002]
+[‘C’, -9.1580, -0.353, -0.028,  4.214]
+[‘C’,  2.8572,  0.993,  0.223,  4.087]</p>
+<p>…]</p>
+<p>data[3][0] -&gt; ‘C’
+data[1][2] -&gt; 5.091</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[str|int]]</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>AssertionError</strong> – The file has no data lines.</p></li>
+<li><p><strong>AssertionError</strong> – Unexpected number of data in geometry file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.struct_viz">
+<span id="dopings-struct-viz-module"></span><h2>dopings.struct_viz module<a class="headerlink" href="#module-dopings.struct_viz" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.struct_viz.struct_viz">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.struct_viz.</span></span><span class="sig-name descname"><span class="pre">struct_viz</span></span><a class="reference internal" href="_modules/dopings/struct_viz.html#struct_viz"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_viz.struct_viz" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de métodos estáticos que geram vizualizações para dados de
+estruturas em forma de arquivos.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">def</span> <span class="pre">histogram(struct:</span> <span class="pre">structure,</span> <span class="pre">hist_out:</span> <span class="pre">str|Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></span></dt>
+<dd><p>Gera um histograma dos comprimentos de ligação da estrutura, no
+caminho informado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">charges_map(struct:</span> <span class="pre">structure,</span> <span class="pre">map_out:</span> <span class="pre">str|Path=None,</span></span></dt>
+<dd><blockquote>
+<div><p>picking_mode=False) -&gt; None</p>
+</div></blockquote>
+<p>Gera uma visualizaçãp de mapa de cargas para dada estrutura, no
+caminho informado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_viz.struct_viz.charges_map">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">charges_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picking_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/struct_viz.html#struct_viz.charges_map"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_viz.struct_viz.charges_map" title="Link para esta definição"></a></dt>
+<dd><p>Gera uma visualizaçãp de mapa de cargas para dada estrutura, no
+caminho informado.</p>
+<p>Necessita que o número de elétrons na camada de valência do
+elemento esteja definido em “atoms_data”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para qual se deseja gerar o mapa de cargas.</p></li>
+<li><p><strong>map_out</strong> (<em>str</em>) – Endereço de saída do mapa de cargas, com extensão inclusa.</p></li>
+<li><p><strong>picking_mode</strong> (<em>bool</em><em>, </em><em>default = False</em>) – Se True, invés de gerar um arquivo com a plotagem, inicia
+um plot interativo, onde é possível clicar em um átomo
+para que sua carga seja impressa no terminal com 3 casas de
+precisão.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_viz.struct_viz.histogram">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">hist_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gen_dat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/struct_viz.html#struct_viz.histogram"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.struct_viz.struct_viz.histogram" title="Link para esta definição"></a></dt>
+<dd><p>Gera um histograma dos comprimentos de ligação da estrutura, no
+caminho informado.</p>
+<p>Depende da definição dos limites de comprimentos de ligações,
+por par de elementos, no arquivo viz_config.json.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><em>structure</em></a>) – Estrutura para qual se deseja gerar o histograma.</p></li>
+<li><p><strong>hist_out</strong> (<em>str</em><em>|</em><em>Path</em>) – Endereço de saída do histograma, com extensão.</p></li>
+<li><p><strong>gen_dat</strong> (<em>bool</em><em>, </em><em>default = False</em>) – Se os dados devem ser escritos na forma de um arquivo dat,
+ao lado das plotagens do histograma.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings.structure">
+<span id="dopings-structure-module"></span><h2>dopings.structure module<a class="headerlink" href="#module-dopings.structure" title="Link para este cabeçalho"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dopings.structure.structure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dopings.structure.</span></span><span class="sig-name descname"><span class="pre">structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_from_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dopings/structure.html#structure"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representa uma estrutura formada por um conjunto de átomos.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><a class="headerlink" href="#dopings.structure.structure.atoms" title="Link para esta definição"></a></dt>
+<dd><p>Array de atom objects na estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray[<a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data">atom_data</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.size">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#dopings.structure.structure.size" title="Link para esta definição"></a></dt>
+<dd><p>Número de átomos na estrutura.
+Se atualiza sozinho.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.dir">
+<span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#dopings.structure.structure.dir" title="Link para esta definição"></a></dt>
+<dd><p>Diretório de otimização da molécula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path, default: None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.material">
+<span class="sig-name descname"><span class="pre">material</span></span><a class="headerlink" href="#dopings.structure.structure.material" title="Link para esta definição"></a></dt>
+<dd><p>Material dopado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.param">
+<span class="sig-name descname"><span class="pre">param</span></span><a class="headerlink" href="#dopings.structure.structure.param" title="Link para esta definição"></a></dt>
+<dd><p>Set of parameters used in the optimization.
+Used only in formation energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.dop_elem">
+<span class="sig-name descname"><span class="pre">dop_elem</span></span><a class="headerlink" href="#dopings.structure.structure.dop_elem" title="Link para esta definição"></a></dt>
+<dd><p>Elemento da dopagem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.base">
+<span class="sig-name descname"><span class="pre">base</span></span><a class="headerlink" href="#dopings.structure.structure.base" title="Link para esta definição"></a></dt>
+<dd><p>Base da estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.site">
+<span class="sig-name descname"><span class="pre">site</span></span><a class="headerlink" href="#dopings.structure.structure.site" title="Link para esta definição"></a></dt>
+<dd><p>Sítio de dopagem da estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">param</span></span><a class="headerlink" href="#id18" title="Link para esta definição"></a></dt>
+<dd><p>Conjunto de parâmetros usado na otimização. Usado apenas para
+cálculo da energia de formação.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.total_energy">
+<span class="sig-name descname"><span class="pre">total_energy</span></span><a class="headerlink" href="#dopings.structure.structure.total_energy" title="Link para esta definição"></a></dt>
+<dd><p>Energia total da estrutura, lida a partir do arquivo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.homo">
+<span class="sig-name descname"><span class="pre">homo</span></span><a class="headerlink" href="#dopings.structure.structure.homo" title="Link para esta definição"></a></dt>
+<dd><p>Energia do homo da estrutura, lida a partir do arquivo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.lumo">
+<span class="sig-name descname"><span class="pre">lumo</span></span><a class="headerlink" href="#dopings.structure.structure.lumo" title="Link para esta definição"></a></dt>
+<dd><p>Energia do lumo da estrutura, lida a partir do arquivo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dopings.structure.structure.dipole">
+<span class="sig-name descname"><span class="pre">dipole</span></span><a class="headerlink" href="#dopings.structure.structure.dipole" title="Link para esta definição"></a></dt>
+<dd><p>Vetor momento dipolo da estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_from_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.__init__"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.__init__" title="Link para esta definição"></a></dt>
+<dd><p>Inicializa o objeto structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.append"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.append" title="Link para esta definição"></a></dt>
+<dd><p>Anexa um atom_data object, ou uma lista de atom_data objects
+à lista de átomos da estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.redo_files_for_resume">
+<span class="sig-name descname"><span class="pre">redo_files_for_resume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.redo_files_for_resume"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.redo_files_for_resume" title="Link para esta definição"></a></dt>
+<dd><p>No caso de uma otimização ser encerrada antes de concluída, este
+método refaz os arquivos de otimização de forma que parta do
+último frame escrito, guardando o progresso até então em uma
+pasta no diretório, que recebe o nome definido em “main_config”
+(resume_dir_name), que por padrão é “before_restart”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.data_from_file">
+<span class="sig-name descname"><span class="pre">data_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.data_from_file"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.data_from_file" title="Link para esta definição"></a></dt>
+<dd><p>A partir do diretório da estrutura, lê os arquivos de dados e os
+carrega como propriedades do objeto structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.opt">
+<span class="sig-name descname"><span class="pre">opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_hard_to_conv_SCC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_unfineshed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.opt"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.opt" title="Link para esta definição"></a></dt>
+<dd><p>Executa uma otimização no diretório da estrutura, espera
+a otimização terminar e relata o status ao final.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_SCC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_conv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_written</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.report"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.report" title="Link para esta definição"></a></dt>
+<dd><p>Reporta o estado da otimização da estrutura a partir do
+arquivo de no seu diretório,</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.dope_out">
+<span class="sig-name descname"><span class="pre">dope_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.dope_out"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.dope_out" title="Link para esta definição"></a></dt>
+<dd><p>Gera uma versão (dopada) de uma estrutura, onde o átomo
+especificado é substituído por um de outro elemento.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.formation_energy">
+<span class="sig-name descname"><span class="pre">formation_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.formation_energy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.formation_energy" title="Link para esta definição"></a></dt>
+<dd><p>Retorna a energia de formação da estrutura, além de sua média
+por átomo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.homo_lumo">
+<span class="sig-name descname"><span class="pre">homo_lumo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.homo_lumo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.homo_lumo" title="Link para esta definição"></a></dt>
+<dd><p>Retorna as energias de HOMO, LUMO, e o módulo da diferença
+HOMO-LUMO de uma estrutura a partir de seu arquivo band.out.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.shortest_distances">
+<span class="sig-name descname"><span class="pre">shortest_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.shortest_distances"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.shortest_distances" title="Link para esta definição"></a></dt>
+<dd><p>Retorna as “n” menores distâncias entre átomos de dados
+elementos, na estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.frame">
+<span class="sig-name descname"><span class="pre">frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.frame"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.frame" title="Link para esta definição"></a></dt>
+<dd><p>Gera e escreve o arquivo xyz do último frame da estrutura.
+Cria diretórios necessários caso não existam.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.output"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.output" title="Link para esta definição"></a></dt>
+<dd><p>Copia o output de otimização da estrutura para o endereço
+passado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.structure.structure.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.copy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#dopings.structure.structure.copy" title="Link para esta definição"></a></dt>
+<dd><p>Retorna uma estrutura que contém os mesmo átomos que a original.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id19">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><span class="pre">atom_data</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.append"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id19" title="Link para esta definição"></a></dt>
+<dd><p>Anexa um atom_data object, ou uma lista de atom_data objects
+à lista de átomos da estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>atoms</strong> (<em>list</em><em>[</em><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><em>atom_data</em></a><em>] </em><em>| </em><a class="reference internal" href="#dopings.atom_data.atom_data" title="dopings.atom_data.atom_data"><em>atom_data</em></a>) – Lista de átomos a ser adicionada.</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – “atoms must be a non-empty list of atoms objects”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id20">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.copy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id20" title="Link para esta definição"></a></dt>
+<dd><p>Retorna uma estrutura que contém os mesmo átomos que a original.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id21">
+<span class="sig-name descname"><span class="pre">data_from_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.data_from_file"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id21" title="Link para esta definição"></a></dt>
+<dd><p>A partir do diretório da estrutura, lê os arquivos de dados e os
+carrega como propriedades do objeto structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id22">
+<span class="sig-name descname"><span class="pre">dope_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dop_elem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure"><span class="pre">structure</span></a></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.dope_out"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id22" title="Link para esta definição"></a></dt>
+<dd><p>Gera uma versão (dopada) de uma estrutura, onde o átomo
+especificado é substituído por um de outro elemento.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dop_elem</strong> (<em>str</em>) – Elemento do átomo que substituirá o antigo.</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – ID do átomo que será substituído.</p></li>
+<li><p><strong>**kwargs</strong> – Passado para o construtor de structure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estrutura dopada, onde o átomo especificado foi substituído
+por um de outro elemento. Obs: As cargas originais são
+substituídas por None.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dopings.structure.structure" title="dopings.structure.structure">structure</a></p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – dop_elem must be string</p></li>
+<li><p><strong>TypeError</strong> – id must be int</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id23">
+<span class="sig-name descname"><span class="pre">formation_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.formation_energy"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id23" title="Link para esta definição"></a></dt>
+<dd><p>Retorna a energia de formação da estrutura, além de sua média
+por átomo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Os seguintes valores:</p>
+<p>Energia de formação da estrutura (eV) no último passo de
+otimização, energia média de formação por átomo.</p>
+</p>
+</dd>
+<dt class="field-even">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id24">
+<span class="sig-name descname"><span class="pre">frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.frame"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id24" title="Link para esta definição"></a></dt>
+<dd><p>Gera e escreve o arquivo xyz do último frame da estrutura.
+Cria diretórios necessários caso não existam.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frame_out</strong> (<em>str</em><em> or </em><em>Path</em>) – Endereço de saída do frame.</p>
+</dd>
+<dt class="field-even">Levanta<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – “frame_out must be str or Path.”</p></li>
+<li><p><strong>ValueError</strong> – This structure has no atoms.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id25">
+<span class="sig-name descname"><span class="pre">homo_lumo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.homo_lumo"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id25" title="Link para esta definição"></a></dt>
+<dd><p>Retorna as energias de HOMO, LUMO, e o módulo da diferença
+HOMO-LUMO de uma estrutura a partir de seu arquivo band.out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Os seguintes valores (todos arredondados em 3 casas
+decimais):</p>
+<p>homo, lumo, homo-lumo</p>
+</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id26">
+<span class="sig-name descname"><span class="pre">opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_hard_to_conv_SCC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_unfineshed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.opt"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id26" title="Link para esta definição"></a></dt>
+<dd><p>Executa uma otimização no diretório da estrutura, espera
+a otimização terminar e relata o status ao final.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default=False</em>)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=True</em>)</p></li>
+<li><p><strong>skip_hard_to_conv_SCC</strong> (<em>bool</em><em>, </em><em>default=True</em>)</p></li>
+<li><p><strong>resume_unfineshed</strong> (<em>bool</em><em>, </em><em>default=True</em>)</p></li>
+<li><p><strong>overwrite</strong> – Se a otimização deve ser executada mesmo que já exista no
+diretório output de otimização anterior. Se True, a
+otimização será iniciada e os arquivos anteriores serão
+sobrescritos.</p></li>
+<li><p><strong>verbose</strong> – Se, como informação extra, os passos onde não houve
+convergência do SCC devem ser impressos também.</p></li>
+<li><p><strong>skip_hard_to_conv_SCC</strong> – <p>Se otimizações com demasiados passos SCC não convergidos
+devem ser puladas.</p>
+<p>Regra para determinar uma otimizão com demasiados passos:</p>
+<p>Ter mais de 30 passos não convergidos; ou ter mais de 20
+passos não convergidos, antes de chegar no passo 30 da
+otimização.</p>
+</p></li>
+<li><p><strong>resume_unfineshed</strong> – <p>Se True, ao realizar a otimização que foi anteriormente
+interrompida, gera os arquivos necessários para recomeçar do
+último passo escrito e inicia tal otimização.</p>
+<p>Se False, recomeça do primeiro frame escrito.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id27">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.output"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id27" title="Link para esta definição"></a></dt>
+<dd><p>Copia o output de otimização da estrutura para o endereço
+passado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output_dest</strong> (<em>str</em><em> | </em><em>Path</em>) – Destino do arquivo output.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id28">
+<span class="sig-name descname"><span class="pre">redo_files_for_resume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.redo_files_for_resume"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id28" title="Link para esta definição"></a></dt>
+<dd><p>No caso de uma otimização ser encerrada antes de concluída, este
+método refaz os arquivos de otimização de forma que parta do
+último frame escrito, guardando o progresso até então em uma
+pasta no diretório, que recebe o nome definido em “main_config”
+(resume_dir_name), que por padrão é “before_restart”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id29">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_SCC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_conv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_written</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.report"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id29" title="Link para esta definição"></a></dt>
+<dd><p>Reporta o estado da otimização da estrutura a partir do
+arquivo de no seu diretório,</p>
+<p>Relata:</p>
+<ul class="simple">
+<li><p>Ausência de arquivo de output.</p></li>
+<li><p>Se convergiu e com quantos passos convergiu.</p></li>
+<li><p>Se houve divergência de SCC, em quais passos isso</p></li>
+</ul>
+<p>ocorreu e que porcentagem isso representa do total de passos.
+- Se houve divergência de SCC no último passo de otimização.</p>
+<ul class="simple">
+<li><p>Se não convergiu.</p></li>
+<li><p>Se houve divergência de SCC, em quais passos isso</p></li>
+</ul>
+<p>ocorreu e que porcentagem isso representa do total de passos.</p>
+<ul class="simple">
+<li><p>Se o estado está indefinido.</p></li>
+<li><p>Se nenhum passo foi escrito no arquivo.</p></li>
+<li><p>Qual o último passo escrito no arquivo.</p></li>
+<li><p>Se houve divergência de SCC, em quais passos isso</p></li>
+</ul>
+<p>ocorreu e que porcentagem isso representa do total de passos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>return_SCC</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Se True, retorna uma lista dos passos não convergidos do
+SCC.</p></li>
+<li><p><strong>return_conv</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Se True, retorna se a otimização convergiu ou não.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Se, como informação extra, os passos onde não houve
+convergência do SCC devem ser impressos também.</p></li>
+<li><p><strong>return_written</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Se True, retorna uma lista dos passos escritos no arquivo.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>list[int]</em> – No caso de return_SCC ou return_written for True.</p></li>
+<li><p><em>bool</em> – No caso de return_conv for True.</p></li>
+<li><p><em>None</em> – No caso de nenhuma opção de retorno ser True.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id30">
+<span class="sig-name descname"><span class="pre">shortest_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dopings/structure.html#structure.shortest_distances"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id30" title="Link para esta definição"></a></dt>
+<dd><p>Retorna as “n” menores distâncias entre átomos de dados
+elementos, na estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elem1</strong> (<em>str</em>) – Símbolo do elementos do átomo 1.</p></li>
+<li><p><strong>elem2</strong> (<em>str</em>) – Símbolo do elementos do átomo 2.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Número de comprimentos retornados.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lista com as “n” menores comprimentos entre átomos da estrutura.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dopings">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dopings" title="Link para este cabeçalho"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Rodapé">
+        <a href="modules.html" class="btn btn-neutral float-left" title="dopings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Direitos autorais 2024, Gustavo Campos.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

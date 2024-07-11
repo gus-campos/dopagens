@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dopings.dops_set &mdash; Documentação dopings 0.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=88519e4e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=000972dd"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            dopings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">dopings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dopings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código do módulo</a></li>
+      <li class="breadcrumb-item active">dopings.dops_set</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fonte para dopings.dops_set</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">dopings.structure</span> <span class="kn">import</span> <span class="n">structure</span>
+<span class="kn">from</span> <span class="nn">dopings.config</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">atoms_data</span><span class="p">,</span> <span class="n">dops_data</span><span class="p">,</span> <span class="n">dirs_data</span><span class="p">,</span> <span class="n">main_config</span>
+
+<span class="c1">####################################################################################</span>
+        
+<div class="viewcode-block" id="dops_set">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set">[documentos]</a>
+<span class="k">class</span> <span class="nc">dops_set</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe de objetos que representam um conjunto completo de dopagens,</span>
+<span class="sd">    com atributos e métodos para gerar seus arquivos, organizar </span>
+<span class="sd">    diretórios, otimizar, e processar seus resultados em massa. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    </span>
+<span class="sd">    structs : list[structure]</span>
+<span class="sd">        Lista de estruturas do conjunto.</span>
+
+<span class="sd">    param : str</span>
+<span class="sd">        Conjunto de dopagens usado nas otimizações.</span>
+
+<span class="sd">    main_dir : Path</span>
+<span class="sd">        Diretório raíz de resultados de processamento dos dados.</span>
+<span class="sd">        </span>
+<span class="sd">    bases : { str : structure }</span>
+<span class="sd">        Dicionário que relaciona o nome da base com a structure da </span>
+<span class="sd">        mesma.</span>
+
+<span class="sd">    dops_info : dict</span>
+<span class="sd">        Dicionário com dados gerais do conjunto de dopagens.</span>
+
+<span class="sd">        self.dops_info = {</span>
+
+<span class="sd">            &quot;material&quot;  : list[str],</span>
+<span class="sd">            &quot;bases&quot;     : list[str]</span>
+<span class="sd">            &quot;sites&quot;     : { str : list[str] },</span>
+<span class="sd">            &quot;sites_id&quot;  : { str : { str : int }},</span>
+<span class="sd">            &quot;n_atoms&quot;   : int,</span>
+<span class="sd">            &quot;n_ligs&quot;    : int</span>
+<span class="sd">        }</span>
+
+<span class="sd">    mode : { &quot;look&quot;, &quot;read&quot;, &quot;write&quot; }</span>
+<span class="sd">        In whick mode dops_set object was initialized.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    </span>
+<span class="sd">    __init__(self, dop_elem: str, dops_info: dict=None, mode: str=&quot;read&quot;, param=None, force_write: bool=False) -&gt; None</span>
+
+<span class="sd">        Contrutor de objetos dops_set.</span>
+<span class="sd">    </span>
+<span class="sd">    map(self, method: &quot;function&quot;, suffix: str, **kwargs) -&gt; None</span>
+
+<span class="sd">        Executa uma função para cada estrutura do conjunto de </span>
+<span class="sd">        estruturas.</span>
+<span class="sd">    </span>
+<span class="sd">    map_to_csv(self, method: &quot;function&quot;, **kwargs) -&gt; None</span>
+
+<span class="sd">        Executa uma função para cada estrutura do conjunto, recolhendo </span>
+<span class="sd">        os retornos para escrever em um arquivo csv final.</span>
+<span class="sd">    </span>
+<span class="sd">    map_opt(self, only_report: bool=True, overwrite: bool=False, verbose: bool=True, skip_hard_to_conv_SCC: bool=True, resume_unfineshed: bool=False, inverse_order: bool=False) -&gt; None</span>
+
+<span class="sd">        Otimiza um conjunto inteiro de dopagens em fila.</span>
+<span class="sd">    </span>
+<span class="sd">    atom_id(self, base, site: dict) -&gt; int</span>
+
+<span class="sd">        Retorna o ID do átomo correspondente ao sítio de dopagem da </span>
+<span class="sd">        estrutura.</span>
+<span class="sd">    </span>
+<span class="sd">    infer_base_dir(self, base) -&gt; Path</span>
+
+<span class="sd">        Infere o diretório da estrutura base que origina a estrutura </span>
+<span class="sd">        dopada em questão.</span>
+<span class="sd">    </span>
+<span class="sd">    infer_dir_out(self, struct, method, suffix=None, as_csv=False) -&gt; Path</span>
+
+<span class="sd">        Faz a inferência do diretório de escrita dos arquivos, baseado</span>
+<span class="sd">        em outros dados do conjunto. </span>
+<span class="sd">    </span>
+<span class="sd">    valid_dops_info(dops_info) -&gt; bool</span>
+
+<span class="sd">        Valida um dicionário dops_info, que descreve a estrutura do</span>
+<span class="sd">        conjunto de dopagens.</span>
+<span class="sd">    </span>
+<span class="sd">    infer_dops_dir(material, dop_elem, site, base) -&gt; Path</span>
+
+<span class="sd">        Faz inferência do diretório de dopagem da estrutura.</span>
+<span class="sd">    </span>
+<span class="sd">    gen_files(struct, read_initial_charges=False, redo=False) -&gt; None</span>
+
+<span class="sd">        Gera os arquivos de otimização de uma estrutura.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="dops_set.__init__">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.__init__">[documentos]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dop_elem</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dops_info</span><span class="p">:</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;read&quot;</span><span class="p">,</span>
+                 <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force_write</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Contrutor de objetos dops_set.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        dop_elem : str</span>
+<span class="sd">            Símbolo do elemento substituído.</span>
+
+<span class="sd">        dops_info : dict</span>
+<span class="sd">            DIct com os dados do conjunto de dopagens, com a </span>
+<span class="sd">            estrutura:</span>
+
+<span class="sd">            self.dops_info = {</span>
+
+<span class="sd">                &quot;material&quot;  : list[str],</span>
+<span class="sd">                &quot;bases&quot;     : list[str]</span>
+<span class="sd">                &quot;sites&quot;     : { str : list[str] },</span>
+<span class="sd">                &quot;sites_id&quot;  : { str : { str : int }},</span>
+<span class="sd">                &quot;n_atoms&quot;   : int,</span>
+<span class="sd">                &quot;n_ligs&quot;    : int</span>
+<span class="sd">            }</span>
+
+<span class="sd">        mode : {&quot;look&quot;, &quot;read&quot;, &quot;write&quot;}</span>
+<span class="sd">            Modo de acesso às estruturas. </span>
+<span class="sd">            </span>
+<span class="sd">            No modo look as estruturas são apenas listadas, para que se</span>
+<span class="sd">            possa emitir report independente do status da otimização.</span>
+
+<span class="sd">            No modo read, os dados das estruturas são lidos dos arquivos</span>
+<span class="sd">            e carregados nas propriedades estrutura. Obs: Estruturas não</span>
+<span class="sd">            convergidas não são adicionadas ao dops_set, porém um </span>
+<span class="sd">            warning é impresso.</span>
+
+<span class="sd">            No modo write, os arquivos de otimização do conjunto de </span>
+<span class="sd">            dopagens é criado, como preparação para otimização do </span>
+<span class="sd">            conjunto. Porém se no local existir um diretório de reinício</span>
+<span class="sd">            de otimização, a estrutura é pulada. Esse comportamento pode</span>
+<span class="sd">            ser sobrescrito com o parâmetro &quot;force_write&quot;.</span>
+
+<span class="sd">        param : str</span>
+<span class="sd">            Conjunto de parâmetro usados na otimização.</span>
+
+<span class="sd">        force_write : bool, default = False</span>
+<span class="sd">            Se True, novos arquivos de otimização são gerados para todas</span>
+<span class="sd">            as estruturas, mesmo que para elas já exista um diretório </span>
+<span class="sd">            de reinício de otimização. </span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        TypeError</span>
+<span class="sd">            param must be str.</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            mode must be &#39;read&#39;, look or &#39;write&#39;.</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            Not valid dops_info.</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            dops_info cannot be None.</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            Invalid dop_elem.</span>
+<span class="sd">        </span>
+<span class="sd">        ValueError</span>
+<span class="sd">            dop_elem can&#39;t be None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">os</span>
+
+        <span class="c1"># Propriedades</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bases</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">structs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Dop_elem</span>
+        <span class="k">if</span> <span class="n">dop_elem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dop_elem</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dop_elem</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span> <span class="o">=</span> <span class="n">dop_elem</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid dop_elem.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dop_elem can&#39;t be None.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Definindo parâmetro</span>
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">=</span><span class="n">param</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;param must be str.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Se não for passado, buscar no dicionário de parâmetros</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span> <span class="ow">in</span> <span class="n">dops_data</span><span class="p">[</span><span class="s2">&quot;param_dict&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="n">dops_data</span><span class="p">[</span><span class="s2">&quot;param_dict&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span><span class="p">]</span>
+
+        <span class="c1"># Guardar endereço principal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;proc_output&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Mode</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">,</span> <span class="s2">&quot;look&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mode must be &#39;read&#39;, &#39;look&#39; or &#39;write&#39;&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Dops_info</span>
+        <span class="k">if</span> <span class="n">dops_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dops_set</span><span class="o">.</span><span class="n">valid_dops_info</span><span class="p">(</span><span class="n">dops_info</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span> <span class="o">=</span> <span class="n">dops_info</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not valid dops_info&quot;</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dops_info cannot be None&quot;</span><span class="p">)</span>
+
+        <span class="c1">## Base struts</span>
+        <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;bases&quot;</span><span class="p">]:</span>
+
+            <span class="c1"># Gerando bases</span>
+            <span class="n">base_struct</span> <span class="o">=</span> <span class="n">structure</span><span class="p">(</span><span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer_base_dir</span><span class="p">(</span><span class="n">base</span><span class="p">),</span>
+                                    <span class="n">read_from_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">bases</span><span class="p">[</span><span class="n">base</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_struct</span>
+
+        <span class="c1"># Para cada estrutura base</span>
+        <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;bases&quot;</span><span class="p">]:</span>
+
+            <span class="c1"># Para cada site</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;sites&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]:</span>
+
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+
+                    <span class="s2">&quot;material&quot;</span>       <span class="p">:</span> <span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;dop_elem&quot;</span>       <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span><span class="p">,</span> 
+                    <span class="s2">&quot;base&quot;</span>           <span class="p">:</span> <span class="n">base</span><span class="p">,</span>
+                    <span class="s2">&quot;site&quot;</span>           <span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+                <span class="p">}</span>
+                
+                <span class="n">opt_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer_dops_dir</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt_dir</span>
+
+                <span class="n">replace_atom_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_id</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">site</span><span class="p">)</span> 
+
+                <span class="c1"># Gerar estrutura dopada</span>
+                <span class="n">doped_struct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bases</span><span class="p">[</span><span class="n">base</span><span class="p">]</span><span class="o">.</span><span class="n">dope_out</span><span class="p">(</span>
+                                                <span class="n">dop_elem</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dop_elem</span><span class="p">,</span> 
+                                                <span class="nb">id</span><span class="o">=</span><span class="n">replace_atom_id</span><span class="p">,</span>
+                                                <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
+                
+                <span class="c1"># Definindo parâmetro</span>
+                <span class="n">doped_struct</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span>
+
+                <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;look&quot;</span><span class="p">:</span>
+
+                    <span class="c1"># Anexar à lista</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">structs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doped_struct</span><span class="p">)</span>
+
+                <span class="c1"># Se modo de escrita</span>
+                <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;write&quot;</span><span class="p">:</span>
+
+                    <span class="c1"># Anexar à lista</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">structs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doped_struct</span><span class="p">)</span>
+
+                    <span class="c1"># Se o arquivo de backup existe</span>
+                    <span class="n">backups_exists</span> <span class="o">=</span> <span class="p">(</span><span class="n">doped_struct</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;resume_dir_name&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+
+                    <span class="c1"># Se o backup não existe, ou foi pedido para forçar a escrita</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">backups_exists</span><span class="p">)</span> <span class="ow">or</span> <span class="n">force_write</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">gen_files</span><span class="p">(</span><span class="n">doped_struct</span><span class="p">)</span>
+
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARNING: not writing over </span><span class="si">{</span><span class="n">doped_struct</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2">, cause this optimization was restarted&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Se modo leitura</span>
+                <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;read&quot;</span><span class="p">:</span>
+
+                    <span class="c1"># Se não tiver convergido, pular iteração</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">doped_struct</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">return_conv</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">doped_struct</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;output_name&quot;</span><span class="p">]):</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping structure with not found output: </span><span class="si">{</span><span class="n">doped_struct</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not reading not converged structure: </span><span class="si">{</span><span class="n">doped_struct</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        
+                        <span class="k">continue</span>
+                    
+                    <span class="c1"># Sobrescrever com estrutura dopada</span>
+                    <span class="n">doped_struct</span> <span class="o">=</span> <span class="n">structure</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">read_from_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                    <span class="c1"># Definindo parâmetro</span>
+                    <span class="n">doped_struct</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span>
+
+                    <span class="c1"># Anexar à lista</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">structs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doped_struct</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Mapeia funções</span>
+<div class="viewcode-block" id="dops_set.map">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.map">[documentos]</a>
+    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executa uma função para cada estrutura do conjunto de </span>
+<span class="sd">        estruturas.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">        method : function</span>
+<span class="sd">            Função a ser executada em todas as estruturas.</span>
+<span class="sd">        </span>
+<span class="sd">        suffix : str or Path</span>
+<span class="sd">            Extensão do arquivo de saída.</span>
+
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            read mode is needed for proper processing results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;read&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;read mode is needed for proper processing&quot;</span>
+                             <span class="o">+</span> <span class="s2">&quot;results.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Para cada structure</span>
+        <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">structs</span><span class="p">:</span>
+
+            <span class="c1"># Checagem de convergência com aviso no nome do arquivo?</span>
+            <span class="c1"># Diretório de testes</span>
+            <span class="n">dir_out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">infer_dir_out</span><span class="p">(</span><span class="n">struct</span><span class="o">=</span><span class="n">struct</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> 
+                                       <span class="n">suffix</span><span class="o">=</span><span class="n">suffix</span><span class="p">)</span>
+
+            <span class="c1"># Executando função</span>
+            <span class="n">method</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="n">dir_out</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Mapeia funções a apresenta retornos em csv</span>
+<div class="viewcode-block" id="dops_set.map_to_csv">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.map_to_csv">[documentos]</a>
+    <span class="k">def</span> <span class="nf">map_to_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executa uma função para cada estrutura do conjunto, recolhendo </span>
+<span class="sd">        os retornos para escrever em um arquivo csv final.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        method : function</span>
+<span class="sd">            Função a ser executada em todas as estruturas.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        AssertionError</span>
+<span class="sd">            There is no structs on this struct_set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Lista para receber valores</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Se não tiver estruturas, reportar</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;There is no structs on this set_struct.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Para cada structure</span>
+        <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">structs</span><span class="p">:</span>
+
+            <span class="c1"># Executar função e guardar valor</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
+                
+                <span class="c1"># Dict de identificação</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Name&quot;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Base&quot;</span> <span class="p">:</span> <span class="n">struct</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Site&quot;</span> <span class="p">:</span> <span class="n">struct</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">name</span> <span class="p">}</span>
+
+            <span class="c1"># Se não tiver</span>
+            <span class="k">else</span><span class="p">:</span>
+                
+                <span class="n">material</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">material</span>
+                <span class="n">dop_elem</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">dop_elem</span>
+                <span class="n">site</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">site</span>
+
+                <span class="c1"># Dict de identificação</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;material&quot;</span> <span class="p">:</span> <span class="n">material</span><span class="p">,</span> <span class="s2">&quot;dop_elem&quot;</span> <span class="p">:</span> <span class="n">dop_elem</span><span class="p">,</span> <span class="s2">&quot;Base&quot;</span> <span class="p">:</span> <span class="n">struct</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Site&quot;</span> <span class="p">:</span> <span class="n">site</span> <span class="p">}</span>
+
+            <span class="c1"># Formatação para dados em csv</span>
+            <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;homo_lumo&quot;</span><span class="p">:</span>
+
+                <span class="n">value</span> <span class="o">=</span> <span class="p">{</span>
+
+                    <span class="s2">&quot;homo&quot;</span> <span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="s2">&quot;lumo&quot;</span> <span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="s2">&quot;homo_lumo&quot;</span> <span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="p">}</span>
+            
+            <span class="c1"># Formatação para dados em csv</span>
+            <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;formation_energy&quot;</span><span class="p">:</span>
+
+                <span class="n">value</span> <span class="o">=</span> <span class="p">{</span>
+
+                    <span class="s2">&quot;energy&quot;</span> <span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="s2">&quot;per_atom&quot;</span> <span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">}</span>
+            
+            <span class="c1"># Juntando identificação e valores </span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="c1"># Diretório final</span>
+        <span class="n">dir_out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">infer_dir_out</span><span class="p">(</span><span class="n">struct</span><span class="o">=</span><span class="n">struct</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">as_csv</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                   
+        <span class="c1"># Criando diretório</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_out</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Escrevendo arquivo CSV</span>
+        <span class="kn">import</span> <span class="nn">csv</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="c1"># Escreve dicionário como csv, usa como nomes de coluna as chaves de um item</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="c1"># Escreve cabeçalho, e escreve valores</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="c1"># Relatar</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">dir_out</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dops_set.map_opt">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.map_opt">[documentos]</a>
+    <span class="k">def</span> <span class="nf">map_opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">only_report</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_hard_to_conv_SCC</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                <span class="n">resume_unfineshed</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inverse_order</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Otimiza um conjunto inteiro de dopagens em fila.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        only_report : bool, default = True</span>
+<span class="sd">            Não realiza otimização, apenas faz o report do estado dos</span>
+<span class="sd">            dos arquivos.</span>
+
+<span class="sd">        overwrite : bool, default=False</span>
+<span class="sd">            Se a otimização deve ser executada mesmo que já exista no </span>
+<span class="sd">            diretório output de otimização anterior. Se True, a </span>
+<span class="sd">            otimização será iniciada e os arquivos anteriores serão </span>
+<span class="sd">            sobrescritos.</span>
+
+<span class="sd">        verbose : bool, default=True</span>
+<span class="sd">            Se, como informação extra, os passos onde não houve </span>
+<span class="sd">            convergência do SCC devem ser impressos também.</span>
+
+<span class="sd">        skip_hard_to_conv_SCC : bool, default=True</span>
+<span class="sd">            Se otimizações com demasiados passos SCC não convergidos </span>
+<span class="sd">            devem ser puladas.</span>
+
+<span class="sd">            Regra para determinar uma otimizão com demasiados passos:</span>
+<span class="sd">            </span>
+<span class="sd">            Ter mais de 30 passos não convergidos; ou ter mais de 20</span>
+<span class="sd">            passos não convergidos, antes de chegar no passo 30 da </span>
+<span class="sd">            otimização.</span>
+
+<span class="sd">        resume_unfineshed : bool, default=True</span>
+<span class="sd">            Se True, ao realizar a otimização que foi anteriormente </span>
+<span class="sd">            interrompida, gera os arquivos necessários para recomeçar do</span>
+<span class="sd">            último passo escrito e inicia tal otimização.</span>
+
+<span class="sd">            Se False, recomeça do primeiro frame escrito.</span>
+
+<span class="sd">        inverse_order : bool, default=False</span>
+<span class="sd">            Se a ordem das otimizações devem seguir a ordem inversa da </span>
+<span class="sd">            lista de estruturas.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="c1"># Salvando lista de estruturas</span>
+        <span class="n">structs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structs</span>
+
+        <span class="c1"># Se for pra rodar na ordem inversa</span>
+        <span class="k">if</span> <span class="n">inverse_order</span><span class="p">:</span>
+            <span class="c1"># Inverter lista</span>
+            <span class="n">structs</span> <span class="o">=</span> <span class="n">structs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Pra cada estrutura...</span>
+        <span class="k">for</span> <span class="n">struct</span> <span class="ow">in</span> <span class="n">structs</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">only_report</span><span class="p">:</span>
+                <span class="n">struct</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">struct</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> 
+                           <span class="n">skip_hard_to_conv_SCC</span><span class="o">=</span><span class="n">skip_hard_to_conv_SCC</span><span class="p">,</span> 
+                           <span class="n">resume_unfineshed</span><span class="o">=</span><span class="n">resume_unfineshed</span><span class="p">)</span></div>
+
+       
+    <span class="c1">###########################################################################</span>
+
+<div class="viewcode-block" id="dops_set.atom_id">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.atom_id">[documentos]</a>
+    <span class="k">def</span> <span class="nf">atom_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">site</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retorna o ID do átomo correspondente ao sítio de dopagem da </span>
+<span class="sd">        estrutura.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        base : str</span>
+<span class="sd">            Base da estrutura.</span>
+
+<span class="sd">        site : str</span>
+<span class="sd">            Sítio de dopagem da estrutura.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        int</span>
+<span class="sd">            ID do átomo buscado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;sites_id&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">][</span><span class="n">site</span><span class="p">])</span></div>
+
+
+    <span class="c1">###########################################################################</span>
+
+<div class="viewcode-block" id="dops_set.infer_base_dir">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.infer_base_dir">[documentos]</a>
+    <span class="k">def</span> <span class="nf">infer_base_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Infere o diretório da estrutura base que origina a estrutura </span>
+<span class="sd">        dopada em questão.</span>
+
+<span class="sd">        =&gt; Formato</span>
+
+<span class="sd">        [bases root dir] / [material] / [base]</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        base : srt</span>
+<span class="sd">            Base da qual se busca o diretório.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Path</span>
+<span class="sd">            Diretório da base correspondente.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;bases&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;material&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">base</span></div>
+
+
+<div class="viewcode-block" id="dops_set.infer_dir_out">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.infer_dir_out">[documentos]</a>
+    <span class="k">def</span> <span class="nf">infer_dir_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">struct</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Faz a inferência do diretório de escrita dos arquivos, baseado</span>
+<span class="sd">        em outros dados do conjunto. </span>
+<span class="sd">        </span>
+<span class="sd">        Os diretórios seguem a seguinte estrutura:</span>
+
+<span class="sd">        =&gt; Diretório CSV</span>
+
+<span class="sd">        [raíz] / [method name] / [method name]-[nome do conjunto].csv  </span>
+<span class="sd">        </span>
+<span class="sd">        =&gt; Diretório dos arquivos individuais</span>
+
+<span class="sd">        [raíz] / [method name] / [nome do conjunto] / [nome do conjunto]</span>
+<span class="sd">        -[nome do diretório mãe]-[nome do diretório].[sufixo]</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : structure</span>
+<span class="sd">            Estrutura que terá diretório inferido.</span>
+
+<span class="sd">        method : function</span>
+<span class="sd">            Função a ser mapeada nas estruturas.</span>
+
+<span class="sd">        suffix : str</span>
+<span class="sd">            Extensão do arquivo de saída </span>
+
+<span class="sd">        as_csv : bool</span>
+<span class="sd">            Se for True, infere diretório de um arquivo csv, que </span>
+<span class="sd">            representa o conjunto como um todo.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Path</span>
+<span class="sd">            Caminho inferido para o arquivo de saída. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">material</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">material</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">base</span>
+        <span class="n">dop_elem</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">dop_elem</span>
+        <span class="n">site</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">site</span>
+
+        <span class="k">if</span> <span class="n">as_csv</span><span class="p">:</span>            
+
+            <span class="c1"># ROOT / METHOD / FILE(method+name)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_dir</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="n">method</span><span class="o">.</span><span class="vm">__name__</span>  <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">dop_elem</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="c1"># Se não tiver sufixo, reportar</span>
+            <span class="k">if</span> <span class="n">suffix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;suffix is needed&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># ROOT / METHOD / NAME / FILE(dir_name)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_dir</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="n">method</span><span class="o">.</span><span class="vm">__name__</span>  <span class="o">/</span> <span class="n">dop_elem</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dop_elem</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dops_set.valid_dops_info">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.valid_dops_info">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">valid_dops_info</span><span class="p">(</span><span class="n">dops_info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Valida um dicionário dops_info, que descreve a estrutura do</span>
+<span class="sd">        conjunto de dopagens.</span>
+
+<span class="sd">        Tal dicionário deve seguir o seguinte formato:</span>
+
+<span class="sd">        self.dops_info = {</span>
+
+<span class="sd">            &quot;graphs_ylims&quot;  : { str : { str : list[float] }}</span>
+<span class="sd">            &quot;material&quot;      : list[str],</span>
+<span class="sd">            &quot;bases&quot;         : list[str],</span>
+<span class="sd">            &quot;sites&quot;         : { str : list[str] },</span>
+<span class="sd">            &quot;sites_id&quot;      : { str : { str : int }},</span>
+<span class="sd">            &quot;n_atoms&quot;       : int,</span>
+<span class="sd">            &quot;n_ligs&quot;        : int</span>
+<span class="sd">        }</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        dops_info : dict</span>
+<span class="sd">            Dicionário dops_info a ser validado.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        bool</span>
+<span class="sd">            Se é o dicionário é valido ou não.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">dops_info_model_keys</span> <span class="o">=</span> <span class="p">[</span>
+
+            <span class="s2">&quot;graphs_config&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;material&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;bases&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sites&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sites_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n_atoms&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n_ligs&quot;</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Se as chaves principais forem diferentes, não é válido</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info_model_keys</span><span class="p">):</span>
+            
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="c1"># Se as chaves de &quot;sites&quot; forem diferentes das &quot;bases&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;sites&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;bases&quot;</span><span class="p">]):</span>
+            
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="c1"># Se o mesmo não ocorrer com sites_id</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;sites_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> 
+                <span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;bases&quot;</span><span class="p">])):</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="c1"># Se para cada base do &quot;sites_id&quot; os keys de sites não correspondetem </span>
+        <span class="c1"># aos sites correspondente</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;sites_id&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> 
+              <span class="nb">sorted</span><span class="p">(</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;sites&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">]))</span> <span class="k">for</span> 
+              <span class="n">base</span> <span class="ow">in</span> <span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;bases&quot;</span><span class="p">]]):</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Se resistir a todos os testes, é válido</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="dops_set.infer_dops_dir">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.infer_dops_dir">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">infer_dops_dir</span><span class="p">(</span><span class="n">material</span><span class="p">,</span> <span class="n">dop_elem</span><span class="p">,</span> <span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Faz inferência do diretório de dopagem da estrutura.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : structure</span>
+<span class="sd">            Estrutura sobre a qual se quer fazer a inferência.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Retornar caminho da dopagem</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;dopings_opt&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="n">dop_elem</span> <span class="o">/</span> <span class="n">base</span> <span class="o">/</span> <span class="n">site</span></div>
+
+
+<div class="viewcode-block" id="dops_set.gen_files">
+<a class="viewcode-back" href="../../dopings.html#dopings.dops_set.dops_set.gen_files">[documentos]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">gen_files</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="n">read_initial_charges</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">redo</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gera os arquivos de otimização de uma estrutura.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        struct : structure</span>
+<span class="sd">            Estrutura para a qual deseja-se gerar arquivos de </span>
+<span class="sd">            otimização.</span>
+
+<span class="sd">        read_initial_charges : bool</span>
+<span class="sd">            Se deve ser especificado no arquivo hsd que as cargas </span>
+<span class="sd">            iniciais devem ser lidas a partir de arquivo antes de </span>
+<span class="sd">            iniciar a otimização.</span>
+
+<span class="sd">        redo : bool</span>
+<span class="sd">            Se os arquivos estão sendo refeitos, e portanto o limite de</span>
+<span class="sd">            passos na otimização deve ser maior que o normal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">################### Funções para lidar com arquivo hsd ################</span>
+
+        <span class="k">def</span> <span class="nf">hsd_to_dict</span><span class="p">(</span><span class="n">dir_in</span><span class="p">):</span>
+
+            <span class="kn">import</span> <span class="nn">hsd</span>
+
+            <span class="c1"># Lendo arquivo genérico</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_in</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+
+                <span class="c1"># Lendo para um dicionário</span>
+                <span class="n">hsd_dict</span> <span class="o">=</span> <span class="n">hsd</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+            <span class="c1"># Retornando dicionário</span>
+            <span class="k">return</span> <span class="n">hsd_dict</span>
+
+        <span class="k">def</span> <span class="nf">write_hsd_dict</span><span class="p">(</span><span class="n">hsd_dict</span><span class="p">,</span> <span class="n">dir_out</span><span class="p">):</span>
+
+            <span class="kn">import</span> <span class="nn">hsd</span>
+
+            <span class="c1"># Carregando informação como string formatada</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="n">hsd</span><span class="o">.</span><span class="n">dump_string</span><span class="p">(</span><span class="n">hsd_dict</span><span class="p">)</span>
+            <span class="c1"># Substituindo informação desejada</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;xyzFormat </span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;xyzFormat {</span><span class="se">\n</span><span class="s1">    &lt;&lt;&lt; &quot;inp.xyz&quot;</span><span class="se">\n</span><span class="s1">  }&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Escrevendo em arquivo</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_out</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+
+        <span class="c1">#################### Gerar frame ######################################</span>
+
+        <span class="n">struct</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="s2">&quot;inp.xyz&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#################### Gerar hsd ########################################</span>
+
+        <span class="c1"># Target</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">dir</span> <span class="o">/</span> <span class="s2">&quot;dftb_in.hsd&quot;</span>
+
+        <span class="c1"># Lendo para um dicionário o modelo principal</span>
+        <span class="k">if</span> <span class="n">struct</span><span class="o">.</span><span class="n">dop_elem</span> <span class="o">!=</span> <span class="s2">&quot;Li&quot;</span><span class="p">:</span>
+            <span class="n">hsd_dict</span> <span class="o">=</span> <span class="n">hsd_to_dict</span><span class="p">(</span><span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;generic_hsd&quot;</span><span class="p">][</span><span class="n">struct</span><span class="o">.</span><span class="n">param</span><span class="p">])</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hsd_dict</span> <span class="o">=</span> <span class="n">hsd_to_dict</span><span class="p">(</span><span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;generic_hsd&quot;</span><span class="p">][</span><span class="s2">&quot;3ob+Li&quot;</span><span class="p">])</span>
+
+
+        <span class="c1"># Obtendo valores únicos de elementos na estrutura</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span> <span class="n">atom</span><span class="o">.</span><span class="n">elem</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">struct</span><span class="o">.</span><span class="n">atoms</span> <span class="p">]))</span>
+
+        <span class="c1"># Importando dados</span>
+        <span class="n">max_ang_momentum</span> <span class="o">=</span> <span class="n">atoms_data</span><span class="p">[</span><span class="s2">&quot;max_ang_momentum&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Definindo momentos angulares máximos para cada elemento</span>
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+
+            <span class="c1"># Criando entrada, com momento angular entre aspas</span>
+            <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Hamiltonian&quot;</span><span class="p">][</span><span class="s2">&quot;DFTB&quot;</span><span class="p">][</span><span class="s2">&quot;MaxAngularMomentum&quot;</span><span class="p">][</span><span class="n">elem</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">max_ang_momentum</span><span class="p">[</span><span class="n">elem</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+            
+        <span class="c1"># Se for 3ob, adicionar as derivadas de hubbard para cada elemento</span>
+        <span class="k">if</span> <span class="n">struct</span><span class="o">.</span><span class="n">param</span> <span class="o">==</span> <span class="s2">&quot;3ob&quot;</span> <span class="ow">and</span> <span class="n">struct</span><span class="o">.</span><span class="n">dop_elem</span> <span class="o">!=</span> <span class="s2">&quot;Li&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+                <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Hamiltonian&quot;</span><span class="p">][</span><span class="s2">&quot;DFTB&quot;</span><span class="p">][</span><span class="s2">&quot;HubbardDerivs&quot;</span><span class="p">][</span><span class="n">elem</span><span class="p">]</span> <span class="o">=</span> <span class="n">atoms_data</span><span class="p">[</span><span class="s2">&quot;hubbard_derivs&quot;</span><span class="p">][</span><span class="n">elem</span><span class="p">]</span>
+                
+        <span class="c1"># SKF DIR</span>
+        <span class="n">skf_dir</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;skf_dirs&quot;</span><span class="p">][</span><span class="n">struct</span><span class="o">.</span><span class="n">param</span><span class="p">]</span>
+        <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Hamiltonian&quot;</span><span class="p">][</span><span class="s2">&quot;DFTB&quot;</span><span class="p">][</span><span class="s2">&quot;SlaterKosterFiles&quot;</span><span class="p">][</span><span class="s2">&quot;Type2FileNames&quot;</span><span class="p">][</span><span class="s2">&quot;Prefix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">skf_dir</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;/&quot;&#39;</span>
+
+        <span class="c1"># Temperatura como forma de melhorar a convergência</span>
+        <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Hamiltonian&quot;</span><span class="p">][</span><span class="s2">&quot;DFTB&quot;</span><span class="p">][</span><span class="s2">&quot;Filling&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Fermi&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Temperature[K]&quot;</span> <span class="p">:</span> <span class="mi">2000</span><span class="p">}}</span>
+
+        <span class="c1">############################################################################</span>
+
+        <span class="c1"># Ler cargas iniciais, se for passado como parâmetro</span>
+        <span class="k">if</span> <span class="n">read_initial_charges</span><span class="p">:</span>
+
+            <span class="c1"># Ler cargas iniciais</span>
+            <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Hamiltonian&quot;</span><span class="p">][</span><span class="s2">&quot;DFTB&quot;</span><span class="p">][</span><span class="s2">&quot;ReadInitialCharges&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+
+            <span class="c1"># Ler cargas como texto</span>
+            <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Options&quot;</span><span class="p">][</span><span class="s2">&quot;ReadChargesAsText&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+
+        <span class="c1">############################################################################</span>
+
+        <span class="c1"># Se estiver refazendo os arquivos pra resumir a otimização</span>
+        <span class="k">if</span> <span class="n">redo</span><span class="p">:</span>
+
+            <span class="c1"># Usar como limite de passos o valor designado nas variáveis de configuração</span>
+            <span class="n">hsd_dict</span><span class="p">[</span><span class="s2">&quot;Driver&quot;</span><span class="p">][</span><span class="s2">&quot;GeometryOptimization&quot;</span><span class="p">][</span><span class="s2">&quot;MaxSteps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">main_config</span><span class="p">[</span><span class="s2">&quot;redo_steps_limits&quot;</span><span class="p">]</span>
+
+        <span class="c1">############################################################################</span>
+
+        <span class="c1"># Escrevendo arquivo de propriedades</span>
+        <span class="n">write_hsd_dict</span><span class="p">(</span><span class="n">hsd_dict</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+        <span class="c1"># Relatar</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Direitos autorais 2024, Gustavo Campos.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

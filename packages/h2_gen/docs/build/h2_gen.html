@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>h2_gen package &mdash; Documentação dopings 0.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=88519e4e"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=000972dd"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dopings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">h2_gen package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-h2_gen.global_vars">h2_gen.global_vars module</a></li>
+<li><a class="reference internal" href="#module-h2_gen.h2_gen">h2_gen.h2_gen module</a><ul>
+<li><a class="reference internal" href="#h2_gen.h2_gen.g"><code class="docutils literal notranslate"><span class="pre">g()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.graphine_radius"><code class="docutils literal notranslate"><span class="pre">graphine_radius()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen"><code class="docutils literal notranslate"><span class="pre">h2_gen</span></code></a><ul>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.plot"><code class="docutils literal notranslate"><span class="pre">h2_gen.plot()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.to_CM"><code class="docutils literal notranslate"><span class="pre">h2_gen.to_CM()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.gen_arrays"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_arrays()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.lin_reg"><code class="docutils literal notranslate"><span class="pre">h2_gen.lin_reg()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.graphine_radius"><code class="docutils literal notranslate"><span class="pre">h2_gen.graphine_radius()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.gen_R2_coord_flake"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_R2_coord_flake()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.gen_R3_H2"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_R3_H2()</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_R2_coord_flake()</span></code></a></li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.h2_gen.gen_R2_coords_periodic"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_R2_coords_periodic()</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_R3_H2()</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">h2_gen.gen_arrays()</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">h2_gen.lin_reg()</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">h2_gen.plot()</span></code></a></li>
+<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">h2_gen.to_CM()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#h2_gen.h2_gen.phi"><code class="docutils literal notranslate"><span class="pre">phi()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-h2_gen">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dopings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">h2_gen package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/h2_gen.rst.txt" rel="nofollow"> Ver código-fonte da página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="h2-gen-package">
+<h1>h2_gen package<a class="headerlink" href="#h2-gen-package" title="Link para este cabeçalho"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link para este cabeçalho"></a></h2>
+</section>
+<section id="module-h2_gen.global_vars">
+<span id="h2-gen-global-vars-module"></span><h2>h2_gen.global_vars module<a class="headerlink" href="#module-h2_gen.global_vars" title="Link para este cabeçalho"></a></h2>
+</section>
+<section id="module-h2_gen.h2_gen">
+<span id="h2-gen-h2-gen-module"></span><h2>h2_gen.h2_gen module<a class="headerlink" href="#module-h2_gen.h2_gen" title="Link para este cabeçalho"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.g">
+<span class="sig-prename descclassname"><span class="pre">h2_gen.h2_gen.</span></span><span class="sig-name descname"><span class="pre">g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#g"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.g" title="Link para esta definição"></a></dt>
+<dd><p>Dado uma matrix coluna de coeficiente do ajuste, calcula a iamgem da
+função:</p>
+<p>g(x,y) = C0 * phi{0}(x,y) + … + C(2n+1) * phi{2n}(x,y)</p>
+<p>tal que:</p>
+<p>phi{0}               = 1
+phi{1}   … phi{n}  = x^n
+phi{n+1} … phi{2n} = y^n</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – Valor de x.</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – Valor de y.</p></li>
+<li><p><strong>C</strong> (<em>np.ndarray</em>) – Matriz coluna com os coeficientes do ajuste.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>z</strong> – Imagem da função.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.graphine_radius">
+<span class="sig-prename descclassname"><span class="pre">h2_gen.h2_gen.</span></span><span class="sig-name descname"><span class="pre">graphine_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">structure</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#graphine_radius"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.graphine_radius" title="Link para esta definição"></a></dt>
+<dd><p>”
+Estima um raio aproximado para a estrutura de grafino.</p>
+<p>Encontra o carbono mais afastado do centro de massa, e retorna 90%
+desta distância. Assume que o centro de massa da estrutura está
+em (0,0,0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura para qual se calcular a estimativa.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Raio estimado para a estrutura.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">h2_gen.h2_gen.</span></span><span class="sig-name descname"><span class="pre">h2_gen</span></span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen" title="Link para esta definição"></a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de métodos estáticos para geração de estruturas cobertas por
+moléculas de H2.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">np.ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.plot"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.plot" title="Link para esta definição"></a></dt>
+<dd><p>Gera um plot interativo de todos os átomos, dadas as coordenadas
+de todos eles. Se for passada uma matriz de coeficientes, plota
+também a curva ajustada.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.to_CM">
+<span class="sig-name descname"><span class="pre">to_CM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.to_CM"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.to_CM" title="Link para esta definição"></a></dt>
+<dd><p>Recebe uma estrutura e retorna a mesma movida para o seu centro
+de massa. Só considera os carbonos no cálculo do centro de
+massa.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.gen_arrays">
+<span class="sig-name descname"><span class="pre">gen_arrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_arrays"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.gen_arrays" title="Link para esta definição"></a></dt>
+<dd><p>Gera arrays xs, ys, zs das coordenadas dos átomos de uma
+estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.lin_reg">
+<span class="sig-name descname"><span class="pre">lin_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.lin_reg"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.lin_reg" title="Link para esta definição"></a></dt>
+<dd><p>Calcula  os coeficientes que ajustam, aos pontos fornecidos, uma
+curva do tipo:</p>
+<p>g(x,y) = C0 * phi{0}(x,y) + … + C(2n+1) * phi{2n}(x,y)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.graphine_radius">
+<span class="sig-name descname"><span class="pre">graphine_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'structure'</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.graphine_radius" title="Link para esta definição"></a></dt>
+<dd><p>Estima um raio aproximado para a estrutura de grafino.</p>
+<p>Encontra o carbono mais afastado do centro de massa, e retorna
+90% desta distância. Assume que o centro de massa da estrutura
+está em (0,0,0).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">gen_R2_coords_periodic(periodic_struct:</span> <span class="pre">&quot;periodic_structure&quot;,</span></span></dt>
+<dd><blockquote>
+<div><p>nH2: int)</p>
+</div></blockquote>
+<p>Gera, para uma estrutura periódica, vários pontos no R2,
+dispostos em uma grade, que correspondem aos centros das
+moléculas de H2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.gen_R2_coord_flake">
+<span class="sig-name descname"><span class="pre">gen_R2_coord_flake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'strucutre'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nH2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_R2_coord_flake"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.gen_R2_coord_flake" title="Link para esta definição"></a></dt>
+<dd><p>Gera, para uma estrutura de formato arredondado, no R2, uma
+lista de com posições de H2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.gen_R3_H2">
+<span class="sig-name descname"><span class="pre">gen_R3_H2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_R3_H2"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.gen_R3_H2" title="Link para esta definição"></a></dt>
+<dd><p>Recebe pontos espalhados sobre um plano, e retorna pontos
+espalhados sobre uma superfície ajustada sobre os átomos da
+estrutura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R2_coord_flake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">strucutre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nH2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_R2_coord_flake"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id0" title="Link para esta definição"></a></dt>
+<dd><p>Gera, para uma estrutura de formato arredondado, no R2, uma lista de
+com posições de H2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<em>structure</em>) – Estrutura para a qual se deseja gerar os centros de H2.</p></li>
+<li><p><strong>nH2</strong> (<em>int</em>) – Número de H2 desejado na molécula.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lista, de vetores no R2, com as posições geradas para os centros
+de H2.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.h2_gen.gen_R2_coords_periodic">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R2_coords_periodic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">periodic_struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">periodic_structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nH2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_R2_coords_periodic"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.h2_gen.gen_R2_coords_periodic" title="Link para esta definição"></a></dt>
+<dd><p>Gera, para uma estrutura periódica, vários pontos no R2,
+dispostos em uma grade, que correspondem aos centros das
+moléculas de H2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>periodic_struct</strong> (<em>periodic_structure</em>) – Estrutura periódica, dotada de vectores de célula.</p></li>
+<li><p><strong>nH2</strong> (<em>int</em>) – Quantidade de moléculas de H2 que deseja gerar para tal
+estrutura.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lista de vetores no R2, com a coordenada dos centros gerados
+para as moléculas de H2.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R3_H2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_R3_H2"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id1" title="Link para esta definição"></a></dt>
+<dd><p>Recebe pontos espalhados sobre um plano, e retorna pontos
+espalhados sobre uma superfície ajustada sobre os átomos da
+estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>R2_coord</strong> (<em>list</em><em>[</em><em>np.ndarray</em><em>]</em>) – Lista de vetores no R2 que dão a posição dos centros de H2
+dispostos no plano.</p></li>
+<li><p><strong>C</strong> (<em>np.ndarray</em>) – Matriz coluna de coeficientes da função ajustada sobre os
+pontos da estrutura.</p></li>
+<li><p><strong>otherside</strong> (<em>bool</em>) – Se é desejado gerar tais pontos no lado oposto da estrutura,
+ou seja, no lado onde z é negativo.</p></li>
+<li><p><strong>vertical</strong> (<em>bool</em>) – Se é deseja que o eixo da molécula de H2 esteja orientada
+perpendicular à estrutura. Se False, o eixo será parelelo à
+estrutura, e sua rotação será aleatória.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lista com vetores no R3 das posições de cada átomo de H,
+com posição ajustada de acordo com a curvatura da estrutura.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_arrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">structure</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.gen_arrays"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id2" title="Link para esta definição"></a></dt>
+<dd><p>Gera arrays xs, ys, zs das coordenadas dos átomos de uma
+estrutura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>structure</em>) – Estrutura para a qual se deseja gerar os arrays.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>xs, ys, zs</strong> – Arrays das coordenadas x, y e z dos átomos da estrutura.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lin_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.lin_reg"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id3" title="Link para esta definição"></a></dt>
+<dd><p>Calcula  os coeficientes que ajustam, aos pontos fornecidos, uma
+curva do tipo:</p>
+<p>g(x,y) = C0 * phi{0}(x,y) + … + C(2n+1) * phi{2n}(x,y)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> (<em>np.ndarray</em>) – Arrays com as coordenadas dos pontos/átomos.</p></li>
+<li><p><strong>ys</strong> (<em>np.ndarray</em>) – Arrays com as coordenadas dos pontos/átomos.</p></li>
+<li><p><strong>zs</strong> (<em>np.ndarray</em>) – Arrays com as coordenadas dos pontos/átomos.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.ndarray(shape=(2n+1))</em> – Matriz coluna de coeficiente do ajuste de curva, na forma:</p></li>
+<li><p><em>|   C0    |</em></p></li>
+<li><p><em>|   C1    |</em></p></li>
+<li><p><em>|    .    |</em></p></li>
+<li><p><em>|    .    |</em></p></li>
+<li><p><em>|    .    |</em></p></li>
+<li><p><em>| C(2n+1) |</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.plot"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id4" title="Link para esta definição"></a></dt>
+<dd><p>Gera um plot interativo de todos os átomos, dadas as coordenadas de
+todos eles. Se for passada uma matriz de coeficientes, plota também
+a curva ajustada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xs</strong> (<em>np.array</em><em>[</em><em>float</em><em>]</em>) – Array de floats das coordenadas dos átomos.</p></li>
+<li><p><strong>ys</strong> (<em>np.array</em><em>[</em><em>float</em><em>]</em>) – Array de floats das coordenadas dos átomos.</p></li>
+<li><p><strong>zs</strong> (<em>np.array</em><em>[</em><em>float</em><em>]</em>) – Array de floats das coordenadas dos átomos.</p></li>
+<li><p><strong>radius</strong> (<em>float</em>) – Raio estimado da estrutura.</p></li>
+<li><p><strong>C</strong> (<em>np.ndarray</em><em>[</em><em>float</em><em>]</em><em>, </em><em>default = None</em>) – Matriz coluna de coeficientes do ajuste de curva.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_CM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">structure</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#h2_gen.to_CM"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#id5" title="Link para esta definição"></a></dt>
+<dd><p>Recebe uma estrutura e retorna a mesma movida para o seu centro
+de massa. Só considera os carbonos no cálculo do centro de
+massa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>structure</em>) – Estrutura a ser transladada.</p>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estrutura transladada para o centro de massa.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="h2_gen.h2_gen.phi">
+<span class="sig-prename descclassname"><span class="pre">h2_gen.h2_gen.</span></span><span class="sig-name descname"><span class="pre">phi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/h2_gen/h2_gen.html#phi"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#h2_gen.h2_gen.phi" title="Link para esta definição"></a></dt>
+<dd><p>Retorna a imagem da n-ésima função phi, tal que:</p>
+<p>phi{0}               = 1
+phi{1}   … phi{n}  = x^n
+phi{n+1} … phi{2n} = y^n</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Índice da i-ésima função phi, ou seja phi{i}.</p></li>
+<li><p><strong>x</strong> (<em>float</em><em> or </em><em>np.ndarray</em>) – Valor único de x, ou array de valores de x.
+Se array, precisa ter o mesmo tamanho de y.</p></li>
+<li><p><strong>y</strong> (<em>float</em><em> or </em><em>np.ndarray</em>) – Valor único de y, ou array de valores de y.
+Se array, precisa ter o mesmo tamanho de x.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>z</strong> – Imagem da função phi{i}, ou array de imagens.</p>
+</dd>
+<dt class="field-odd">Tipo de retorno<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-h2_gen">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-h2_gen" title="Link para este cabeçalho"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Direitos autorais 2024, Gustavo Campos.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

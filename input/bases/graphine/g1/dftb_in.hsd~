@@ -1,0 +1,65 @@
+#
+# Parâmetro com equilíbrio de cargas, onde o SCC não é limitado,
+# de forma que memso não convergindo no primeiro passo, e passando
+# de 1000, ele segue pro próximo passo, podendo convergir depois
+#
+
+Geometry = {
+    xyzFormat {
+            <<< "inp.xyz"
+    }
+}
+
+Hamiltonian = DFTB {
+    Scc = Yes
+    SCCTolerance = 1.0E-5
+    MaxSCCIterations = 1000
+    ConvergentSccOnly = No
+    ShellResolvedSCC = Yes
+    	
+    MaxAngularMomentum = {
+        H = "s"
+        C = "p"
+    }
+
+    Mixer = Simple {
+        MixingParameter = 0.05
+    }
+
+#    Solver = DivideAndConquer { }
+    Solver = RelativelyRobust { }    
+
+#   Filling = Fermi {
+#       Temperature [K] = 300
+#   }
+
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "/home/common/dftb/slako/3ob/3ob-3-1/"
+        Separator = "-"
+        Suffix = ".skf"
+        LowerCaseTypeName = No
+    }
+    Dispersion = LennardJones {
+        Parameters = UFFParameters {}
+    }
+}
+
+Options = {
+    WriteDetailedXML = No
+    WriteAutotestTag = No
+    WriteResultsTag = No
+    WriteDetailedOut = Yes
+    RandomSeed = 0
+    WriteHS = No
+    WriteRealHS = No
+    MinimiseMemoryUsage = No
+    WriteChargesAsText = Yes
+}
+
+ParserOptions = {
+  ParserVersion = 12
+  WriteHSDInput = Yes
+  IgnoreUnprocessedNodes = No
+  StopAfterParsing = No
+}
+

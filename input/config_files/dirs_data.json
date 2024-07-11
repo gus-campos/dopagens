@@ -1,0 +1,29 @@
+    
+{
+    "dopings_opt"       : "../dopings_opt",
+    "processing_output" : "../output/processing_output",
+    "h2_gen_output"     : "../output/h2_gen_output",
+
+    "bases"             : "../input/bases",
+    
+    "config"            : "../input/config_files",
+    
+    "skf_dirs" : {
+
+        "matsci"        : "../input/slater_koster_files/matsci",
+        "3ob"           : "../input/slater_koster_files/3ob"
+    },
+    
+    "generic_hsd" : {
+        
+        "matsci" : "../input/generic_dftb_input/matsci.hsd",
+        "3ob"    : "../input/generic_dftb_input/3ob.hsd",
+        "3ob+Li" : "../input/generic_dftb_input/3ob+Li.hsd"
+    },
+    
+    "bin_dir" : {
+        
+        "df12"  : "/home/common/dftb/dftbplus-22.2.x86_64-linux/bin/dftb+",
+        "d1"    : "/home/usr/bin/dftb_plus/dftbplus-22.2.x86_64-linux/bin/dftb+"
+    }   
+}

@@ -1,0 +1,82 @@
+
+Geometry = {
+    xyzFormat {}
+}
+
+Driver = GeometryOptimization {
+	Optimiser = Rational { DiagLimit = 1.0e-2 }
+	MovedAtoms =  1:-1
+	MaxSteps = 10000
+	OutputPrefix = "geo_end"
+	Convergence = {
+	        Energy = inf
+	        GradElem = 1e-4
+	        GradNorm = inf
+	        DispElem = inf
+	        DispNorm = inf
+	} 
+	AppendGeometries = Yes
+}
+
+Hamiltonian = DFTB {
+
+    Scc = Yes
+    SCCTolerance = 1.0E-5
+    MaxSCCIterations = 1000
+    ConvergentSccOnly = No
+    
+    ########## Terceira ordem ###########
+
+    ThirdOrderFull = Yes
+
+    HCorrection = Damping { Exponent = 4.00 }
+    
+    HubbardDerivs = {}
+
+    ###########################################
+    
+    ShellResolvedSCC = No
+
+    MaxAngularMomentum = {}
+
+    Mixer = Simple {
+        MixingParameter = 0.05
+    }
+
+    Solver = RelativelyRobust { }    
+
+    SlaterKosterFiles = Type2FileNames {
+        Prefix = "/usr/cluster/bin/dftb_plus/parameters/slako/3ob/3ob-3-1/"
+        Separator = "-"
+        Suffix = ".skf"
+        LowerCaseTypeName = No
+    }
+
+    Dispersion = LennardJones {
+    
+        Parameters = UFFParameters {}
+    }
+} 
+
+Options = {
+    
+    WriteDetailedXML = No
+    WriteAutotestTag = No
+    WriteResultsTag = No
+    WriteDetailedOut = Yes
+    RandomSeed = 0
+    WriteHS = No
+    WriteRealHS = No
+    MinimiseMemoryUsage = No
+
+    WriteChargesAsText = Yes
+}
+
+ParserOptions = {
+    
+    ParserVersion = 12
+    WriteHSDInput = Yes
+    IgnoreUnprocessedNodes = No
+    StopAfterParsing = No
+}
+

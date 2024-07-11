@@ -1,6 +1,0 @@
-{   
-    "output_name" : "output",
-    "resume_dir_name" : "before_restart",
-    "maquina"     : "d1",
-    "redo_steps_limits" : 30000
-}
