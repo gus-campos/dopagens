@@ -1,35 +1,73 @@
 <!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dopings.set_viz &mdash; Documentação dopings 0.1</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
-<html lang="pt-BR" data-content_root="../../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dopings.set_viz &#8212; Documentação dopings 0.1</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <script src="../../_static/documentation_options.js?v=88519e4e"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/translations.js?v=000972dd"></script>
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=88519e4e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=000972dd"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Índice" href="../../genindex.html" />
-    <link rel="search" title="Buscar" href="../../search.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
+    <link rel="search" title="Buscar" href="../../search.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="../../index.html" class="icon icon-home">
+            dopings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">dopings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Código do módulo</a></li>
+      <li class="breadcrumb-item active">dopings.set_viz</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Código fonte para dopings.set_viz</h1><div class="highlight"><pre>
 <span></span><span class="c1">#from dops_set import dops_set</span>
 <span class="kn">from</span> <span class="nn">dopings.config</span> <span class="kn">import</span> <span class="n">atoms_data</span><span class="p">,</span> <span class="n">dirs_data</span>
@@ -112,7 +150,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;HOMO - LUMO&quot;</span><span class="p">)</span>
 
             <span class="c1"># Nome do arquivo</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;proc_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;gap_graphs&quot;</span> <span class="o">/</span> <span class="s2">&quot;site_x_gap&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">dop_elem</span><span class="si">}</span><span class="s2">.png&quot;</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;processing_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;gap_graphs&quot;</span> <span class="o">/</span> <span class="s2">&quot;site_x_gap&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">dop_elem</span><span class="si">}</span><span class="s2">.png&quot;</span>
 
             <span class="c1"># Criando diretórios</span>
             <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -211,7 +249,7 @@
                 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;HOMO - LUMO&quot;</span><span class="p">)</span>
 
                 <span class="c1"># Nome do arquivo</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;proc_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;gap_graphs&quot;</span> <span class="o">/</span> <span class="s2">&quot;elem_x_gap&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">.png&quot;</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;processing_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;gap_graphs&quot;</span> <span class="o">/</span> <span class="s2">&quot;elem_x_gap&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">.png&quot;</span>
 
                 <span class="c1"># Criando diretórios</span>
                 <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -396,7 +434,7 @@
 
         <span class="c1"># Nome do arquivo</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">second_var</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">second_var</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;energy&#39;</span><span class="si">}</span><span class="s2">.png&quot;</span>
-        <span class="n">filepath</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;proc_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;energy_correlations&quot;</span> <span class="o">/</span> <span class="s2">&quot;sites&quot;</span> <span class="o">/</span> <span class="n">filename</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;processing_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;energy_correlations&quot;</span> <span class="o">/</span> <span class="s2">&quot;sites&quot;</span> <span class="o">/</span> <span class="n">filename</span>
 
         <span class="c1"># Criando diretórios</span>
         <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">filepath</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -483,7 +521,7 @@
                     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">*</span><span class="n">sets_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dops_info</span><span class="p">[</span><span class="s2">&quot;graphs_config&quot;</span><span class="p">][</span><span class="s2">&quot;ylims&quot;</span><span class="p">][</span><span class="s2">&quot;energy&quot;</span><span class="p">][</span><span class="n">base</span><span class="p">])</span>
 
                 <span class="c1"># Nome do arquivo</span>
-                <span class="n">filepath</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;proc_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;energy_correlations&quot;</span> <span class="o">/</span> <span class="s2">&quot;elems&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">.png&quot;</span>
+                <span class="n">filepath</span> <span class="o">=</span> <span class="n">dirs_data</span><span class="p">[</span><span class="s2">&quot;processing_output&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">material</span> <span class="o">/</span> <span class="s2">&quot;energy_correlations&quot;</span> <span class="o">/</span> <span class="s2">&quot;elems&quot;</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">.png&quot;</span>
 
                 <span class="c1"># Criar diretórios necessário</span>
                 <span class="n">Path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">filepath</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -503,65 +541,31 @@
     <span class="c1">###########################################################################</span>
 </pre></div>
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Direitos autorais 2024, Gustavo Campos.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">dopings</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navegação</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Código do módulo</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<search id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Busca rápida</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Ir" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2024, Gustavo Campos.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

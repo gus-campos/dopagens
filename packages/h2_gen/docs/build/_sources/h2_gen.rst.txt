@@ -4,14 +4,6 @@ h2\_gen package
 Submodules
 ----------
 
-h2\_gen.global\_vars module
----------------------------
-
-.. automodule:: h2_gen.global_vars
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 h2\_gen.h2\_gen module
 ----------------------
 

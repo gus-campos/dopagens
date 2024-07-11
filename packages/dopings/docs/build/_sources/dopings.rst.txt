@@ -12,18 +12,18 @@ dopings.atom\_data module
    :undoc-members:
    :show-inheritance:
 
-dopings.dops\_set module
-------------------------
+dopings.config module
+---------------------
 
-.. automodule:: dopings.dops_set
+.. automodule:: dopings.config
    :members:
    :undoc-members:
    :show-inheritance:
 
-dopings.global\_vars module
----------------------------
+dopings.dops\_set module
+------------------------
 
-.. automodule:: dopings.config
+.. automodule:: dopings.dops_set
    :members:
    :undoc-members:
    :show-inheritance:
