@@ -1,13 +1,13 @@
 
 # Incluindo endereço do diretório mãe
 import sys
-sys.path.append("../packages" )
+sys.path.append("../" )
 
 # Bibliotecas internas
 from dopings.structure import structure
 from dopings.dops_set import dops_set
 from dopings.struct_viz import struct_viz
-from dopings.config import dops_data, dirs_data
+from dopings.config import dops_data
 
 ###############################################################################
 

@@ -1,12 +1,12 @@
 
 # Incluindo endereço do diretório mãe
 import sys
-sys.path.append("../packages" )
+sys.path.append("../" )
 
 # Bibliotecas internas
 from dopings.structure import structure, atom_data
 from dopings.config import dops_data, dirs_data
-from h2_gen.h2_gen import h2_gen
+from dopings.h2_gen import h2_gen
 
 # Externas
 import numpy as np
