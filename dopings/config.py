@@ -9,9 +9,7 @@ print([f for f in listdir(".") if isfile(join(".", f))])
 # Inicialização: lendo diretório dos arquivos de configuração
 #with open("ini.json") as file:
 #    config_files_dir = Path(json.load(file)["config_files_dir"])
-config_files_dir = Path("../input/config_files")
-
-
+config_files_dir = Path("../../input/config_files")
 
 ###############################################################################
 
