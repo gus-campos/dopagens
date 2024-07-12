@@ -5,7 +5,7 @@ sys.path.append("../" )
 
 # Bibliotecas internas
 from dopings.config import dops_data
-from dopings.dops_set import dops_set
+from dopings.doping_set import DopingSet
 
 ###############################################################################
 
@@ -16,7 +16,7 @@ for material in ["graphine", "graphene"]:
     for dop_elem in ["Al", "B", "Li", "Mg", "N", "Na", "O", "P", "Si", "Ti", "Zn"]:
 
         # Ler um conjunto de dopagens do armazenamento
-        set = dops_set(dop_elem = dop_elem, dops_info=dops_data[material], mode="look")
+        set = DopingSet(dop_elem = dop_elem, dops_info=dops_data[material], mode="look")
 
         # Reportar estado das otimizações
         set.map_opt(only_report=True, inverse_order=False, verbose=True)

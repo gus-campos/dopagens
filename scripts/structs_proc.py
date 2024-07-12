@@ -4,9 +4,9 @@ import sys
 sys.path.append("../" )
 
 # Bibliotecas internas
-from dopings.structure import structure
-from dopings.dops_set import dops_set
-from dopings.struct_viz import struct_viz
+from dopings.structure import Structure
+from dopings.doping_set import DopingSet
+from dopings.struct_viz import StructViz
 from dopings.config import dops_data
 
 ###############################################################################
@@ -18,14 +18,14 @@ for material in ["graphine", "graphene"]:
     for dop_elem in ["Al", "B", "Li", "Mg", "N", "Na", "O", "P", "Si", "Ti", "Zn"]:
 
         # Ler um conjunto de dopagens
-        set = dops_set(dop_elem=dop_elem, dops_info=dops_data[material], mode="read")
+        set = DopingSet(dop_elem=dop_elem, dops_info=dops_data[material], mode="read")
         
         #### Gerar arquivos individuais para todas as estruturas
-        set.map(method=structure.output, suffix=".out")         # Output
-        set.map(method=structure.frame, suffix=".xyz")          # Frame
-        set.map(method=struct_viz.histogram, suffix=".png")     # Histograma
-        set.map(method=struct_viz.charges_map, suffix=".png")   # Mapa de cargas
+        set.map(method=Structure.output, suffix=".out")         # Output
+        set.map(method=Structure.frame, suffix=".xyz")          # Frame
+        set.map(method=StructViz.histogram, suffix=".png")      # Histograma
+        set.map(method=StructViz.charges_map, suffix=".png")    # Mapa de cargas
 
         #### Gerar arquivos CSV com todas as estruturas do conjunto
-        set.map_to_csv(method=structure.homo_lumo)              # CSV de homo-lumo
-        set.map_to_csv(method=structure.formation_energy)       # CSV de energia de formação
+        set.map_to_csv(method=Structure.homo_lumo)              # CSV de homo-lumo
+        set.map_to_csv(method=Structure.formation_energy)       # CSV de energia de formação

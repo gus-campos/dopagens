@@ -4,9 +4,10 @@ import sys
 sys.path.append("../" )
 
 # Bibliotecas internas
-from dopings.structure import structure, atom_data
+from dopings.structure import Structure
+from dopings.atom import Atom
 from dopings.config import dirs_data, h2_gen_data
-from dopings.h2_gen import h2_gen
+from dopings.h2_gen import H2Gen
 
 # Externas
 import numpy as np
@@ -14,7 +15,7 @@ from pathlib import Path
 
 ###############################################################################
 
-def gen_H2_periodic(p_struct: "periodic_structure", 
+def gen_H2_periodic(p_struct: "PeriodicStructure", 
                     nH2: int, output_path: str|Path, both_sides:bool=False, 
                     vertical: bool=False, plot: bool=False):
 
@@ -24,7 +25,7 @@ def gen_H2_periodic(p_struct: "periodic_structure",
     Parameters 
     ----------
 
-    p_struct : periodic_structure
+    p_struct : PeriodicStructure
         Objeto que representa uma estrutura periódica.
 
     nH2 : int
@@ -48,18 +49,18 @@ def gen_H2_periodic(p_struct: "periodic_structure",
     """
 
     # Copiando e movendo CM pro (0,0,0)
-    struct = h2_gen.to_CM(p_struct.struct.copy())
+    struct = H2Gen.to_CM(p_struct.struct.copy())
 
     # Gerando coordenadas de pontos distribuídos no plano XY
-    R2_H2_coords = h2_gen.gen_R2_coords_periodic(p_struct, nH2)
+    R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, nH2)
 
     # Gerando coeficientes que ajustam a curva aos átomos
-    struct_coords = h2_gen.gen_arrays(struct)
-    C = h2_gen.lin_reg(*struct_coords, n=1)
+    struct_coords = H2Gen.gen_arrays(struct)
+    C = H2Gen.lin_reg(*struct_coords, n=1)
     
     # Transformando pontos distribuídos no plano, em átomos de H distribuídos 
     # sobre a estrutura
-    R3_H2_coords = h2_gen.gen_R3_H2(R2_H2_coords, C, otherside=False, 
+    R3_H2_coords = H2Gen.gen_R3_H2(R2_H2_coords, C, otherside=False, 
                                     vertical=vertical)
 
     ########################## GERANDO PRO OUTRO LADO #########################
@@ -68,10 +69,10 @@ def gen_H2_periodic(p_struct: "periodic_structure",
     if both_sides:
 
         # Gerar mais pontos espalhados no plano
-        R2_H2_coords = h2_gen.gen_R2_coords_periodic(p_struct, nH2)
+        R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, nH2)
         
         # Gerar pontos espalhados sobre o outro lado da estrura
-        R3_H2_coords_otherside = h2_gen.gen_R3_H2(R2_H2_coords, C, 
+        R3_H2_coords_otherside = H2Gen.gen_R3_H2(R2_H2_coords, C, 
                                                   otherside=True, 
                                                   vertical=vertical)
         
@@ -82,20 +83,20 @@ def gen_H2_periodic(p_struct: "periodic_structure",
 
     # Adicionar todos os átomos de H na estrutura
     for coord in R3_H2_coords:
-        struct.append(atom_data(elem="H", coord=np.round(coord, decimals=8).tolist()))
+        struct.append(Atom(elem="H", coord=np.round(coord, decimals=8).tolist()))
 
     # Gerar aquivo .xyz da estrutura
     struct.frame(output_path)
     
     # Se for para plotar, gerar visualização interativa da estrutura com curva
     if plot:
-        radius = h2_gen.graphine_radius(struct)
-        h2_gen.plot(*struct_coords, radius=radius, C=C)
+        radius = H2Gen.graphine_radius(struct)
+        H2Gen.plot(*struct_coords, radius=radius, C=C)
 
 ###############################################################################
 
 # Classe de estruturas periódicas
-class periodic_structure:
+class PeriodicStructure:
     """
     Classe de objetos que representam estruturas periódicas.
 
@@ -105,7 +106,7 @@ class periodic_structure:
     name : str
         O nome da estrutura
 
-    struct : structure
+    struct : Structure
         Objeto que representa a estrutura, em si, desta estrutura 
         periódica.
 
@@ -117,7 +118,7 @@ class periodic_structure:
     """
     def __init__(self, name=None, nH2=None, vectors=None):
         
-        "Construtor do objeto periodic structure."
+        "Construtor do objeto periodic Structure."
     
         self.name=name
         self.struct=None
@@ -131,7 +132,7 @@ p_structs = []
 for name in ["g1_s1", "g1_s2", "g1_s3", "g1_s4"]:
     
     # Criar estrutura periódica
-    p_struct = periodic_structure(
+    p_struct = PeriodicStructure(
             
                             name=name, 
                             nH2=h2_gen_data[name]["nH2"],
@@ -146,7 +147,7 @@ for name in ["g1_s1", "g1_s2", "g1_s3", "g1_s4"]:
 for i, p_struct in enumerate(p_structs):
 
     # Ler estrutura correspondente e adicionar como sua propriedade
-    p_structs[i].struct = structure(dir=dirs_data["bases"] / "g1-periodic" / p_struct.name, 
+    p_structs[i].struct = Structure(dir=dirs_data["bases"] / "g1-periodic" / p_struct.name, 
                                     read_from_dir=True)
 
 ###############################################################################

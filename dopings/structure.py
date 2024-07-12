@@ -3,20 +3,20 @@ from __future__ import annotations
 import numpy as np
 from pathlib import Path
 
-from dopings.atom_data import atom_data
-from dopings.struct_read import struct_read
+from dopings.atom import Atom
+from dopings.struct_read import StructRead
 from dopings.config import atoms_data, dirs_data, main_config
 
 ###############################################################################
 
-class structure:
+class Structure:
 
     """
     Representa uma estrutura formada por um conjunto de átomos.
 
     Attributes
     ----------
-    atoms : np.ndarray[atom_data]
+    atoms : np.ndarray[Atom]
         Array de atom objects na estrutura.
     
     size : int
@@ -61,13 +61,13 @@ class structure:
     Methods
     -------
 
-    __init__(self, atoms : list[atom_data]=None, dir : str|Path=None, read_from_dir : bool=False, material: str=None, base: str=None, dop_elem: str=None, site: str=None, param : str=None) -> None
+    __init__(self, atoms : list[Atom]=None, dir : str|Path=None, read_from_dir : bool=False, material: str=None, base: str=None, dop_elem: str=None, site: str=None, param : str=None) -> None
 
-        Inicializa o objeto structure.
+        Inicializa o objeto Structure.
     
-    append(self, atoms: atom_data|list[atom_data]) -> None
+    append(self, atoms: Atom|list[Atom]) -> None
 
-        Anexa um atom_data object, ou uma lista de atom_data objects 
+        Anexa um Atom object, ou uma lista de Atom objects 
         à lista de átomos da estrutura.
     
     redo_files_for_resume(self) -> None
@@ -81,7 +81,7 @@ class structure:
     data_from_file(self) -> None
 
         A partir do diretório da estrutura, lê os arquivos de dados e os 
-        carrega como propriedades do objeto structure.
+        carrega como propriedades do objeto Structure.
     
     opt(self, overwrite: bool=False, verbose: bool=True, skip_hard_to_conv_SCC: bool=True, resume_unfineshed: bool=True) -> None
 
@@ -93,7 +93,7 @@ class structure:
         Reporta o estado da otimização da estrutura a partir do
         arquivo de no seu diretório, 
     
-    dope_out(self, dop_elem: str, id: int, kwargs: dict=None) -> structure
+    dope_out(self, dop_elem: str, id: int, kwargs: dict=None) -> Structure
 
         Gera uma versão (dopada) de uma estrutura, onde o átomo 
         especificado é substituído por um de outro elemento.
@@ -123,23 +123,23 @@ class structure:
         Copia o output de otimização da estrutura para o endereço 
         passado.
 
-    copy(self) -> structure
+    copy(self) -> Structure
         
         Retorna uma estrutura que contém os mesmo átomos que a original.
     """
      
-    def __init__(self, atoms : list[atom_data]=None, dir : str|Path=None, 
+    def __init__(self, atoms : list[Atom]=None, dir : str|Path=None, 
                  read_from_dir : bool=False, material: str=None, 
                  base: str=None, dop_elem: str=None, site: str=None, 
                  param : str=None) -> None:
 
         """
-        Inicializa o objeto structure.
+        Inicializa o objeto Structure.
 
         Parameters
         ----------
 
-        atoms : list[atom_data], default = None
+        atoms : list[Atom], default = None
             Lista de átomos da estrutura criada.
 
         dir : str or Path, default: None
@@ -179,7 +179,7 @@ class structure:
         # Diretório de otimização da molécula
         self.dir = None
         self.size = 0
-        self.atoms = np.array([], dtype = atom_data)
+        self.atoms = np.array([], dtype = Atom)
         
         # -- Dop info --
         self.param = None
@@ -234,16 +234,16 @@ class structure:
 
     ############# Adicionar novos átomos à estrutura - Sem dados obrigatórios
              
-    def append(self, atoms: atom_data|list[atom_data]) -> None:
+    def append(self, atoms: Atom|list[Atom]) -> None:
 
         """
-        Anexa um atom_data object, ou uma lista de atom_data objects 
+        Anexa um Atom object, ou uma lista de Atom objects 
         à lista de átomos da estrutura.
 
         Parameters
         ----------
 
-        atoms: list[atom_data] | atom_data
+        atoms: list[Atom] | Atom
             Lista de átomos a ser adicionada.
 
         Raises
@@ -253,8 +253,8 @@ class structure:
             "atoms must be a non-empty list of atoms objects"
         """
 
-        # Se for atom_data object, tranformar em lista unitária
-        if isinstance(atoms, atom_data):
+        # Se for Atom object, tranformar em lista unitária
+        if isinstance(atoms, Atom):
             atoms = [atoms]
         
         # Transformando em array
@@ -263,7 +263,7 @@ class structure:
 
         # Se for array, composto por atoms objects
         if (isinstance(atoms, np.ndarray) and atoms.size > 0 
-            and all(isinstance(atom, atom_data) for atom in atoms)):
+            and all(isinstance(atom, Atom) for atom in atoms)):
             
             # Anexar a lista passada ao array de atoms.
             self.atoms = np.append(self.atoms, atoms)
@@ -271,8 +271,8 @@ class structure:
             self.size = self.size + len(atoms)
         
         else:
-            raise TypeError(("atoms must be a non-empty list of atom_data"
-            + "objects, or atom_data."))
+            raise TypeError(("atoms must be a non-empty list of Atom"
+            + "objects, or Atom."))
 
     ############# Otimização e relatório
 
@@ -315,15 +315,15 @@ class structure:
                     # Copiar pra pasta backup
                     shutil.copy(file, backup_file / file.name)
 
-        # Lendo dados da structure (lê os dados mesmo que esteja em look mode)
-        struct = structure(dir=self.dir, read_from_dir=True)
+        # Lendo dados da Structure (lê os dados mesmo que esteja em look mode)
+        struct = Structure(dir=self.dir, read_from_dir=True)
 
         # Gerando novos arquivos de otimização, e sobrescrevendo antigos 
-        from dops_set import dops_set
+        from DopingSet import DopingSet
         
         # Tentar gerar arquivos, com ReadInitialCharges
         try:
-            dops_set.gen_files(self, read_initial_charges=True, redo=True)
+            DopingSet.gen_files(self, read_initial_charges=True, redo=True)
         
         # Se não for possível, restaurar estado anterior
         except:
@@ -361,11 +361,11 @@ class structure:
 
         """
         A partir do diretório da estrutura, lê os arquivos de dados e os 
-        carrega como propriedades do objeto structure.
+        carrega como propriedades do objeto Structure.
         """
 
         # Lendo coordenadas
-        frame_data = struct_read.read_frame(self)
+        frame_data = StructRead.read_frame(self)
 
         # Quantidade de dados
         if frame_data is not None:
@@ -390,16 +390,16 @@ class structure:
 
                 # Passando pares de chaves e valores do dicionário como 
                 # argumentos, usando "**"
-                self.append(atom_data(**temp_dict))  
+                self.append(Atom(**temp_dict))  
 
         # Lendo energia
-        self.total_energy = struct_read.read_energy(self)
+        self.total_energy = StructRead.read_energy(self)
 
         # Lendo homo e lumo
-        self.homo, self.lumo = struct_read.read_bands(self)
+        self.homo, self.lumo = StructRead.read_bands(self)
 
         # Lendo momento dipolo
-        self.dipole = struct_read.read_dipole(self)
+        self.dipole = StructRead.read_dipole(self)
 
     def opt(self, overwrite: bool=False, verbose: bool=True, 
             skip_hard_to_conv_SCC: bool=True, resume_unfineshed: bool=True
@@ -894,7 +894,7 @@ class structure:
                 
     ############# Dopagem
 
-    def dope_out(self, dop_elem: str, id: int, kwargs: dict=None) -> structure:
+    def dope_out(self, dop_elem: str, id: int, kwargs: dict=None) -> Structure:
         
         """
         Gera uma versão (dopada) de uma estrutura, onde o átomo 
@@ -910,12 +910,12 @@ class structure:
             ID do átomo que será substituído.
 
         **kwargs
-            Passado para o construtor de structure.
+            Passado para o construtor de Structure.
 
         Returns
         -------
 
-        structure
+        Structure
             Estrutura dopada, onde o átomo especificado foi substituído 
             por um de outro elemento. Obs: As cargas originais são 
             substituídas por None.
@@ -953,8 +953,8 @@ class structure:
         # Modificando o símbolo de elemento químico no átomo especificado
         atoms[id-1].elem = dop_elem
 
-        # Criando outro objeto structure, agora dopado
-        doped_out = structure(atoms=atoms, **kwargs)
+        # Criando outro objeto Structure, agora dopado
+        doped_out = Structure(atoms=atoms, **kwargs)
 
         # Retornando
         return doped_out
@@ -1092,7 +1092,7 @@ class structure:
             "frame_out must be str or Path."
 
         ValueError
-            This structure has no atoms.
+            This Structure has no atoms.
         """
 
         # Se frame_out não for string, nem Path, apontar erro
@@ -1120,7 +1120,7 @@ class structure:
                 for atom in self.atoms:
                     data.append(" ".join( [ atom.elem ] + [ str(round(number, 8)) for number in atom.coord]))
         else:
-            raise ValueError("This structure has no atoms.")
+            raise ValueError("This Structure has no atoms.")
 
         # Convertendo tudo em texto (string formatada)
         data = "\n".join(data)
@@ -1170,12 +1170,12 @@ class structure:
         # Imprimir endereço do arquivo escrito
         print(output_dest)
 
-    def copy(self) -> structure:
+    def copy(self) -> Structure:
         
         """
         Retorna uma estrutura que contém os mesmo átomos que a original.
         """
 
-        return structure(atoms=self.atoms)
+        return Structure(atoms=self.atoms)
 
 ####################################################################################

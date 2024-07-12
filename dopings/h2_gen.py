@@ -85,7 +85,7 @@ def g(x: float, y: float, C: np.ndarray):
     # Retornando imagem
     return z
 
-def graphine_radius(struct: "structure"):
+def graphine_radius(struct: "Structure"):
 
         """"
         Estima um raio aproximado para a estrutura de grafino.
@@ -117,7 +117,7 @@ def graphine_radius(struct: "structure"):
         # Rotrnar a estimativa           
         return 0.9 * maior
 
-class h2_gen:
+class H2Gen:
     """
     Classe de métodos estáticos para geração de estruturas cobertas por
     moléculas de H2.
@@ -131,13 +131,13 @@ class h2_gen:
         de todos eles. Se for passada uma matriz de coeficientes, plota 
         também a curva ajustada.
     
-    to_CM(struct : "structure")
+    to_CM(struct : "Structure")
 
         Recebe uma estrutura e retorna a mesma movida para o seu centro 
         de massa. Só considera os carbonos no cálculo do centro de 
         massa.
     
-    gen_arrays(struct : "structure")
+    gen_arrays(struct : "Structure")
 
         Gera arrays xs, ys, zs das coordenadas dos átomos de uma 
         estrutura.
@@ -149,7 +149,7 @@ class h2_gen:
 
         g(x,y) = C0 * phi{0}(x,y) + ... + C(2n+1) * phi{2n}(x,y)
     
-    graphine_radius(struct: "structure")
+    graphine_radius(struct: "Structure")
 
         Estima um raio aproximado para a estrutura de grafino.
         
@@ -157,7 +157,7 @@ class h2_gen:
         90% desta distância. Assume que o centro de massa da estrutura 
         está em (0,0,0).
     
-    gen_R2_coords_periodic(periodic_struct: "periodic_structure",
+    gen_R2_coords_periodic(periodic_struct: "PeriodicStructure",
                            nH2: int)
 
         Gera, para uma estrutura periódica, vários pontos no R2, 
@@ -238,7 +238,7 @@ class h2_gen:
         plt.clf()
 
     @staticmethod
-    def to_CM(struct : "structure"):
+    def to_CM(struct : "Structure"):
         """
         Recebe uma estrutura e retorna a mesma movida para o seu centro 
         de massa. Só considera os carbonos no cálculo do centro de 
@@ -247,19 +247,19 @@ class h2_gen:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura a ser transladada.
 
         Returns
         -------
 
-        structure 
+        Structure 
             Estrutura transladada para o centro de massa.
         """
 
         import numpy as np
 
-        # Copia a structure para não alterar a original
+        # Copia a Structure para não alterar a original
         struct = struct.copy()
 
         # Inicializando variáveis
@@ -284,7 +284,7 @@ class h2_gen:
         return struct
 
     @staticmethod
-    def gen_arrays(struct : "structure"):
+    def gen_arrays(struct : "Structure"):
         """
         Gera arrays xs, ys, zs das coordenadas dos átomos de uma 
         estrutura.
@@ -292,7 +292,7 @@ class h2_gen:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual se deseja gerar os arrays.
 
         Returns
@@ -373,7 +373,7 @@ class h2_gen:
     #######################  R2 GEN  ##############################################
 
     @staticmethod
-    def gen_R2_coords_periodic(periodic_struct: "periodic_structure", 
+    def gen_R2_coords_periodic(periodic_struct: "PeriodicStructure", 
                             nH2: int):
         
         """
@@ -384,7 +384,7 @@ class h2_gen:
         Parameters
         ----------
 
-        periodic_struct : periodic_structure
+        periodic_struct : PeriodicStructure
             Estrutura periódica, dotada de vectores de célula.
 
         nH2 : int
@@ -458,7 +458,7 @@ class h2_gen:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual se deseja gerar os centros de H2.
 
         nH2 : int 

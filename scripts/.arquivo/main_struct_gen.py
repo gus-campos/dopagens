@@ -1,5 +1,6 @@
 import numpy as np
-from structure import structure, atom_data
+from dopings.structure import Structure
+from dopings.atom import Atom
 
 class unit_cell:
 
@@ -220,9 +221,9 @@ class cells_set:
                         center = origin + X[r,c] * basis[0] + Y[r,c] * basis[1]
 
                         # Listando centro
-                        atoms.append(atom_data(elem="C", coord=np.append(center, [0.0]).tolist()))
+                        atoms.append(Atom(elem="C", coord=np.append(center, [0.0]).tolist()))
 
-        return structure(atoms=atoms)
+        return Structure(atoms=atoms)
 
 ########################################################################
 

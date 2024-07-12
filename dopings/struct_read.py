@@ -1,38 +1,38 @@
 import numpy as np
 
-from dopings.atom_data import atom_data
+from dopings.atom import Atom
 from dopings.config import atoms_data, main_config
 
 
-class struct_read:
+class StructRead:
     """
     Classe de métodos estáticos para a leitura de arquivos de 
-    structures.
+    Structures.
 
     Methods
     -------
-    read_frame(struct: "structure") -> list[list[str|int]]
+    read_frame(struct: "Structure") -> list[list[str|int]]
 
         Lê o último frame de um arquivo geo_end e o retorna como uma 
         lista 2D.
 
-    read_energy(struct: "structure", extrapolated_0K=True) -> float
+    read_energy(struct: "Structure", extrapolated_0K=True) -> float
 
         Lê a energia total da estrutura em eV no último passo de 
         otimização e a retorna.
 
-    read_bands(struct: "structure") -> tuple[float, float]
+    read_bands(struct: "Structure") -> tuple[float, float]
 
         Lê o arquivo band.out da estrutura e retorna a energia do HOMO e
         do LUMO.
 
-    read_dipole(struct: "structure") -> np.ndarray[float]:
+    read_dipole(struct: "Structure") -> np.ndarray[float]:
 
         Lê o vetor dipolo da estrutura, retornando-o como um array.
     """
 
     @staticmethod
-    def read_frame(struct: "structure") -> list[list[str|int]]:
+    def read_frame(struct: "Structure") -> list[list[str|int]]:
         """
         Lê o último frame de um arquivo geo_end e o retorna como uma 
         lista 2D.
@@ -40,7 +40,7 @@ class struct_read:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual se deseja ler os dados.
   
         Returns
@@ -142,7 +142,7 @@ class struct_read:
         return frame
     
     @staticmethod
-    def read_energy(struct: "structure", extrapolated_0K=True) -> float:
+    def read_energy(struct: "Structure", extrapolated_0K=True) -> float:
         """
         Retorna a energia total da estrutura (eV) no último passo de 
         otimização.
@@ -152,7 +152,7 @@ class struct_read:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual se deseja ler os dados.
 
         extrapolated_0K : bool, default = True
@@ -211,7 +211,7 @@ class struct_read:
             raise AssertionError("Energies not found in file.")
     
     @staticmethod
-    def read_bands(struct: "structure") -> tuple[float, float]:
+    def read_bands(struct: "Structure") -> tuple[float, float]:
         """
         Lê o arquivo band.out da estrutura e retorna a energia do HOMO e
         do LUMO.
@@ -222,7 +222,7 @@ class struct_read:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual se deseja ler os dados.
 
         Returns
@@ -305,14 +305,14 @@ class struct_read:
         return homo_energy, lumo_energy
     
     @staticmethod
-    def read_dipole(struct: "structure") -> np.ndarray[float]:
+    def read_dipole(struct: "Structure") -> np.ndarray[float]:
         """
         Lê o vetor dipolo da estrutura, retornando-o como um array.
 
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual se deseja ler os dados.
 
         Returns

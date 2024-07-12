@@ -1,10 +1,10 @@
-#from dops_set import dops_set
+
 from dopings.config import atoms_data, dirs_data
 
-class set_viz:
+class SetViz:
 
     @staticmethod
-    def gap_site_graph(set: "dops_set") -> None:
+    def gap_site_graph(set: "DopingSet") -> None:
         """
         Gera, para um conjunto completo de dopagens, vizualizações com 
         gráficos de linha, que relacionam o sítio da dopagem com o gap
@@ -15,7 +15,7 @@ class set_viz:
         Parameters
         ----------
 
-        set : dops_set
+        set : DopingSet
             Conjunto de dopagens para o qual se deseja gerar a 
             visualizaçãp.
         """
@@ -91,7 +91,7 @@ class set_viz:
 
     ###########################################################################
     @staticmethod
-    def gap_elem_graph(sets_list: list["dops_set"]) -> None:
+    def gap_elem_graph(sets_list: list["DopingSet"]) -> None:
         """
         Gera, para um conjunto completo de dopagens, vizualizações com 
         gráficos de linha, que relacionam o elemento da dopagem com o 
@@ -102,7 +102,7 @@ class set_viz:
         Parameters
         ----------
 
-        set_list : list[dops_set]
+        set_list : list[DopingSet]
             Conjunto de dopagens para o qual se deseja gerar a 
             visualizaçãp.
         """
@@ -188,7 +188,7 @@ class set_viz:
     ###########################################################################
 
     @staticmethod
-    def energ_site_graph(sets_list: list["dops_set"], second_var: str=None, 
+    def energ_site_graph(sets_list: list["DopingSet"], second_var: str=None, 
                          show_cov: bool=True) -> None:
         """
         Gera uma grade de gráficos, onde os gráficos da grade variam em
@@ -204,7 +204,7 @@ class set_viz:
 
         Parameters
         ----------
-        sets_list : list[dops_set]
+        sets_list : list[DopingSet]
             Lista de donjunto de dopagens a serem plotadas.
 
         stat : {None, "dipole", "std"}, default = None 
@@ -371,7 +371,7 @@ class set_viz:
     ###########################################################################
 
     @staticmethod
-    def energ_elem_graphs(sets_list: list["dops_set"]) -> None:
+    def energ_elem_graphs(sets_list: list["DopingSet"]) -> None:
         """
         Gera, para uma lista de conjuntos de dopagens, visualizações que
         para cada sítio, compara a energia de ligação das dopagens 
@@ -380,7 +380,7 @@ class set_viz:
         Parameters
         ----------
 
-        sets_list : list[dops_set]
+        sets_list : list[DopingSet]
             Lista de conjunto de dopagens para os quais se deseja gerar
             as visualizações.
         """

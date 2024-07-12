@@ -1,14 +1,14 @@
 
 import numpy as np
 from dopings.config import graphine_data, dops_data, atoms_data
-from dopings.structure import structure
-from dopings.atom_data import atom_data
+from dopings.structure import Structure
+from dopings.atom import Atom
 
 # Dados de sítios extras
 sites_id = dops_data["graphine"]["sites_id"]
 extra_sites_id = graphine_data["sites_id"]
 
-def dihedral_angle(atoms: list[atom_data]) -> float:
+def dihedral_angle(atoms: list[Atom]) -> float:
     """
     Calcula o ângulo diedral, ou ângulo de torção, entre 4 átomos.
 
@@ -18,7 +18,7 @@ def dihedral_angle(atoms: list[atom_data]) -> float:
     Parameters
     ----------
 
-    atoms : list[atom_data]
+    atoms : list[Atom]
         Lista de 4 átomos sobre os quais deseja-se calcular a 
         torção.
 
@@ -56,7 +56,7 @@ def dihedral_angle(atoms: list[atom_data]) -> float:
     y = np.dot(np.cross(b1, v), w)
     return np.degrees(np.arctan2(y, x))
 
-class graphine_calcs:
+class GraphineCalcs:
     """
     Classe de métodos estáticos que trás implementações de calculos 
     sobre estruturas dopadas de grafinos.
@@ -64,33 +64,33 @@ class graphine_calcs:
     Methods
     -------
 
-    axis_torsion_angle(struct: structure, arm: int) -> float
+    axis_torsion_angle(struct: Structure, arm: int) -> float
         Calcula a torção de um eixo da estrutura, usando o braço "arm"
         e o seu oposto para cacular um ângulo diedral.
     
-    int_arm_length(struct: structure) -> float
+    int_arm_length(struct: Structure) -> float
         Calcula a soma de distâncias entre os carbonos no braço interno
         da dopagem, ou seja, no braço 0, dentre os seguintes sítios:
 
         [A1, B1, B2, B3, ..., B{2N}, D4]
     
-    ext_arm_length(struct: structure) -> float
+    ext_arm_length(struct: Structure) -> float
         Calcula a soma de distâncias entre os carbonos no braço externo
         da dopagem, ou seja, no braço 0, dentre os seguintes sítios:
 
         [C2, D1, D2, ..., D{2N+1}]
     
-    dop_atom_angle(struct: structure) -> float|None
+    dop_atom_angle(struct: Structure) -> float|None
         Se o átomo dopante pertencer a um sítio B ou D, calcula o 
         ângulo da ligação do átomo dopado com seus dois vizinhos.
     
-    dop_atom_torsion(struct: structure) -> float|None
+    dop_atom_torsion(struct: Structure) -> float|None
         Quando o dopante se encontra em um anel benzênico, calcula a 
         torção de um sequência de 4 átomos, onde o dopante é o segundo.
     """
 
     @staticmethod
-    def axis_torsion_angle(struct: structure, arm: int) -> float:
+    def axis_torsion_angle(struct: Structure, arm: int) -> float:
         """
         Calcula a torção de um eixo da estrutura, usando o braço "arm"
         e o seu oposto para cacular um ângulo diedral.
@@ -152,7 +152,7 @@ class graphine_calcs:
         return angle
 
     @staticmethod
-    def int_arm_length(struct: structure) -> float:
+    def int_arm_length(struct: Structure) -> float:
         """
         Calcula a soma de distâncias entre os carbonos no braço interno
         da dopagem, ou seja, no braço 0, dentre os seguintes sítios:
@@ -212,7 +212,7 @@ class graphine_calcs:
         return total_length
 
     @staticmethod
-    def ext_arm_length(struct: structure) -> float:
+    def ext_arm_length(struct: Structure) -> float:
         """
         Calcula a soma de distâncias entre os carbonos no braço externo
         da dopagem, ou seja, no braço 0, dentre os seguintes sítios:
@@ -273,7 +273,7 @@ class graphine_calcs:
         return total_length
 
     @staticmethod
-    def dop_atom_angle(struct: structure) -> float|None:
+    def dop_atom_angle(struct: Structure) -> float|None:
         """
         Se o átomo dopante pertencer a um sítio B ou D, calcula o 
         ângulo da ligação do átomo dopado com seus dois vizinhos.
@@ -296,7 +296,7 @@ class graphine_calcs:
         None
             Se o dopante não pertencer a um sítio B ou D.
         """
-        def bond_angle(atoms: list[atom_data]) -> float:
+        def bond_angle(atoms: list[Atom]) -> float:
             """
             Calcula o ângulo da ligação de uma sequência de 3 átomos.
             """
@@ -347,7 +347,7 @@ class graphine_calcs:
             return None
 
     @staticmethod
-    def dop_atom_torsion(struct: structure) -> float|None:
+    def dop_atom_torsion(struct: Structure) -> float|None:
         """
         Se o dopante se encontra em um anel benzênico, calcula a 
         torção de um sequência de 4 átomos, onde o dopante é o segundo.

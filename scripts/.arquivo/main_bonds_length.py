@@ -1,5 +1,5 @@
 
-from dopings.dops_set import dops_set
+from dopings.doping_set import DopingSet
 from dopings.config import dops_data
 
 # Classe faixa
@@ -233,7 +233,7 @@ def detect_values_jumps(all_bonds, n=5):
 for dop_elem in ["Li"]: #["Al", "B", "Li", "N", "O", "P", "Si", "Ti"]:
 
         # Lê um conjunto de dopagens
-        set = dops_set(dop_elem = dop_elem, dops_info=dops_data["graphene"], mode="read", param="matsci")
+        set = DopSet(dop_elem = dop_elem, dops_info=dops_data["graphene"], mode="read", param="matsci")
 
         # FAIXAS
         faixas = faixas_graphene

@@ -1,9 +1,9 @@
 
 import numpy as np
 
-"Este módulo contém a classe atom_data"
+"Este módulo contém a classe Atom"
 
-class atom_data:
+class Atom:
 
     """
     Representa um átomo, a partir do seu símbolo de elemento, posição e 
@@ -27,18 +27,18 @@ class atom_data:
     
     def __init__(self, elem: str=None, coord: list[float]=None, charge: float = None) -> None
 
-        Inicializa objeto atom_data.
+        Inicializa objeto Atom.
 
-    def dist_to(self, atom2: atom_data) -> float
+    def dist_to(self, atom2: Atom) -> float
 
-        Calcula distância de si, até outro atom_data.        
+        Calcula distância de si, até outro Atom.        
     """
 
     def __init__(self, elem: str=None, coord: list[float]=None, 
                  charge: float = None) -> None: 
 
         """
-        Inicializa objeto atom_data.
+        Inicializa objeto Atom.
 
         Parameters
         ----------
@@ -98,7 +98,7 @@ class atom_data:
 
     ############# Distância até outro átomo
 
-    def dist_to(self, atom2: "atom_data") -> float:
+    def dist_to(self, atom2: "Atom") -> float:
     
         """
         Calcula distância de si, até outro átomo.
@@ -106,8 +106,8 @@ class atom_data:
         Parameters
         ----------
 
-        atom2 : atom_data
-            Outro objeto atom_data.
+        atom2 : Atom
+            Outro objeto Atom.
 
         Returns
         -------
@@ -122,15 +122,15 @@ class atom_data:
             Both atoms must have defined positions.
 
         TypeError
-            atom2 must be an atom_data object.
+            atom2 must be an Atom object.
         """
 
         # Se alguma coordenada for None
         if (self.coord is None) or (atom2.coord is None):
             raise TypeError("Both atoms must have defined positions.")
 
-        # Se for passado um objeto atom_data, retornar a distância
-        if isinstance(atom2, atom_data):
+        # Se for passado um objeto Atom, retornar a distância
+        if isinstance(atom2, Atom):
             return np.linalg.norm(self.coord - atom2.coord)
         else:
-             raise TypeError("atom2 must be an atom_data object.")
+             raise TypeError("atom2 must be an Atom object.")

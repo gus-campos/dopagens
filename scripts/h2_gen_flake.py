@@ -4,9 +4,10 @@ import sys
 sys.path.append("../" )
 
 # Bibliotecas internas
-from dopings.structure import structure, atom_data
+from dopings.structure import Structure
+from dopings.atom import Atom
 from dopings.config import dops_data, dirs_data
-from dopings.h2_gen import h2_gen
+from dopings.h2_gen import H2Gen
 
 # Externas
 import numpy as np
@@ -21,7 +22,7 @@ def gen_H2_flake(struct, nH2, output_path, both_sides=False, vertical=False,
     Parameters 
     ----------
 
-    struct : structure
+    struct : Structure
         Objeto que representa uma estrutura.
 
     nH2 : int
@@ -45,18 +46,18 @@ def gen_H2_flake(struct, nH2, output_path, both_sides=False, vertical=False,
     """
 
     # Copiando e movendo CM pro (0,0,0)
-    struct = h2_gen.to_CM(struct)
+    struct = H2Gen.to_CM(struct)
 
     # Gerando coordenadas de pontos distribuídos no plano XY
-    R2_H2_coords = h2_gen.gen_R2_coord_flake(struct, nH2)
+    R2_H2_coords = H2Gen.gen_R2_coord_flake(struct, nH2)
 
     # Gerando coeficientes que ajustam a curva aos átomos
-    struct_coords = h2_gen.gen_arrays(struct)
-    C = h2_gen.lin_reg(*struct_coords, n=3)
+    struct_coords = H2Gen.gen_arrays(struct)
+    C = H2Gen.lin_reg(*struct_coords, n=3)
     
     # Transformando pontos distribuídos no plano, em átomos de H distribuídos 
     # sobre a estrutura
-    R3_H2_coords = h2_gen.gen_R3_H2(R2_H2_coords, C, otherside=False, 
+    R3_H2_coords = H2Gen.gen_R3_H2(R2_H2_coords, C, otherside=False, 
                                     vertical=vertical)
 
     ########################## GERANDO PRO OUTRO LADO #########################
@@ -65,10 +66,10 @@ def gen_H2_flake(struct, nH2, output_path, both_sides=False, vertical=False,
     if both_sides:
 
         # Gerar mais pontos espalhados no plano
-        R2_H2_coords = h2_gen.gen_R2_coord_flake(struct, nH2)
+        R2_H2_coords = H2Gen.gen_R2_coord_flake(struct, nH2)
         
         # Gerar pontos espalhados sobre o outro lado da estrura
-        R3_H2_coords_otherside = h2_gen.gen_R3_H2(R2_H2_coords, C, 
+        R3_H2_coords_otherside = H2Gen.gen_R3_H2(R2_H2_coords, C, 
                                                   otherside=True, 
                                                   vertical=vertical)
         
@@ -79,15 +80,15 @@ def gen_H2_flake(struct, nH2, output_path, both_sides=False, vertical=False,
 
     # Adicionar todos os átomos de H na estrutura
     for coord in R3_H2_coords:
-        struct.append(atom_data(elem="H", coord=np.round(coord, decimals=8).tolist()))
+        struct.append(Atom(elem="H", coord=np.round(coord, decimals=8).tolist()))
 
     # Gerar aquivo .xyz da estrutura
     struct.frame(output_path)
     
     # Se for para plotar, gerar visualização interativa da estrutura com curva
     if plot:
-        radius = h2_gen.graphine_radius(struct)
-        h2_gen.plot(*struct_coords, radius=radius, C=C)
+        radius = H2Gen.graphine_radius(struct)
+        H2Gen.plot(*struct_coords, radius=radius, C=C)
 
 ###############################################################################
 
@@ -105,7 +106,7 @@ nH2_dict = {
 for base in dops_data["graphine"]["bases"]:
 
     # Lê a estrutura que receberá os H2
-    struct = structure(dir=dirs_data["bases"] / "graphine" / base, 
+    struct = Structure(dir=dirs_data["bases"] / "graphine" / base, 
                        read_from_dir=True)
 
     # Do 0 ao máximo de H2 que cada estrutura receberá

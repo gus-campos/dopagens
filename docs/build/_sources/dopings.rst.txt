@@ -4,10 +4,10 @@ dopings package
 Submodules
 ----------
 
-dopings.atom\_data module
--------------------------
+dopings.atom module
+-------------------
 
-.. automodule:: dopings.atom_data
+.. automodule:: dopings.atom
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,10 +20,10 @@ dopings.config module
    :undoc-members:
    :show-inheritance:
 
-dopings.dops\_set module
-------------------------
+dopings.doping\_set module
+--------------------------
 
-.. automodule:: dopings.dops_set
+.. automodule:: dopings.doping_set
    :members:
    :undoc-members:
    :show-inheritance:

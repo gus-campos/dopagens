@@ -1,18 +1,13 @@
 import json
 from pathlib import Path
 
-from os import listdir
-from os.path import isfile, join
-
-# Inicialização: lendo diretório dos arquivos de configuração
-with open("ini.json") as file:
-    config_files_dir = Path(json.load(file)["config_files_dir"])
-
-# Para build no Read The Docs
-#config_files_dir = Path("../../input/config_files")
-
 # Para build local dos docs
 #config_files_dir = Path("input/config_files")
+# Para build no Read The Docs
+config_files_dir = Path("../../input/config_files")
+
+# Para uso nos scripts
+#config_files_dir = Path("../input/config_files")
 
 ###############################################################################
 

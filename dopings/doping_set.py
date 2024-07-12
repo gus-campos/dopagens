@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from dopings.structure import structure
+from dopings.structure import Structure
 from dopings.config import atoms_data, dops_data, dirs_data, main_config
 
 ####################################################################################
         
-class dops_set():
+class DopingSet:
     """
     Classe de objetos que representam um conjunto completo de dopagens,
     com atributos e métodos para gerar seus arquivos, organizar 
@@ -14,7 +14,7 @@ class dops_set():
     Parameters
     ----------
     
-    structs : list[structure]
+    structs : list[Structure]
         Lista de estruturas do conjunto.
 
     param : str
@@ -23,8 +23,8 @@ class dops_set():
     main_dir : Path
         Diretório raíz de resultados de processamento dos dados.
         
-    bases : { str : structure }
-        Dicionário que relaciona o nome da base com a structure da 
+    bases : { str : Structure }
+        Dicionário que relaciona o nome da base com a Structure da 
         mesma.
 
     dops_info : dict
@@ -41,7 +41,7 @@ class dops_set():
         }
 
     mode : { "look", "read", "write" }
-        In whick mode dops_set object was initialized.
+        In whick mode DopingSet object was initialized.
 
     Methods
     -------
@@ -49,7 +49,7 @@ class dops_set():
     
     __init__(self, dop_elem: str, dops_info: dict=None, mode: str="read", param=None, force_write: bool=False) -> None
 
-        Contrutor de objetos dops_set.
+        Contrutor de objetos DopingSet.
     
     map(self, method: "function", suffix: str, **kwargs) -> None
 
@@ -98,7 +98,7 @@ class dops_set():
                  param=None, force_write: bool=False) -> None:
 
         """
-        Contrutor de objetos dops_set.
+        Contrutor de objetos DopingSet.
 
         Parameters
         ----------
@@ -128,7 +128,7 @@ class dops_set():
 
             No modo read, os dados das estruturas são lidos dos arquivos
             e carregados nas propriedades estrutura. Obs: Estruturas não
-            convergidas não são adicionadas ao dops_set, porém um 
+            convergidas não são adicionadas ao DopingSet, porém um 
             warning é impresso.
 
             No modo write, os arquivos de otimização do conjunto de 
@@ -209,7 +209,7 @@ class dops_set():
         
         # Dops_info
         if dops_info is not None:
-            if dops_set.valid_dops_info(dops_info):
+            if DopingSet.valid_dops_info(dops_info):
                 self.dops_info = dops_info
             else:
                 raise ValueError("Not valid dops_info")
@@ -221,7 +221,7 @@ class dops_set():
         for base in self.dops_info["bases"]:
 
             # Gerando bases
-            base_struct = structure(dir = self.infer_base_dir(base),
+            base_struct = Structure(dir = self.infer_base_dir(base),
                                     read_from_dir=True)
             
             self.bases[base] = base_struct
@@ -284,15 +284,15 @@ class dops_set():
 
                         print(doped_struct.dir / main_config["output_name"])
                         if not os.path.exists(doped_struct.dir / main_config["output_name"]):
-                            print(f"Skipping structure with not found output: {doped_struct.dir}")
+                            print(f"Skipping Structure with not found output: {doped_struct.dir}")
                         
                         else:
-                            print(f"Not reading not converged structure: {doped_struct.dir}")
+                            print(f"Not reading not converged Structure: {doped_struct.dir}")
                         
                         continue
                     
                     # Sobrescrever com estrutura dopada
-                    doped_struct = structure(**kwargs, read_from_dir=True)
+                    doped_struct = Structure(**kwargs, read_from_dir=True)
 
                     # Definindo parâmetro
                     doped_struct.param = self.param
@@ -326,7 +326,7 @@ class dops_set():
             raise ValueError("read mode is needed for proper processing"
                              + "results.")
 
-        # Para cada structure
+        # Para cada Structure
         for struct in self.structs:
 
             # Checagem de convergência com aviso no nome do arquivo?
@@ -363,7 +363,7 @@ class dops_set():
         if len(self.structs) == 0:
             raise AssertionError("There is no structs on this set_struct.")
 
-        # Para cada structure
+        # Para cada Structure
         for struct in self.structs:
 
             # Executar função e guardar valor
@@ -562,7 +562,7 @@ class dops_set():
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura que terá diretório inferido.
 
         method : function
@@ -680,7 +680,7 @@ class dops_set():
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura sobre a qual se quer fazer a inferência.
         """
 
@@ -696,7 +696,7 @@ class dops_set():
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para a qual deseja-se gerar arquivos de 
             otimização.
 

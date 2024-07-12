@@ -4,8 +4,8 @@ import sys
 sys.path.append("../" )
 
 # Bibliotecas internas
-from dopings.structure import structure
-from dopings.struct_viz import struct_viz
+from dopings.structure import Structure
+from dopings.struct_viz import StructViz
 from dopings.config import dops_data, dirs_data
 
 # Externas
@@ -13,7 +13,7 @@ from pathlib import Path
 
 ###############################################################################
 
-def map_bases_to_csv(struct_list: list[structure], method: "function", 
+def map_bases_to_csv(struct_list: list[Structure], method: "function", 
                material=None) -> None:
 
     """
@@ -23,7 +23,7 @@ def map_bases_to_csv(struct_list: list[structure], method: "function",
     Parameters
     ----------
 
-    struct_list : list[structure]
+    struct_list : list[Structure]
         Lista das estruturas para quais se deseja gerar o arquivo.
 
     method : function
@@ -105,17 +105,17 @@ for material in ["graphene", "graphine"]:
         }
 
         # Ler estrutura
-        struct = structure(dir=dirs_data["bases"] / material / base, 
+        struct = Structure(dir=dirs_data["bases"] / material / base, 
                            read_from_dir=True, param=param_dict[material], 
                            material=material, base=base)
 
         #######################################################################
 
         # Para cada função e sufixo da lista, de arquivo individual
-        for method, suffix in [(structure.output, "out"),
-                               (structure.frame, "xyz"),
-                               (struct_viz.histogram, "png"),
-                               (struct_viz.charges_map, "png")]:
+        for method, suffix in [(Structure.output, "out"),
+                               (Structure.frame, "xyz"),
+                               (StructViz.histogram, "png"),
+                               (StructViz.charges_map, "png")]:
         
             # Caminho do arquivo de saída
             output_path = (dirs_data["processing_output"] / material 
@@ -132,7 +132,7 @@ for material in ["graphene", "graphine"]:
     ###########################################################################
 
     # Para cada função de arquivo csv da lista
-    for method in [structure.homo_lumo, structure.formation_energy]:
+    for method in [Structure.homo_lumo, Structure.formation_energy]:
 
         # Mapear função e gerar o cvs
         map_bases_to_csv(struct_list, method, material)

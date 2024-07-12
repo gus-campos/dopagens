@@ -2,9 +2,9 @@ from pathlib import Path
 import numpy as np
 
 from dopings.config import viz_config, atoms_data, dops_data, dirs_data
-from dopings.structure import structure
+from dopings.structure import Structure
 
-class struct_viz:
+class StructViz:
     """
     Classe de métodos estáticos que geram vizualizações para dados de 
     estruturas em forma de arquivos.
@@ -12,12 +12,12 @@ class struct_viz:
     Methods
     -------
 
-    def histogram(struct: structure, hist_out: str|Path) -> None
+    def histogram(struct: Structure, hist_out: str|Path) -> None
 
         Gera um histograma dos comprimentos de ligação da estrutura, no 
         caminho informado.
 
-    charges_map(struct: structure, map_out: str|Path=None, 
+    charges_map(struct: Structure, map_out: str|Path=None, 
                 picking_mode=False) -> None
         
         Gera uma visualizaçãp de mapa de cargas para dada estrutura, no 
@@ -25,7 +25,7 @@ class struct_viz:
     """
 
     @staticmethod
-    def histogram(struct: structure, hist_out: str|Path, 
+    def histogram(struct: Structure, hist_out: str|Path, 
                   gen_dat: bool=False) -> None:
         """
         Gera um histograma dos comprimentos de ligação da estrutura, no 
@@ -37,7 +37,7 @@ class struct_viz:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para qual se deseja gerar o histograma.
 
         hist_out : str|Path
@@ -343,7 +343,7 @@ class struct_viz:
             hist_dat(lengths, hist_out.with_suffix(".dat"))
 
     @staticmethod
-    def charges_map(struct: structure, map_out: str|Path=None, 
+    def charges_map(struct: Structure, map_out: str|Path=None, 
                     picking_mode=False) -> None:
         
         """
@@ -356,7 +356,7 @@ class struct_viz:
         Parameters
         ----------
 
-        struct : structure
+        struct : Structure
             Estrutura para qual se deseja gerar o mapa de cargas.
 
         map_out : str
@@ -433,7 +433,7 @@ class struct_viz:
                     return -k * (log(-x+d) + c)
 
         # Carga dados da estrutura como data frame
-        def data_to_df(struct: structure) -> pd.DataFrame:
+        def data_to_df(struct: Structure) -> pd.DataFrame:
             """
             Cria um pd.DataFrame com os dados da estrura. O DataFrame é 
             melhor compreendido pelo seaborn, biblioteca que gera as 
@@ -442,7 +442,7 @@ class struct_viz:
             Parameters
             ----------
 
-            struct : structure
+            struct : Structure
                 Estrutura da qual se quer extrair os dados.
 
             Returns

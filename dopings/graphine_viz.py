@@ -1,15 +1,15 @@
-#from dops_set import dops_set
+#from DopingSet import DopingSet
 from dopings.config import dops_data, graphine_data, dirs_data
-from dopings.graphine_calcs import graphine_calcs as gc
+from dopings.graphine_calcs import GraphineCalcs as gc
 
 """
 viz
 """
 
 # GRÁFICOS DE GEOMETRIA
-class graphine_viz:
+class GraphineViz:
     
-    def geometry_graph(set: "dops_set") -> None:
+    def geometry_graph(set: "DopingSet") -> None:
         """
         Gera uma visualização composta dos dados de geometria do 
         grafino, que conta, por estrutura, com a torção da superfície em
@@ -19,7 +19,7 @@ class graphine_viz:
         Parameters
         ----------
 
-        set : dops_set
+        set : DopingSet
             Conjunto de dopagens de grafino para o qual se deseja gerar
             a visualização.
         """
