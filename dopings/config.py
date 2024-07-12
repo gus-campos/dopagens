@@ -4,12 +4,15 @@ from pathlib import Path
 from os import listdir
 from os.path import isfile, join
 
-print([f for f in listdir(".") if isfile(join(".", f))])
-
 # Inicialização: lendo diretório dos arquivos de configuração
-#with open("ini.json") as file:
-#    config_files_dir = Path(json.load(file)["config_files_dir"])
-config_files_dir = Path("../../input/config_files")
+with open("ini.json") as file:
+    config_files_dir = Path(json.load(file)["config_files_dir"])
+
+# Para build no Read The Docs
+#config_files_dir = Path("../../input/config_files")
+
+# Para build local dos docs
+#config_files_dir = Path("input/config_files")
 
 ###############################################################################
 

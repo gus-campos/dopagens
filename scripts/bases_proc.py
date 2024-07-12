@@ -13,100 +13,129 @@ from pathlib import Path
 
 ###############################################################################
 
-def map_to_csv(struct_list, method: "function", material=None, **kwargs) -> None:
+def map_bases_to_csv(struct_list: list[structure], method: "function", 
+               material=None) -> None:
 
-    # Lista para receber valores
+    """
+    Aplica um função à uma lista de estruturas, recolhe seus retornos, e
+    gera um cvs com os dados.
+
+    Parameters
+    ----------
+
+    struct_list : list[structure]
+        Lista das estruturas para quais se deseja gerar o arquivo.
+
+    method : function
+        Função que se deseja aplicar a todas as estruturas da lista.
+
+    material : str
+        Material da estrutura.
+    """
+
+    # Lista para acumular os dados de retorno
     values = []
 
-    # Se não tiver estruturas, reportar
+    # Se não tiver estruturas na lista, reportar
     if len(struct_list) == 0:
         raise AssertionError("There is no structs on this set_struct.")
 
-    # Para cada structure
+    # Para cada estrutura na lista
     for struct in struct_list:
 
         # Executar função e guardar valor
-        value = method(struct, **kwargs)
+        value = method(struct)
             
-        # Dict de identificação
+        # Criar dicionário de identificação
         id = { "Name" : "Bases", "Base" : struct.dir.name, "Site" : "BASE"}
 
-        # Formatação para dados em csv
+        ###### Estruturar dados de retorno de acrodo com a função #############
         if method.__name__ == "homo_lumo":
 
             value = {
-
                 "homo" : value[0],
                 "lumo" : value[1],
                 "homo_lumo" : value[2]
             }
         
-        # Formatação para dados em csv
         elif method.__name__ == "formation_energy":
 
             value = {
-
                 "energy" : value[0],
                 "per_atom" : value[1],
             }
         
-        # Juntando identificação e valores 
+        else:
+            raise AssertionError("Função inválida.")
+        #######################################################################
+        
+        # Juntando dados identificação com valores retornados 
         values.append(dict(id, **value))
 
     # Diretório final
     dir_out = dirs_data["processing_output"] / material / method.__name__ / f"{method.__name__}-BASES.csv"
                                 
-    # Criando diretório
+    # Criando diretórios necessários
     Path.mkdir(dir_out.parent, exist_ok=True, parents=True)
 
     # Escrevendo arquivo CSV
     import csv
     with open(dir_out, 'w') as file:
-        # Escreve dicionário como csv, usa como nomes de coluna as chaves de um item
         writer = csv.DictWriter(file, fieldnames=values[0].keys())
-        # Escreve cabeçalho, e escreve valores
         writer.writeheader()
         writer.writerows(values)
 
-    # Relatar
+    # Reportar aquivo gerado
     print(dir_out)
 
-###########################################################################
+###############################################################################
 
+# Para cada material
 for material in ["graphene", "graphine"]:
 
+    # Criar lista para acumular estruturas
     struct_list = []
 
+    # Para cada base de tal material
     for base in dops_data[material]["bases"]:
 
-        param_dict = {
+        param_dict = { 
             "graphine" : "3ob",
             "graphene" : "matsci"
         }
 
-        struct = structure(dir=(dirs_data["bases"] / material / base), 
-                           read_from_dir=True, 
-                           param=param_dict[material], material=material,
-                           base=base)
-        
-        struct_list.append(struct)
+        # Ler estrutura
+        struct = structure(dir=dirs_data["bases"] / material / base, 
+                           read_from_dir=True, param=param_dict[material], 
+                           material=material, base=base)
 
         #######################################################################
 
+        # Para cada função e sufixo da lista, de arquivo individual
         for method, suffix in [(structure.output, "out"),
-                                (structure.frame, "xyz"),
-                                (struct_viz.histogram, "png"),
-                                (struct_viz.charges_map, "png")]:
+                               (structure.frame, "xyz"),
+                               (struct_viz.histogram, "png"),
+                               (struct_viz.charges_map, "png")]:
         
+            # Caminho do arquivo de saída
+            output_path = (dirs_data["processing_output"] / material 
+                           / method.__name__ / "BASES" / f"{base}.{suffix}")
+
+            # Gerar aquivo
+            method(struct, output_path)
         
-            method(struct, dirs_data["processing_output"] / material 
-                    / method.__name__ / "BASES" / f"{base}.{suffix}")
+        #######################################################################
+
+        # Acumular estrutura em lista, para geração dos arquivos csv
+        struct_list.append(struct)
     
     ###########################################################################
 
+    # Para cada função de arquivo csv da lista
     for method in [structure.homo_lumo, structure.formation_energy]:
 
-        map_to_csv(struct_list, method, material)
+        # Mapear função e gerar o cvs
+        map_bases_to_csv(struct_list, method, material)
 
 
 

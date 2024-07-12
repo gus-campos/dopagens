@@ -11,20 +11,21 @@ from dopings.config import dops_data
 
 ###############################################################################
 
+# Para cada material
 for material in ["graphine", "graphene"]:
 
+    # Para cada elemento
     for dop_elem in ["Al", "B", "Li", "Mg", "N", "Na", "O", "P", "Si", "Ti", "Zn"]:
 
-        # Lê um conjunto de dopagens
+        # Ler um conjunto de dopagens
         set = dops_set(dop_elem=dop_elem, dops_info=dops_data[material], mode="read")
-
-        # Reportar status
-        set.map_opt(only_report=True, verbose=False)
         
-        # Gera dados
-        set.map(method=structure.output, suffix=".out")
-        set.map(method=structure.frame, suffix=".xyz")
-        set.map(method=struct_viz.histogram, suffix=".png")
-        set.map(method=struct_viz.charges_map, suffix=".png")
-        set.map_to_csv(method=structure.homo_lumo)
-        set.map_to_csv(method=structure.formation_energy)
+        #### Gerar arquivos individuais para todas as estruturas
+        set.map(method=structure.output, suffix=".out")         # Output
+        set.map(method=structure.frame, suffix=".xyz")          # Frame
+        set.map(method=struct_viz.histogram, suffix=".png")     # Histograma
+        set.map(method=struct_viz.charges_map, suffix=".png")   # Mapa de cargas
+
+        #### Gerar arquivos CSV com todas as estruturas do conjunto
+        set.map_to_csv(method=structure.homo_lumo)              # CSV de homo-lumo
+        set.map_to_csv(method=structure.formation_energy)       # CSV de energia de formação
