@@ -1,4 +1,4 @@
-hsd_python==0.1
+hsd==0.1
 matplotlib==3.8.1
 numpy==2.0.0
 pandas==2.2.2
