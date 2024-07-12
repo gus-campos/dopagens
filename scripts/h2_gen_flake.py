@@ -119,5 +119,5 @@ for base in dops_data["graphine"]["bases"]:
         output_path = dirs_data["h2_gen_output"] / "flake" / output_name
 
         # Gerar floco com H2 no diretório especificado
-        gen_H2_flake(struct, nH2, output_path, plot=False, vertical=True,
-                     both_sides=True)
+        gen_H2_flake(struct, nH2, output_path, plot=False, vertical=False,
+                     both_sides=False)
