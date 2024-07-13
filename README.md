@@ -106,4 +106,6 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 
 ## Documentação <a name="docs"></a>
 
+A documentação é hospedada no Read the Docs:
+
 https://dopagens.readthedocs.io/
