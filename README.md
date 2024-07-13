@@ -133,6 +133,6 @@ Uso no próprio repositório, sem necessidade de instalação através da execu�
 
 ## Documentação <a name="docs"></a>
 
-A documentação esta hospedada no Read the Docs e pode ser acessada pelo link abaixo:
+A documentação está hospedada no Read the Docs e pode ser acessada pelo link abaixo:
 
 https://dopagens.readthedocs.io/
