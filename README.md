@@ -1,6 +1,6 @@
 # Dopings: Automação de dopagem, otimização e de análise de estruturas moleculares simuladas pelo DFTB+
 
-Criei esse conjunto de programas, escritos em Python, como parte do meu projeto de pesquisa junto do Laboratório de Simulação Computacional do Departamento de Física da UFJF, com objetivo de pesquisar novos possíveis materiais e suas propriedades teóricas ao simular computacionalmente flocos de grafeno e grafino com impurezas diversas, em variadas posições. As simulações foram feitas utilizando o pacote de simulação quântica DFTB+.
+Criei esse conjunto de programas, escritos em Python, como parte do meu projeto de pesquisa no Laboratório de Simulação Computacional do Departamento de Física da UFJF, com objetivo de pesquisar novos possíveis materiais e suas propriedades teóricas ao simular computacionalmente flocos de grafeno e grafino com impurezas diversas, em variadas posições. As simulações foram feitas utilizando o pacote de simulação quântica DFTB+.
 
 Posteriormente ainda foram desenvolvido outros programas que geram versões de tais estruturas, adsorvidas com moléculas de H2, para estudar a possibilidade de usar tais estruturas em tecnologia de armazenamento de hidrogênio.
 
@@ -11,7 +11,7 @@ Posteriormente ainda foram desenvolvido outros programas que geram versões de t
 
 Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de mais de 3.500 versões de estruturas adsorvidas com H2.
 
-## Table of Contents
+## Índice
 
 1. [Funcionalidades](#funcionalidades)
 2. [Dopagens](#dopagens)
@@ -28,7 +28,7 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 * Criar filas de otimizações do DFTB+, com um leve nível de auto gerência;
 * Gerar relatório do estado e progresso das otimizações;
 * Extrair os dados necessário dos arquivos;
-* Gerar árvores de diretórios organizadas com o a geometria final da otimização;
+* Gerar árvores de diretórios organizadas com o arquivo de geometria final da otimização;
 * Gerar visualizações e processamentos dos dados para viabilizar a análise da grande quantidade de resultados;
 * Gerar novas estruturas adsorvidas com H2, para diversos tamanhos e formas de estruturas, tanto para floco, quanto para periódica.
 
@@ -86,7 +86,7 @@ Modelo de relatório do estado das otimizações:
 
 ### Visualizações <a name="viz"></a>
 
-#### Mapa de distribuição de elétrons pela estrutura e Histograma
+#### Mapa de distribuição de elétrons pela estrutura
 
 Plot de pontos que através da cor e tamanho dos pontos ilustram como os elétrons estão distribuídos pela estrutura.
 
@@ -113,7 +113,7 @@ Plot composto que resume a geometria de diversas estruturas otimizadas, para fá
 | ![](assets/geometry_graph.png) | 
 | - | 
 
-#### Gráfico de gap para a substituição de cada elemento no mesmo local da estrutura
+#### Gráfico de gap eletrônico, para as dopagens de diversos elementos na mesma posição da estrutura
 
 Gráfico que relaciona a energia do HOMO e do LUMO em um mesmo sítio de dopagem, para diferentes elementos químicos.
 
@@ -122,11 +122,14 @@ Gráfico que relaciona a energia do HOMO e do LUMO em um mesmo sítio de dopagem
 
 ## Frames finais de geometria <a name="frametree"></a>
 
-Árvore de diretórios com a geometria do último passo de otimização da estrutura:
+Árvore de diretórios com a geometria do último passo de otimização da estrutura, para fácil acesso à geometria e fácil vizualização e comparação de diversos resultados:
 
 | ![](assets/frame-tree.png) |
 |-| 
 
+## Uso
+
+Uso no próprio repositório, sem necessidade de instalação através da execução direta dos scripts no diretório "scripts".
 
 ## Documentação <a name="docs"></a>
 
