@@ -24,9 +24,9 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 
 ## Dopagens
 
-| ![](assets/g1.png) | ![](assets/N-g1-B2.png) | 
+| ![](assets/B-g1-D1.png) | ![](assets/N-g1-B2.png) | 
 | - | - |
-| ![](assets/ac.png) | ![](assets/P-ac-A1.png) |
+| ![](assets/N-ac-C11.png) | ![](assets/P-ac-A1.png) |
 
 ## Adsorção com H2
 
@@ -83,5 +83,10 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 #### Gráfico de gap para a substituição de cada elemento no mesmo local da estrutura
 | ![](assets/gap_graph.png) | 
 |-|
+
+## Árvore de diretórios com a geometria do último passo de otimização da estrutura
+
+| ![](assets/frame-tree.png) |
+|-| 
 
 
