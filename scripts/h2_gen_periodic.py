@@ -49,7 +49,7 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
     """
 
     # Copiando e movendo CM pro (0,0,0)
-    struct = H2Gen.to_CM(p_struct.struct.copy())
+    struct = p_struct.struct.copy()
 
     # Gerando coordenadas de pontos distribuídos no plano XY
     R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, nH2)
@@ -128,6 +128,9 @@ class PeriodicStructure:
 # Listando estruturas periódicas
 p_structs = []
 
+# Dados da geração periódica
+h2_gen_data = h2_gen_data["periodic"]
+
 # Para cada estrutura
 for name in ["g1_s1", "g1_s2", "g1_s3", "g1_s4"]:
     
@@ -148,25 +151,52 @@ for i, p_struct in enumerate(p_structs):
 
     # Ler estrutura correspondente e adicionar como sua propriedade
     p_structs[i].struct = Structure(dir=dirs_data["bases"] / "g1-periodic" / p_struct.name, 
-                                    read_from_dir=True)
+                                    read_from_dir=True).copy()
 
 ###############################################################################
 
 # Para cada estrutura periódica
 for p_struct in p_structs:
+    
+    # Caminho de saída raíz
+    output_path_root = dirs_data["h2_gen_output"]/ "periodic"
 
     # De 0, até o número máximo de H2 a serem adicionados
     for nH2 in range(p_struct.nH2 + 1):
         
         # Nome do arquivo .xyz de saída
-        output_name = f"{p_struct.name}-{f'{i:03d}'}{'.xyz'}"
+        output_name = f"{p_struct.name}-{f'{nH2:03d}'}{'.xyz'}"
+
+        ############### Vertical Mono
 
         # Caminho de saída
-        output_path = dirs_data["h2_gen_output"]/ "periodic" / output_name
+        output_path = output_path_root / "vertical-mono" / output_name
 
         # Gerar estrutura .xyz da estrutura periódica com "i" moléculas de H2
         gen_H2_periodic(p_struct, nH2, output_path, vertical=True, 
+                        both_sides=False, plot=False)
+        
+        ############### Vertical Dual
+
+        output_path = output_path_root / "vertical-dual" / output_name
+
+        gen_H2_periodic(p_struct, nH2, output_path, vertical=True, 
                         both_sides=True, plot=False)
+        
+        ############### Horizontal Mono
+
+        output_path = output_path_root / "horizontal-mono" / output_name
+
+        gen_H2_periodic(p_struct, nH2, output_path, vertical=False, 
+                        both_sides=True, plot=False)
+        
+        ############### Horizontal Dual
+
+        output_path = output_path_root / "horizontal-dual" / output_name
+        
+        gen_H2_periodic(p_struct, nH2, output_path, vertical=False, 
+                        both_sides=True, plot=False)
+    
 
 ###############################################################################
 

@@ -85,37 +85,37 @@ def g(x: float, y: float, C: np.ndarray):
     # Retornando imagem
     return z
 
-def graphine_radius(struct: "Structure"):
+def struct_radius(struct: "Structure"):
 
-        """"
-        Estima um raio aproximado para a estrutura de grafino.
-        
-        Encontra o carbono mais afastado do centro de massa, e retorna 90% 
-        desta distância. Assume que o centro de massa da estrutura está 
-        em (0,0,0).
+    """"
+    Estima um raio aproximado para a estrutura de grafino.
+    
+    Encontra o carbono mais afastado do centro de massa, e retorna 90% 
+    desta distância. Assume que o centro de massa da estrutura está 
+    em (0,0,0).
 
-        Parameters
-        ----------
+    Parameters
+    ----------
 
-        struct : strucutre
-            Estrutura para qual se calcular a estimativa.
+    struct : strucutre
+        Estrutura para qual se calcular a estimativa.
 
-        Returns
-        -------
+    Returns
+    -------
 
-        float
-            Raio estimado para a estrutura.
-        """
+    float
+        Raio estimado para a estrutura.
+    """
 
-        maior = 0
-        for atom in struct.atoms:
-            if atom.elem == "C":
-                length = np.linalg.norm(atom.coord)
-                if length > maior:
-                    maior = length
+    maior = 0
+    for atom in struct.atoms:
+        if atom.elem == "C":
+            length = np.linalg.norm(atom.coord)
+            if length > maior:
+                maior = length
 
-        # Rotrnar a estimativa           
-        return 0.9 * maior
+    # Rotrnar a estimativa           
+    return maior
 
 class H2Gen:
     """
@@ -149,7 +149,7 @@ class H2Gen:
 
         g(x,y) = C0 * phi{0}(x,y) + ... + C(2n+1) * phi{2n}(x,y)
     
-    graphine_radius(struct: "Structure")
+    struct_radius(struct: "Structure")
 
         Estima um raio aproximado para a estrutura de grafino.
         
@@ -450,10 +450,11 @@ class H2Gen:
         return H2_centers
 
     @staticmethod
-    def gen_R2_coord_flake(struct: "strucutre", nH2: int):
+    def gen_R2_coord_flake(struct: "strucutre", nH2: int, 
+                           main_vector: np.ndarray=None):
         """
-        Gera, para uma estrutura de formato arredondado, no R2, uma lista de 
-        com posições de H2.
+        Gera, para uma estrutura de formato hexagonal, no R2, uma lista 
+        de com posições de H2.
 
         Parameters
         ----------
@@ -464,12 +465,15 @@ class H2Gen:
         nH2 : int 
             Número de H2 desejado na molécula.
 
+        main_vector : np.ndarray[float]
+            Vetor no R2 com a direção de um dos vértices do hexágono.
+
         Returns
         -------
         
         list[np.ndarray]
-            Lista, de vetores no R2, com as posições geradas para os centros
-            de H2. 
+            Lista, de vetores no R2, com as posições geradas para os 
+            centros de H2. 
         """
 
         def tri_nums(n: int):
@@ -478,7 +482,7 @@ class H2Gen:
 
             return int((n*(n+1))/2)
 
-        def menor_triangular(nH2):
+        def smallest_triangular(nH2):
 
             """
             O menor m-ésimo número triangular, que quando usado para 
@@ -541,7 +545,25 @@ class H2Gen:
 
             return centers
 
-        import math
+        def rotate_60(vector) -> np.ndarray:
+            """
+            Rotaciona um vetor no R2 em 60 graus.
+
+            Adaptado de: https://stackoverflow.com/questions/20840692/rotation-of-a-2d-array-over-an-angle-using-rotation-matrix 
+            """
+            vector = np.array(vector)
+
+            vector = vector.T
+
+            theta = np.radians(60)
+
+            rotation_matrix = np.array([
+                [np.cos(theta), -np.sin(theta)],
+                [np.sin(theta), np.cos(theta)]
+            ])
+
+            return np.matmul(rotation_matrix, vector).T
+
         import random
 
         # Se nenhum nH2 for gerado, retornar lista vazia
@@ -549,18 +571,23 @@ class H2Gen:
             return []
 
         # Raio estimado
-        radius = graphine_radius(struct) * 0.95
+        radius = struct_radius(struct) #* 0.95
 
         # Determinando dimensão dos triângulos
-        n_triangles = menor_triangular(nH2)
+        n_triangles = smallest_triangular(nH2)
 
-        # Listando os 6 vetores principais, que geram o hexágono
+        # Rotacionando o vetor principal da estrutura
         hex_vecs = []
-        for i in range(6):
-            arc = 60 * (np.pi/180)
-            x = radius * math.cos(i*arc)
-            y = radius * math.sin(i*arc)
-            hex_vecs.append(np.array([x,y]))
+
+        # Adicionando À lista o primeiro vetor
+        if main_vector is not None:
+            hex_vecs.append(radius * (main_vector / np.linalg.norm(main_vector)))
+        else:
+            # Se não foi passado, usar (1, 0)
+            hex_vecs.append(radius * np.array([1.0, 0.0]))
+
+        for i in range(5):
+            hex_vecs.append(rotate_60(hex_vecs[-1]))
 
         # Listando os 6 pares de vetores, que geram os 6 triângulos principais
         tri_vecs = []
