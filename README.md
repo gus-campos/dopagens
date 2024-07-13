@@ -130,6 +130,6 @@ Gráfico que relaciona a energia do HOMO e do LUMO em um mesmo sítio de dopagem
 
 ## Documentação <a name="docs"></a>
 
-A documentação é hospedada no Read the Docs:
+A documentação esta hospedada no Read the Docs e pode ser acessada pelo link abaixo:
 
 https://dopagens.readthedocs.io/
