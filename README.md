@@ -69,10 +69,19 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 
 ### Visualizações
 
-| ![](assets/histogram.png) | ![](assets/charges_map.png) | 
+#### Mapa de distribuição de elétrons pela estrutura e Histograma
+
+| ![](assets/charges_map.png) |  ![](assets/histogram.png) |
 | - | - |
-| ![](assets/gap_graph.png) | ![](assets/geometry_graph.png) |
 
 
+#### Gráfico composto de descrição de geometria do grafino
+
+| ![](assets/geometry_graph.png) | 
+| - | 
+
+#### Gráfico de gap para a substituição de cada elemento no mesmo local da estrutura
+| ![](assets/gap_graph.png) | 
+|-|
 
 
