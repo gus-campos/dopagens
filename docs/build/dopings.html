@@ -20,7 +20,9 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dopagens" href="modules.html" />
+    <link rel="prev" title="Welcome to dopagens’s documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,174 +44,223 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">dopings package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-dopings.atom">dopings.atom module</a><ul>
-<li><a class="reference internal" href="#dopings.atom.Atom"><code class="docutils literal notranslate"><span class="pre">Atom</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.atom.Atom.elem"><code class="docutils literal notranslate"><span class="pre">Atom.elem</span></code></a></li>
-<li><a class="reference internal" href="#dopings.atom.Atom.coord"><code class="docutils literal notranslate"><span class="pre">Atom.coord</span></code></a></li>
-<li><a class="reference internal" href="#dopings.atom.Atom.charge"><code class="docutils literal notranslate"><span class="pre">Atom.charge</span></code></a></li>
-<li><a class="reference internal" href="#dopings.atom.Atom.dist_to"><code class="docutils literal notranslate"><span class="pre">Atom.dist_to()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dopings package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.atom">dopings.atom module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.atom.Atom"><code class="docutils literal notranslate"><span class="pre">Atom</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.atom.Atom.elem"><code class="docutils literal notranslate"><span class="pre">Atom.elem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.atom.Atom.coord"><code class="docutils literal notranslate"><span class="pre">Atom.coord</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.atom.Atom.charge"><code class="docutils literal notranslate"><span class="pre">Atom.charge</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.atom.Atom.dist_to"><code class="docutils literal notranslate"><span class="pre">Atom.dist_to()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings.config">dopings.config module</a></li>
-<li><a class="reference internal" href="#module-dopings.doping_set">dopings.doping_set module</a><ul>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet"><code class="docutils literal notranslate"><span class="pre">DopingSet</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.__init__"><code class="docutils literal notranslate"><span class="pre">DopingSet.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.map"><code class="docutils literal notranslate"><span class="pre">DopingSet.map()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.map_to_csv"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_to_csv()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.map_opt"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_opt()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.atom_id"><code class="docutils literal notranslate"><span class="pre">DopingSet.atom_id()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.infer_base_dir"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_base_dir()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.infer_dir_out"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dir_out()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.valid_dops_info"><code class="docutils literal notranslate"><span class="pre">DopingSet.valid_dops_info()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.infer_dops_dir"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dops_dir()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.doping_set.DopingSet.gen_files"><code class="docutils literal notranslate"><span class="pre">DopingSet.gen_files()</span></code></a></li>
-<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">DopingSet.atom_id()</span></code></a></li>
-<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">DopingSet.gen_files()</span></code></a></li>
-<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_base_dir()</span></code></a></li>
-<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dir_out()</span></code></a></li>
-<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dops_dir()</span></code></a></li>
-<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">DopingSet.map()</span></code></a></li>
-<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_opt()</span></code></a></li>
-<li><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_to_csv()</span></code></a></li>
-<li><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">DopingSet.valid_dops_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.config">dopings.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.doping_set">dopings.doping_set module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.doping_set.DopingSet"><code class="docutils literal notranslate"><span class="pre">DopingSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.__init__"><code class="docutils literal notranslate"><span class="pre">DopingSet.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.map"><code class="docutils literal notranslate"><span class="pre">DopingSet.map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.map_to_csv"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_to_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.map_opt"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.atom_id"><code class="docutils literal notranslate"><span class="pre">DopingSet.atom_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.infer_base_dir"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_base_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.infer_dir_out"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dir_out()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.valid_dops_info"><code class="docutils literal notranslate"><span class="pre">DopingSet.valid_dops_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.infer_dops_dir"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dops_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet.gen_files"><code class="docutils literal notranslate"><span class="pre">DopingSet.gen_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">DopingSet.atom_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">DopingSet.gen_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_base_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dir_out()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">DopingSet.infer_dops_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">DopingSet.map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">DopingSet.map_to_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">DopingSet.valid_dops_info()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings.graphine_calcs">dopings.graphine_calcs module</a><ul>
-<li><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.axis_torsion_angle"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.axis_torsion_angle()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.int_arm_length"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.int_arm_length()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.ext_arm_length"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.ext_arm_length()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.dop_atom_angle"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_angle()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.dop_atom_torsion"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_torsion()</span></code></a></li>
-<li><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.axis_torsion_angle()</span></code></a></li>
-<li><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_angle()</span></code></a></li>
-<li><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_torsion()</span></code></a></li>
-<li><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.ext_arm_length()</span></code></a></li>
-<li><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.int_arm_length()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.graphine_calcs">dopings.graphine_calcs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.axis_torsion_angle"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.axis_torsion_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.int_arm_length"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.int_arm_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.ext_arm_length"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.ext_arm_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.dop_atom_angle"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs.dop_atom_torsion"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_torsion()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.axis_torsion_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_angle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.dop_atom_torsion()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.ext_arm_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs.int_arm_length()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#dopings.graphine_calcs.dihedral_angle"><code class="docutils literal notranslate"><span class="pre">dihedral_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.graphine_calcs.dihedral_angle"><code class="docutils literal notranslate"><span class="pre">dihedral_angle()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings.graphine_viz">dopings.graphine_viz module</a><ul>
-<li><a class="reference internal" href="#dopings.graphine_viz.GraphineViz"><code class="docutils literal notranslate"><span class="pre">GraphineViz</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.graphine_viz.GraphineViz.geometry_graph"><code class="docutils literal notranslate"><span class="pre">GraphineViz.geometry_graph()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-dopings.h2_gen">dopings.h2_gen module</a><ul>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen"><code class="docutils literal notranslate"><span class="pre">H2Gen</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.plot"><code class="docutils literal notranslate"><span class="pre">H2Gen.plot()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.to_CM"><code class="docutils literal notranslate"><span class="pre">H2Gen.to_CM()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_arrays"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_arrays()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.lin_reg"><code class="docutils literal notranslate"><span class="pre">H2Gen.lin_reg()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.graphine_radius"><code class="docutils literal notranslate"><span class="pre">H2Gen.graphine_radius()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_R2_coord_flake"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R2_coord_flake()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_R3_H2"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R3_H2()</span></code></a></li>
-<li><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R2_coord_flake()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_R2_coords_periodic"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R2_coords_periodic()</span></code></a></li>
-<li><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R3_H2()</span></code></a></li>
-<li><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_arrays()</span></code></a></li>
-<li><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">H2Gen.lin_reg()</span></code></a></li>
-<li><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">H2Gen.plot()</span></code></a></li>
-<li><a class="reference internal" href="#id19"><code class="docutils literal notranslate"><span class="pre">H2Gen.to_CM()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#dopings.h2_gen.g"><code class="docutils literal notranslate"><span class="pre">g()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.graphine_radius"><code class="docutils literal notranslate"><span class="pre">graphine_radius()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.h2_gen.phi"><code class="docutils literal notranslate"><span class="pre">phi()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-dopings.set_viz">dopings.set_viz module</a><ul>
-<li><a class="reference internal" href="#dopings.set_viz.SetViz"><code class="docutils literal notranslate"><span class="pre">SetViz</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.set_viz.SetViz.energ_elem_graphs"><code class="docutils literal notranslate"><span class="pre">SetViz.energ_elem_graphs()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.set_viz.SetViz.energ_site_graph"><code class="docutils literal notranslate"><span class="pre">SetViz.energ_site_graph()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.set_viz.SetViz.gap_elem_graph"><code class="docutils literal notranslate"><span class="pre">SetViz.gap_elem_graph()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.set_viz.SetViz.gap_site_graph"><code class="docutils literal notranslate"><span class="pre">SetViz.gap_site_graph()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.graphine_viz">dopings.graphine_viz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.graphine_viz.GraphineViz"><code class="docutils literal notranslate"><span class="pre">GraphineViz</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_viz.GraphineViz.geometry_graph"><code class="docutils literal notranslate"><span class="pre">GraphineViz.geometry_graph()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings.struct_read">dopings.struct_read module</a><ul>
-<li><a class="reference internal" href="#dopings.struct_read.StructRead"><code class="docutils literal notranslate"><span class="pre">StructRead</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.struct_read.StructRead.read_frame"><code class="docutils literal notranslate"><span class="pre">StructRead.read_frame()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.struct_read.StructRead.read_energy"><code class="docutils literal notranslate"><span class="pre">StructRead.read_energy()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.struct_read.StructRead.read_bands"><code class="docutils literal notranslate"><span class="pre">StructRead.read_bands()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.struct_read.StructRead.read_dipole"><code class="docutils literal notranslate"><span class="pre">StructRead.read_dipole()</span></code></a></li>
-<li><a class="reference internal" href="#id20"><code class="docutils literal notranslate"><span class="pre">StructRead.read_bands()</span></code></a></li>
-<li><a class="reference internal" href="#id21"><code class="docutils literal notranslate"><span class="pre">StructRead.read_dipole()</span></code></a></li>
-<li><a class="reference internal" href="#id22"><code class="docutils literal notranslate"><span class="pre">StructRead.read_energy()</span></code></a></li>
-<li><a class="reference internal" href="#id23"><code class="docutils literal notranslate"><span class="pre">StructRead.read_frame()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.h2_gen">dopings.h2_gen module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.h2_gen.H2Gen"><code class="docutils literal notranslate"><span class="pre">H2Gen</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.plot"><code class="docutils literal notranslate"><span class="pre">H2Gen.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.to_CM"><code class="docutils literal notranslate"><span class="pre">H2Gen.to_CM()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_arrays"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_arrays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.lin_reg"><code class="docutils literal notranslate"><span class="pre">H2Gen.lin_reg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.struct_radius"><code class="docutils literal notranslate"><span class="pre">H2Gen.struct_radius()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_R2_coord_flake"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R2_coord_flake()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_R3_H2"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R3_H2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R2_coord_flake()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen.gen_R2_coords_periodic"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R2_coords_periodic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_R3_H2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">H2Gen.gen_arrays()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">H2Gen.lin_reg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">H2Gen.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19"><code class="docutils literal notranslate"><span class="pre">H2Gen.to_CM()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.h2_gen.g"><code class="docutils literal notranslate"><span class="pre">g()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.h2_gen.phi"><code class="docutils literal notranslate"><span class="pre">phi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.h2_gen.struct_radius"><code class="docutils literal notranslate"><span class="pre">struct_radius()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.set_viz">dopings.set_viz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.set_viz.SetViz"><code class="docutils literal notranslate"><span class="pre">SetViz</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.set_viz.SetViz.energ_elem_graphs"><code class="docutils literal notranslate"><span class="pre">SetViz.energ_elem_graphs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.set_viz.SetViz.energ_site_graph"><code class="docutils literal notranslate"><span class="pre">SetViz.energ_site_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.set_viz.SetViz.gap_elem_graph"><code class="docutils literal notranslate"><span class="pre">SetViz.gap_elem_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.set_viz.SetViz.gap_site_graph"><code class="docutils literal notranslate"><span class="pre">SetViz.gap_site_graph()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings.struct_viz">dopings.struct_viz module</a><ul>
-<li><a class="reference internal" href="#dopings.struct_viz.StructViz"><code class="docutils literal notranslate"><span class="pre">StructViz</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.struct_viz.StructViz.charges_map"><code class="docutils literal notranslate"><span class="pre">StructViz.charges_map()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.struct_viz.StructViz.histogram"><code class="docutils literal notranslate"><span class="pre">StructViz.histogram()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.struct_read">dopings.struct_read module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.struct_read.StructRead"><code class="docutils literal notranslate"><span class="pre">StructRead</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.StructRead.read_frame"><code class="docutils literal notranslate"><span class="pre">StructRead.read_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.StructRead.read_energy"><code class="docutils literal notranslate"><span class="pre">StructRead.read_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.StructRead.read_bands"><code class="docutils literal notranslate"><span class="pre">StructRead.read_bands()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.StructRead.read_dipole"><code class="docutils literal notranslate"><span class="pre">StructRead.read_dipole()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20"><code class="docutils literal notranslate"><span class="pre">StructRead.read_bands()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21"><code class="docutils literal notranslate"><span class="pre">StructRead.read_dipole()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22"><code class="docutils literal notranslate"><span class="pre">StructRead.read_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23"><code class="docutils literal notranslate"><span class="pre">StructRead.read_frame()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings.structure">dopings.structure module</a><ul>
-<li><a class="reference internal" href="#dopings.structure.Structure"><code class="docutils literal notranslate"><span class="pre">Structure</span></code></a><ul>
-<li><a class="reference internal" href="#dopings.structure.Structure.atoms"><code class="docutils literal notranslate"><span class="pre">Structure.atoms</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.size"><code class="docutils literal notranslate"><span class="pre">Structure.size</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.dir"><code class="docutils literal notranslate"><span class="pre">Structure.dir</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.material"><code class="docutils literal notranslate"><span class="pre">Structure.material</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.param"><code class="docutils literal notranslate"><span class="pre">Structure.param</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.dop_elem"><code class="docutils literal notranslate"><span class="pre">Structure.dop_elem</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.base"><code class="docutils literal notranslate"><span class="pre">Structure.base</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.site"><code class="docutils literal notranslate"><span class="pre">Structure.site</span></code></a></li>
-<li><a class="reference internal" href="#id24"><code class="docutils literal notranslate"><span class="pre">Structure.param</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.total_energy"><code class="docutils literal notranslate"><span class="pre">Structure.total_energy</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.homo"><code class="docutils literal notranslate"><span class="pre">Structure.homo</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.lumo"><code class="docutils literal notranslate"><span class="pre">Structure.lumo</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.dipole"><code class="docutils literal notranslate"><span class="pre">Structure.dipole</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.__init__"><code class="docutils literal notranslate"><span class="pre">Structure.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.append"><code class="docutils literal notranslate"><span class="pre">Structure.append()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.redo_files_for_resume"><code class="docutils literal notranslate"><span class="pre">Structure.redo_files_for_resume()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.data_from_file"><code class="docutils literal notranslate"><span class="pre">Structure.data_from_file()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.opt"><code class="docutils literal notranslate"><span class="pre">Structure.opt()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.report"><code class="docutils literal notranslate"><span class="pre">Structure.report()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.dope_out"><code class="docutils literal notranslate"><span class="pre">Structure.dope_out()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.formation_energy"><code class="docutils literal notranslate"><span class="pre">Structure.formation_energy()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.homo_lumo"><code class="docutils literal notranslate"><span class="pre">Structure.homo_lumo()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.shortest_distances"><code class="docutils literal notranslate"><span class="pre">Structure.shortest_distances()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.frame"><code class="docutils literal notranslate"><span class="pre">Structure.frame()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.output"><code class="docutils literal notranslate"><span class="pre">Structure.output()</span></code></a></li>
-<li><a class="reference internal" href="#dopings.structure.Structure.copy"><code class="docutils literal notranslate"><span class="pre">Structure.copy()</span></code></a></li>
-<li><a class="reference internal" href="#id25"><code class="docutils literal notranslate"><span class="pre">Structure.append()</span></code></a></li>
-<li><a class="reference internal" href="#id26"><code class="docutils literal notranslate"><span class="pre">Structure.copy()</span></code></a></li>
-<li><a class="reference internal" href="#id27"><code class="docutils literal notranslate"><span class="pre">Structure.data_from_file()</span></code></a></li>
-<li><a class="reference internal" href="#id28"><code class="docutils literal notranslate"><span class="pre">Structure.dope_out()</span></code></a></li>
-<li><a class="reference internal" href="#id29"><code class="docutils literal notranslate"><span class="pre">Structure.formation_energy()</span></code></a></li>
-<li><a class="reference internal" href="#id30"><code class="docutils literal notranslate"><span class="pre">Structure.frame()</span></code></a></li>
-<li><a class="reference internal" href="#id31"><code class="docutils literal notranslate"><span class="pre">Structure.homo_lumo()</span></code></a></li>
-<li><a class="reference internal" href="#id32"><code class="docutils literal notranslate"><span class="pre">Structure.opt()</span></code></a></li>
-<li><a class="reference internal" href="#id33"><code class="docutils literal notranslate"><span class="pre">Structure.output()</span></code></a></li>
-<li><a class="reference internal" href="#id34"><code class="docutils literal notranslate"><span class="pre">Structure.redo_files_for_resume()</span></code></a></li>
-<li><a class="reference internal" href="#id35"><code class="docutils literal notranslate"><span class="pre">Structure.report()</span></code></a></li>
-<li><a class="reference internal" href="#id36"><code class="docutils literal notranslate"><span class="pre">Structure.shortest_distances()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.struct_viz">dopings.struct_viz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.struct_viz.StructViz"><code class="docutils literal notranslate"><span class="pre">StructViz</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_viz.StructViz.charges_map"><code class="docutils literal notranslate"><span class="pre">StructViz.charges_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_viz.StructViz.histogram"><code class="docutils literal notranslate"><span class="pre">StructViz.histogram()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-dopings">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings.structure">dopings.structure module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dopings.structure.Structure"><code class="docutils literal notranslate"><span class="pre">Structure</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.atoms"><code class="docutils literal notranslate"><span class="pre">Structure.atoms</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.size"><code class="docutils literal notranslate"><span class="pre">Structure.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.dir"><code class="docutils literal notranslate"><span class="pre">Structure.dir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.material"><code class="docutils literal notranslate"><span class="pre">Structure.material</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.param"><code class="docutils literal notranslate"><span class="pre">Structure.param</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.dop_elem"><code class="docutils literal notranslate"><span class="pre">Structure.dop_elem</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.base"><code class="docutils literal notranslate"><span class="pre">Structure.base</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.site"><code class="docutils literal notranslate"><span class="pre">Structure.site</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24"><code class="docutils literal notranslate"><span class="pre">Structure.param</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.total_energy"><code class="docutils literal notranslate"><span class="pre">Structure.total_energy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.homo"><code class="docutils literal notranslate"><span class="pre">Structure.homo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.lumo"><code class="docutils literal notranslate"><span class="pre">Structure.lumo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.dipole"><code class="docutils literal notranslate"><span class="pre">Structure.dipole</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.__init__"><code class="docutils literal notranslate"><span class="pre">Structure.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.append"><code class="docutils literal notranslate"><span class="pre">Structure.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.redo_files_for_resume"><code class="docutils literal notranslate"><span class="pre">Structure.redo_files_for_resume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.data_from_file"><code class="docutils literal notranslate"><span class="pre">Structure.data_from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.opt"><code class="docutils literal notranslate"><span class="pre">Structure.opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.report"><code class="docutils literal notranslate"><span class="pre">Structure.report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.dope_out"><code class="docutils literal notranslate"><span class="pre">Structure.dope_out()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.formation_energy"><code class="docutils literal notranslate"><span class="pre">Structure.formation_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.homo_lumo"><code class="docutils literal notranslate"><span class="pre">Structure.homo_lumo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.shortest_distances"><code class="docutils literal notranslate"><span class="pre">Structure.shortest_distances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.frame"><code class="docutils literal notranslate"><span class="pre">Structure.frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.output"><code class="docutils literal notranslate"><span class="pre">Structure.output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure.copy"><code class="docutils literal notranslate"><span class="pre">Structure.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25"><code class="docutils literal notranslate"><span class="pre">Structure.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26"><code class="docutils literal notranslate"><span class="pre">Structure.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27"><code class="docutils literal notranslate"><span class="pre">Structure.data_from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28"><code class="docutils literal notranslate"><span class="pre">Structure.dope_out()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29"><code class="docutils literal notranslate"><span class="pre">Structure.formation_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30"><code class="docutils literal notranslate"><span class="pre">Structure.frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31"><code class="docutils literal notranslate"><span class="pre">Structure.homo_lumo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32"><code class="docutils literal notranslate"><span class="pre">Structure.opt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33"><code class="docutils literal notranslate"><span class="pre">Structure.output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34"><code class="docutils literal notranslate"><span class="pre">Structure.redo_files_for_resume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35"><code class="docutils literal notranslate"><span class="pre">Structure.report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id36"><code class="docutils literal notranslate"><span class="pre">Structure.shortest_distances()</span></code></a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dopings">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">dopagens</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dopings package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.atom">dopings.atom module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.atom.Atom"><code class="docutils literal notranslate"><span class="pre">Atom</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.config">dopings.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.doping_set">dopings.doping_set module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.doping_set.DopingSet"><code class="docutils literal notranslate"><span class="pre">DopingSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.graphine_calcs">dopings.graphine_calcs module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.GraphineCalcs"><code class="docutils literal notranslate"><span class="pre">GraphineCalcs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_calcs.dihedral_angle"><code class="docutils literal notranslate"><span class="pre">dihedral_angle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.graphine_viz">dopings.graphine_viz module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.graphine_viz.GraphineViz"><code class="docutils literal notranslate"><span class="pre">GraphineViz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.h2_gen">dopings.h2_gen module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.H2Gen"><code class="docutils literal notranslate"><span class="pre">H2Gen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.g"><code class="docutils literal notranslate"><span class="pre">g()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.phi"><code class="docutils literal notranslate"><span class="pre">phi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.h2_gen.struct_radius"><code class="docutils literal notranslate"><span class="pre">struct_radius()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.set_viz">dopings.set_viz module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.set_viz.SetViz"><code class="docutils literal notranslate"><span class="pre">SetViz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.struct_read">dopings.struct_read module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.StructRead"><code class="docutils literal notranslate"><span class="pre">StructRead</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.struct_viz">dopings.struct_viz module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_viz.StructViz"><code class="docutils literal notranslate"><span class="pre">StructViz</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings.structure">dopings.structure module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.structure.Structure"><code class="docutils literal notranslate"><span class="pre">Structure</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-dopings">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -870,8 +921,8 @@ curva do tipo:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="dopings.h2_gen.H2Gen.graphine_radius">
-<span class="sig-name descname"><span class="pre">graphine_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'Structure'</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dopings.h2_gen.H2Gen.graphine_radius" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="dopings.h2_gen.H2Gen.struct_radius">
+<span class="sig-name descname"><span class="pre">struct_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'Structure'</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dopings.h2_gen.H2Gen.struct_radius" title="Link to this definition"></a></dt>
 <dd><p>Estima um raio aproximado para a estrutura de grafino.</p>
 <p>Encontra o carbono mais afastado do centro de massa, e retorna
 90% desta distância. Assume que o centro de massa da estrutura
@@ -906,19 +957,20 @@ estrutura.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id14">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R2_coord_flake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">strucutre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nH2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
-<dd><p>Gera, para uma estrutura de formato arredondado, no R2, uma lista de
-com posições de H2.</p>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R2_coord_flake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">strucutre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nH2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Gera, para uma estrutura de formato hexagonal, no R2, uma lista
+de com posições de H2.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.Structure" title="dopings.structure.Structure"><em>Structure</em></a>) – Estrutura para a qual se deseja gerar os centros de H2.</p></li>
 <li><p><strong>nH2</strong> (<em>int</em>) – Número de H2 desejado na molécula.</p></li>
+<li><p><strong>main_vector</strong> (<em>np.ndarray</em><em>[</em><em>float</em><em>]</em>) – Vetor no R2 com a direção de um dos vértices do hexágono.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Lista, de vetores no R2, com as posições geradas para os centros
-de H2.</p>
+<dd class="field-even"><p>Lista, de vetores no R2, com as posições geradas para os
+centros de H2.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[np.ndarray]</p>
@@ -1095,27 +1147,6 @@ phi{n+1} … phi{2n} = y^n</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="dopings.h2_gen.graphine_radius">
-<span class="sig-prename descclassname"><span class="pre">dopings.h2_gen.</span></span><span class="sig-name descname"><span class="pre">graphine_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.Structure" title="dopings.structure.Structure"><span class="pre">Structure</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dopings.h2_gen.graphine_radius" title="Link to this definition"></a></dt>
-<dd><p>”
-Estima um raio aproximado para a estrutura de grafino.</p>
-<p>Encontra o carbono mais afastado do centro de massa, e retorna 90%
-desta distância. Assume que o centro de massa da estrutura está
-em (0,0,0).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura para qual se calcular a estimativa.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Raio estimado para a estrutura.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="dopings.h2_gen.phi">
 <span class="sig-prename descclassname"><span class="pre">dopings.h2_gen.</span></span><span class="sig-name descname"><span class="pre">phi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dopings.h2_gen.phi" title="Link to this definition"></a></dt>
 <dd><p>Retorna a imagem da n-ésima função phi, tal que:</p>
@@ -1137,6 +1168,27 @@ Se array, precisa ter o mesmo tamanho de x.</p></li>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float or np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dopings.h2_gen.struct_radius">
+<span class="sig-prename descclassname"><span class="pre">dopings.h2_gen.</span></span><span class="sig-name descname"><span class="pre">struct_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.Structure" title="dopings.structure.Structure"><span class="pre">Structure</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dopings.h2_gen.struct_radius" title="Link to this definition"></a></dt>
+<dd><p>”
+Estima um raio aproximado para a estrutura de grafino.</p>
+<p>Encontra o carbono mais afastado do centro de massa, e retorna 90%
+desta distância. Assume que o centro de massa da estrutura está
+em (0,0,0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>struct</strong> (<em>strucutre</em>) – Estrutura para qual se calcular a estimativa.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Raio estimado para a estrutura.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1941,7 +1993,10 @@ elementos, na estrutura.</p>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to dopagens’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="dopagens" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
