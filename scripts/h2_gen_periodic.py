@@ -188,7 +188,7 @@ for p_struct in p_structs:
         output_path = output_path_root / "horizontal-mono" / output_name
 
         gen_H2_periodic(p_struct, nH2, output_path, vertical=False, 
-                        both_sides=True, plot=False)
+                        both_sides=False, plot=False)
         
         ############### Horizontal Dual
 

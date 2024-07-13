@@ -34,18 +34,23 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 
 ## Dopagens <a name="dopagens"></a>
 
+Exemplos de estruturas onde houve substituição de átomos de carbono por de outros elementos:
+
 | ![](assets/B-g1-D1.png) | ![](assets/N-g1-B2.png) | 
 | - | - |
 | ![](assets/N-ac-C11.png) | ![](assets/P-ac-A1.png) |
 
-## Adsorção com H2
-<a name="adsorcao"></a>
+## Adsorção com H2 <a name="adsorcao"></a>
+
+Estruturas que receberam camadas de H2 para estudo de adsorção:
 
 | ![](assets/g5-150.png) | ![](assets/ac-200-v.png) | 
 | - | - |
-| ![](assets/g1_s4.png) | ![](assets/g1_s4-100.png) |
+| ![](assets/g1_s1-005.png) | ![](assets/g1_s4-100.png) |
 
 ## Relatório de otimização <a name="relatorio"></a>
+
+Modelo de relatório do estado das otimizações:
 
 ```
 ../opt_files/graphine/Zn/g5/C4 - Converged      | Last step: 277
@@ -83,22 +88,41 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 
 #### Mapa de distribuição de elétrons pela estrutura e Histograma
 
-| ![](assets/charges_map.png) |  ![](assets/histogram.png) |
+Plot de pontos que através da cor e tamanho dos pontos ilustram como os elétrons estão distribuídos pela estrutura.
+
+Usa uma escala logarítimica de cores que permite destacar pequenas diferenças de cargas entre pontos, com uma grande amplitude dos dados.
+
+| ![](assets/charges_map.png) | ![](assets/escala.jpg) |
 | - | - |
 
 
-#### Gráfico composto de descrição de geometria do grafino
+#### Histograma dos comprimentos de ligação
+
+Vizualização da distribuição dos comprimentos de ligação presentes na estrutura. É padronizado com limites de eixos que comportem qualquer estrutura, para fácil comparação visual.
+
+Leva em conta critérios de comprimentos máximos de ligação para cada par de elementos químicos.
+
+| ![](assets/histogram.png) |
+|-|
+
+
+#### Gráficos de descrição de geometria do grafino
+
+Plot composto que resume a geometria de diversas estruturas otimizadas, para fácil análise dos resultados.
 
 | ![](assets/geometry_graph.png) | 
 | - | 
 
 #### Gráfico de gap para a substituição de cada elemento no mesmo local da estrutura
 
+Gráfico que relaciona a energia do HOMO e do LUMO em um mesmo sítio de dopagem, para diferentes elementos químicos.
+
 | ![](assets/gap_graph.png) | 
 |-|
 
 ## Frames finais de geometria <a name="frametree"></a>
-Árvore de diretórios com a geometria do último passo de otimização da estrutura
+
+Árvore de diretórios com a geometria do último passo de otimização da estrutura:
 
 | ![](assets/frame-tree.png) |
 |-| 

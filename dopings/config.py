@@ -4,7 +4,7 @@ from pathlib import Path
 # Para build local dos docs
 #config_files_dir = Path("input/config_files")
 # Para build no Read The Docs
-c#onfig_files_dir = Path("../../input/config_files")
+#config_files_dir = Path("../../input/config_files")
 
 # Para uso nos scripts
 config_files_dir = Path("../input/config_files")
