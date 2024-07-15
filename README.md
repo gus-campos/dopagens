@@ -26,7 +26,7 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 * Criar versões em lote, de várias estruturas base, dopadas por vários elementos químicos, em diversas posições;
 * Criar um diretório de otimização para cada estrutura, com os arquivos e informações necessárias;
 * Criar filas de otimizações do DFTB+, com um leve nível de auto gerência;
-* Gerar relatório do estado e progresso das otimizações;
+* Gerar relatório do estado e progresso das otimizações;git push --set-upstream origin cached
 * Extrair os dados necessário dos arquivos;
 * Gerar árvores de diretórios organizadas com o arquivo de geometria final da otimização;
 * Gerar visualizações e processamentos dos dados para viabilizar a análise da grande quantidade de resultados;

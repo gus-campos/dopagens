@@ -234,7 +234,7 @@ class Structure:
         if site is not None and isinstance(site, str):
             self.site = site
         
-        name = self.gen_name()
+        name = self.name()
         stored_path = dirs_data["stored_structs"] / f"{name}.pkl"
         
         # Se pediu pra ler dos arquivos
@@ -1198,40 +1198,70 @@ class Structure:
         # Coopiando arquivo
         copyfile(output_origin, output_dest)
 
-        
-
         # Imprimir endereço do arquivo escrito
         print(output_dest)
 
     def copy(self) -> Structure:
         
         """
-        Retorna uma estrutura que contém os mesmo átomos que a original.
+        Retorna uma cópia da estrutura original.
         """
 
         from copy import deepcopy
 
         return deepcopy(self)
 
-    def gen_name(self):
+    def name(self) -> str|None:
+        """
+        Gera um nome para a estrutura, se tiver os atributos 
+        necessários. Se não tiver, retorna None.
 
+        Returns
+        -------
+
+        str
+            Nome gerado da estrutura.
+
+        None    
+            Se não possuir os atributos necessários.
+        """
         atts = [self.material, self.base,self.dop_elem, self.site ]
 
         if any([att is None for att in atts]):
             return None
-
-        return f"{self.material}-{self.base}-{self.dop_elem}-{self.site}"
+        else:
+            return f"{self.material}-{self.base}-{self.dop_elem}-{self.site}"
         
-    def write_struct_pickle(self, pkl_dir: str|Path) -> None:
+    def write_struct_pickle(self, pkl_path: str|Path) -> None:
+        """
+        Escreve o objeto Strucutre como um arquivo pickle no 
+        armazenamento.
 
-        Path.mkdir(Path(pkl_dir).parent, parents=True, exist_ok=True)
+        Parameters
+        ----------
+
+        pkl_path : str or Path
+            O caminho do arquivo pickle a ser salvo.
+        """
+
+        Path.mkdir(Path(pkl_path).parent, parents=True, exist_ok=True)
 
         import pickle
-        with open(pkl_dir, "wb") as file:
+        with open(pkl_path, "wb") as file:
             pickle.dump(self, file)
 
     @staticmethod
     def read_struct_pickle(pkl_dir):
+        """
+        Lê um arquivo pickle onde foi escrito um objeto Strucutre,
+        cria tal objeto e o retorna.
+
+        Parameters
+        ----------
+
+        pkl_path : str or Path
+            O caminho do arquivo pickle a ser lido.
+        """
 
         import pickle
         with open(pkl_dir, "rb") as file:
