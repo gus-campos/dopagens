@@ -1108,7 +1108,7 @@ class Structure:
 
     ############ Escrita/cópia de arquivos
 
-    def frame(self, frame_out: str|Path) -> None:
+    def frame(self, frame_out: str|Path, ignore_charges: bool=False) -> None:
         """
         Gera e escreve o arquivo xyz do último frame da estrutura.
         Cria diretórios necessários caso não existam.
@@ -1117,6 +1117,9 @@ class Structure:
         ----------
         frame_out: str or Path
             Endereço de saída do frame.
+
+        ignore_charges : bool, default = False
+            Se True as cargas não são escritas.
 
         Raises
         ------
@@ -1146,12 +1149,12 @@ class Structure:
 
         if len(self.atoms) > 0:
             # Para cada átomo, adicionar uma linha com: elemento, X, Y, Z 
-            if self.atoms[0].charge is not None:           
-                for atom in self.atoms:
-                    data.append(" ".join( [ atom.elem ] + [ str(round(number, 8)) for number in atom.coord] + [str(atom.charge)]))
-            else:
+            if self.atoms[0].charge is None or ignore_charges:           
                 for atom in self.atoms:
                     data.append(" ".join( [ atom.elem ] + [ str(round(number, 8)) for number in atom.coord]))
+            else:
+                for atom in self.atoms:
+                    data.append(" ".join( [ atom.elem ] + [ str(round(number, 8)) for number in atom.coord] + [str(atom.charge)]))
         else:
             raise ValueError("This Structure has no atoms.")
 
@@ -1251,7 +1254,7 @@ class Structure:
             pickle.dump(self, file)
 
     @staticmethod
-    def read_struct_pickle(pkl_dir):
+    def read_struct_pickle(pkl_dir: str|Path) -> Structure:
         """
         Lê um arquivo pickle onde foi escrito um objeto Strucutre,
         cria tal objeto e o retorna.

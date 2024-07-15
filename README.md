@@ -1,4 +1,4 @@
-# Dopings: Automação de dopagem, otimização e de análise de estruturas moleculares simuladas pelo DFTB+
+# Dopings: Automação de dopagem, adsorção, otimização e análise de estruturas
 
 Esse conjunto de programas foi idealizado e escrito por mim, em Python, como parte do projeto de pesquisa que participei, no Laboratório de Simulação Computacional do Departamento de Física da UFJF como bolsista da CNPq, com objetivo de pesquisar novos possíveis materiais e suas propriedades teóricas ao simular computacionalmente flocos de grafeno e grafino com impurezas diversas, em variadas posições. As simulações foram feitas utilizando o pacote de simulação quântica DFTB+.
 

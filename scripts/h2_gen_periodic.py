@@ -86,7 +86,7 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
         struct.append(Atom(elem="H", coord=np.round(coord, decimals=8).tolist()))
 
     # Gerar aquivo .xyz da estrutura
-    struct.frame(output_path)
+    struct.frame(output_path, ignore_charges=True)
     
     # Se for para plotar, gerar visualização interativa da estrutura com curva
     if plot:
@@ -159,7 +159,7 @@ for i, p_struct in enumerate(p_structs):
 for p_struct in p_structs:
     
     # Caminho de saída raíz
-    output_path_root = dirs_data["h2_gen_output"]/ "periodic"
+    output_path_root = dirs_data["h2_gen_output"] / "periodic"
 
     # De 0, até o número máximo de H2 a serem adicionados
     for nH2 in range(p_struct.nH2 + 1):
@@ -197,6 +197,18 @@ for p_struct in p_structs:
         gen_H2_periodic(p_struct, nH2, output_path, vertical=False, 
                         both_sides=True, plot=False)
     
+# Juntando todos os frames
+output_path_root = dirs_data["h2_gen_output"] / "periodic"
+
+dirs = [ 
+    output_path_root / "vertical-mono",
+    output_path_root / "vertical-dual",
+    output_path_root / "horizontal-mono",
+    output_path_root / "horizontal-dual"
+]
+
+
+
 
 ###############################################################################
 
