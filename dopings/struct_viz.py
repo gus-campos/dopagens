@@ -74,7 +74,6 @@ class StructViz:
 
             # Para o índice de cada átomo na estrutura
             for i in range(tam):
-
                 # Para o índice de cada átomo seguinte na estrutura
                 for j in range(i+1,tam):
 
@@ -87,8 +86,7 @@ class StructViz:
                     # Se o comprimento calculado for menor que o critério utilizado
                     if bond_length < bond_crit[struct.material][label]:
 
-                        # Listar valor do comprimento como sendo de uma ligação
-                        # válida 
+                        # Listar valor do comprimento como sendo de uma ligação válida 
                         data.append(bond_length)
 
             # Retornar dados
@@ -181,11 +179,9 @@ class StructViz:
         bins_length = viz_config['histogram']["bins_length"]      
         # Distância entre ticks
         minor_tick_delta = viz_config['histogram']["delta_tick_small"]   
-        major_tick_delta = viz_config['histogram']["delta_tick_big"]  
-        #delta_y_ticks = viz_config['histogram']["delta_y_ticks"]
+        major_tick_delta = viz_config['histogram']["delta_tick_big"]
         ###################################################################
 
-        # Obtendo lista de comprimento e transformando em array
         lengths = np.array(bonds_lengths(struct))
         
         # Guardando quantidade de ligações

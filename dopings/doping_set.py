@@ -95,7 +95,8 @@ class DopingSet:
     """
 
     def __init__(self, dop_elem: str, dops_info: dict=None, mode: str="read",
-                 param=None, force_write: bool=False) -> None:
+                 param=None, force_write: bool=False, 
+                 force_read_source: bool=False) -> None:
 
         """
         Contrutor de objetos DopingSet.
@@ -143,7 +144,12 @@ class DopingSet:
         force_write : bool, default = False
             Se True, novos arquivos de otimização são gerados para todas
             as estruturas, mesmo que para elas já exista um diretório 
-            de reinício de otimização. 
+            de reinício de otimização.
+
+        force_read_source : deafault=False
+            Se True, para cada estrutura, lê dos arquivo originais e 
+            escreve objeto no armazenamento, mesmo que ele já esteja 
+            escrito. Também sobrescreve versão salva no armazenamento.
             
         Raises
         ------
@@ -292,9 +298,10 @@ class DopingSet:
                         continue
                     
                     # Sobrescrever com estrutura dopada
-                    doped_struct = Structure(**kwargs, read_from_dir=True)
+                    doped_struct = Structure(**kwargs, read_from_dir=True, 
+                                             force_read_source=force_read_source)
 
-                    # Definindo parâmetro
+                    # Definindo
                     doped_struct.param = self.param
 
                     # Anexar à lista

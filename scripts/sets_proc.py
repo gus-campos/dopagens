@@ -24,7 +24,9 @@ for material in ["graphine", "graphene"]:
         print(f"Lendo {material}-{dop_elem}...")
 
         # Ler conjunto e acumular na lista de conjuntos
-        set = DopingSet(dop_elem=dop_elem, dops_info=dops_data[material], mode="read")
+        set = DopingSet(dop_elem=dop_elem, dops_info=dops_data[material], 
+                        mode="read")
+
         sets.append(set)
 
     # Para cada conjunto

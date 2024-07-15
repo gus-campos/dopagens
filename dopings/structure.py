@@ -131,10 +131,14 @@ class Structure:
     def __init__(self, atoms : list[Atom]=None, dir : str|Path=None, 
                  read_from_dir : bool=False, material: str=None, 
                  base: str=None, dop_elem: str=None, site: str=None, 
-                 param : str=None) -> None:
+                 param : str=None, force_read_source: bool=False,
+                 ) -> None:
 
         """
-        Inicializa o objeto Structure.
+        Inicializa o objeto Structure. Se o objeto Strucutre não estiver
+        salvo em forma de arquivo no armazenamento, os dados da 
+        estrutura são lidos dos arquivos, o objeto é criado e escrito
+        no armazenamento. Se o objeto estiver escrito
 
         Parameters
         ----------
@@ -166,6 +170,11 @@ class Structure:
             Se dados devem ser lidos do diretório ou não.
             Se True, dir deve ser passada.
 
+        force_read_source : deafault=False
+            Se True, lê dos arquivo originais e escreve objeto no 
+            armazenamento, mesmo que ele já esteja escrito. Também 
+            sobrescreve versão escrita.
+        
         Raises
         ------
 
@@ -201,15 +210,8 @@ class Structure:
                 self.dir = Path(dir).expanduser()
             else:
                 raise TypeError("dir must be string or Path.")
-
-        # Se pediu pra ler dos arquivos
-        if read_from_dir:
-            if self.dir is not None:
-                self.data_from_file()
-            else:
-                raise ValueError("If read_from_dir True, dir must be given.")
         
-        # Decidindo se será anexado
+        # Decidindo se os átomos serão anexados
         if ((dir is None) or (not read_from_dir)) and (atoms is not None):
 
             # Adicionar átomos que foram passados
@@ -231,7 +233,39 @@ class Structure:
 
         if site is not None and isinstance(site, str):
             self.site = site
+        
+        name = self.gen_name()
+        stored_path = dirs_data["stored_structs"] / f"{name}.pkl"
+        
+        # Se pediu pra ler dos arquivos
+        if read_from_dir:
+            
+            # Se é possível gerar nome, não está forçado a ler dos arquivos
+            # originais, e o arquivo pickle já existe, carregá-lo
+            if ((name is not None) and (not force_read_source) 
+                and stored_path.is_file()):
+                    
+                    try:
+                        self.__dict__ = Structure.read_struct_pickle(stored_path).__dict__
+                    
+                    # Se não conseguir ler, assumir que está corrompido,
+                    # ler dos arquivos originais, e escrever outro pkl
+                    except:
+                        if self.dir is not None:
+                            self.data_from_file()
+                            self.write_struct_pickle(stored_path)    
+                        else:
+                            raise ValueError("If read_from_dir True, dir must be given.")
 
+            elif self.dir is not None:
+                self.data_from_file()
+            else:
+                raise ValueError("If read_from_dir True, dir must be given.")
+
+        # Se o structure não está salvo, salvar
+        if not stored_path.is_file() or force_read_source:
+            self.write_struct_pickle(stored_path)            
+                
     ############# Adicionar novos átomos à estrutura - Sem dados obrigatórios
              
     def append(self, atoms: Atom|list[Atom]) -> None:
@@ -318,11 +352,10 @@ class Structure:
         # Lendo dados da Structure (lê os dados mesmo que esteja em look mode)
         struct = Structure(dir=self.dir, read_from_dir=True)
 
-        # Gerando novos arquivos de otimização, e sobrescrevendo antigos 
-        from DopingSet import DopingSet
-        
+        # Gerando novos arquivos de otimização, e sobrescrevendo antigos         
         # Tentar gerar arquivos, com ReadInitialCharges
         try:
+            from doping_set import DopingSet
             DopingSet.gen_files(self, read_initial_charges=True, redo=True)
         
         # Se não for possível, restaurar estado anterior
@@ -1176,6 +1209,32 @@ class Structure:
         Retorna uma estrutura que contém os mesmo átomos que a original.
         """
 
-        return Structure(atoms=self.atoms)
+        from copy import deepcopy
+
+        return deepcopy(self)
+
+    def gen_name(self):
+
+        atts = [self.material, self.base,self.dop_elem, self.site ]
+
+        if any([att is None for att in atts]):
+            return None
+
+        return f"{self.material}-{self.base}-{self.dop_elem}-{self.site}"
+        
+    def write_struct_pickle(self, pkl_dir: str|Path) -> None:
+
+        Path.mkdir(Path(pkl_dir).parent, parents=True, exist_ok=True)
+
+        import pickle
+        with open(pkl_dir, "wb") as file:
+            pickle.dump(self, file)
+
+    @staticmethod
+    def read_struct_pickle(pkl_dir):
+
+        import pickle
+        with open(pkl_dir, "rb") as file:
+            return pickle.load(file)
 
 ####################################################################################

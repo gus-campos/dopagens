@@ -3,3 +3,4 @@ opt_files/*
 output/h2_gen_output/*
 output/processing_output/*
 scripts/.arquivo
+.stored_structs

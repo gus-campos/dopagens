@@ -3,6 +3,7 @@
     "dopings_opt"       : "../opt_files",
     "processing_output" : "../output/processing_output",
     "h2_gen_output"     : "../output/h2_gen_output",
+    "stored_structs"    : "../.stored_structs",
 
     "bases"             : "../input/bases",
     
