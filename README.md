@@ -27,7 +27,8 @@ Foram geradas, otimizadas e processadas, um total de 1.540 estruturas. Além de 
 * Criar um diretório de otimização para cada estrutura, com os arquivos e informações necessárias;
 * Criar filas de otimizações do DFTB+, com um leve nível de auto gerência;
 * Gerar relatório do estado e progresso das otimizações;git push --set-upstream origin cached
-* Extrair os dados necessário dos arquivos;
+* Extrair os dados necessário dos arquivos e criar objetos que representando as estruturas;
+* Escrever tais objetos como arquivos para acelerar a leitura nos diversos processos;
 * Gerar árvores de diretórios organizadas com o arquivo de geometria final da otimização;
 * Gerar visualizações e processamentos dos dados para viabilizar a análise da grande quantidade de resultados;
 * Gerar novas estruturas adsorvidas com H2, para diversos tamanhos e formas de estruturas, tanto para floco, quanto para periódica.
@@ -129,7 +130,7 @@ Gráfico que relaciona a energia do HOMO e do LUMO em um mesmo sítio de dopagem
 
 ## Uso
 
-Uso no próprio repositório, sem necessidade de instalação através da execução direta dos scripts no diretório "scripts".
+Uso no próprio diretório, sem necessidade de instalação através da execução direta dos scripts no diretório "scripts".
 
 ## Documentação <a name="docs"></a>
 
