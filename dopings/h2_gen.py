@@ -178,7 +178,7 @@ class H2Gen:
 
     ##################### Auxiliar ################################################
     @staticmethod
-    def plot(xs, ys, zs, radius: float, C: np.ndarray=None):
+    def plot(struct, C: np.ndarray=None):
         """
         Gera um plot interativo de todos os átomos, dadas as coordenadas de 
         todos eles. Se for passada uma matriz de coeficientes, plota também
@@ -199,11 +199,13 @@ class H2Gen:
 
         import matplotlib.pyplot as plt
         
+        radius = struct_radius(struct)
+
         ######################### ÁTOMOS ##########################################
 
         plt.figure()
         ax = plt.subplot(111, projection='3d')
-        ax.scatter(xs, ys, zs, color='b')
+        ax.scatter(*H2Gen.gen_arrays(struct), color='b')
 
         ######################### CURVA ###########################################
         if C is not None:

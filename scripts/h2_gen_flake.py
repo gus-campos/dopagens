@@ -90,8 +90,7 @@ def gen_H2_flake(struct, nH2, output_path, both_sides=False, vertical=False,
     
     # Se for para plotar, gerar visualização interativa da estrutura com curva
     if plot:
-        radius = H2Gen.graphine_radius(struct)
-        H2Gen.plot(*struct_coords, radius=radius, C=C)
+        H2Gen.plot(struct, C=C)
 
 ###############################################################################
 
@@ -110,91 +109,46 @@ nH2_dict = {
 
 ####################### Graphine Vertical Mono
         
-# Para cada base
-for base in dops_data["graphine"]["bases"]:
+for material in ["graphine", "graphene"]:
 
-    # Lê a estrutura que receberá os H2
-    struct = Structure(dir=dirs_data["bases"] / "graphine" / base, 
-                       read_from_dir=True)
+    # Para cada base
+    for base in dops_data[material]["bases"]:
 
-    # Raíz do output
-    output_path_root = dirs_data["h2_gen_output"] / "flake" / "graphine"
-    
-    # Do 0 ao máximo de H2 que cada estrutura receberá
-    for nH2 in range(nH2_dict[base]+1):
+        # Lê a estrutura que receberá os H2
+        struct = Structure(dir=dirs_data["bases"] / material / base, 
+                        read_from_dir=True)
 
-        # Nome do arquivo .xyz de saída
-        output_name = f"{base}-{nH2:03d}.xyz"
-
-        ############### Gaphine Vertical Mono 
-
-        # Caminho de saída
-        output_path = output_path_root / "vertical-mono" / output_name
-        # Gerar floco com H2 no diretório especificado
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=True, both_sides=False)
+        # Raíz do output
+        output_path_root = dirs_data["h2_gen_output"] / "flake" / material
         
-        ############### Gaphine Vertical Dual 
+        # Do 0 ao máximo de H2 que cada estrutura receberá
+        for nH2 in range(nH2_dict[base]+1):
 
-        output_path = output_path_root / "vertical-dual" / output_name
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=True, both_sides=True)
-        
-        ############### Gaphine Horizontal Mono 
+            # Nome do arquivo .xyz de saída
+            output_name = f"{base}-{nH2:03d}.xyz"
 
-        output_path = output_path_root / "horizontal-mono" / output_name
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=False, both_sides=False)
-        
-        ############### Gaphine Horizontal Dual
+            ############### Vertical Mono 
 
-        output_path = output_path_root / "horizontal-dual" / output_name
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=False, both_sides=True)
-    
-        
-####################### Graphine Horizontal Mono
-        
-# Para cada base
-for base in dops_data["graphene"]["bases"]:
+            # Caminho de saída
+            output_path = output_path_root / "vertical-mono" / output_name
+            # Gerar floco com H2 no diretório especificado
+            gen_H2_flake(struct, nH2, output_path, plot=False, 
+                        vertical=True, both_sides=False)
+            
+            ############### Vertical Dual 
 
-    # Lê a estrutura que receberá os H2
-    struct = Structure(dir=dirs_data["bases"] / "graphene" / base, 
-                       read_from_dir=True)
-    
-    #H2Gen.to_CM(struct).frame(f"{base}.xyz")
+            output_path = output_path_root / "vertical-dual" / output_name
+            gen_H2_flake(struct, nH2, output_path, plot=False, 
+                        vertical=True, both_sides=True)
+            
+            ############### Horizontal Mono 
 
-    # Raíz do output
-    output_path_root = dirs_data["h2_gen_output"] / "flake" / "graphene"
+            output_path = output_path_root / "horizontal-mono" / output_name
+            gen_H2_flake(struct, nH2, output_path, plot=False, 
+                        vertical=False, both_sides=False)
+            
+            ############### Horizontal Dual
 
-    # Do 0 ao máximo de H2 que cada estrutura receberá
-    for nH2 in range(nH2_dict[base]+1):
-        
-        # Nome do arquivo .xyz de saída
-        output_name = f"{base}-{nH2:03d}.xyz"
-
-        ############## Gaphene Vertical Mono 
-
-        # Caminho de saída
-        output_path = output_path_root / "vertical-mono" / output_name
-        # Gerar floco com H2 no diretório especificado
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=True, both_sides=False)
-        
-        ############## Gaphene Vertical Dual 
-
-        output_path = output_path_root / "vertical-dual" / output_name
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=True, both_sides=True)
-        
-        ############## Gaphene Horizontal Mono 
-
-        output_path = output_path_root / "horizontal-mono" / output_name
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=False, both_sides=False)
-        
-        ############## Gaphene Horizontal Dual
-
-        output_path = output_path_root / "horizontal-dual" / output_name
-        gen_H2_flake(struct, nH2, output_path, plot=False, 
-                     vertical=False, both_sides=True)
+            output_path = output_path_root / "horizontal-dual" / output_name
+            gen_H2_flake(struct, nH2, output_path, plot=False, 
+                        vertical=False, both_sides=True)

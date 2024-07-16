@@ -43,37 +43,37 @@ Exemplos de estruturas onde houve substituição de átomos de carbono por de ou
 
 ## Adsorção com H2 <a name="adsorcao"></a>
 
-Estruturas que receberam camadas de H2 para estudo de adsorção:
+Estruturas que receberam camadas de H2 para estudo de adsorção. Fiz um ajuste de uma curva às coordenadas de cada estrutura, para poder fazer a sobreposição das moléculas sobre as mesmas. Além disso utilizei uma grade retangular para distribuir uniformemente os H2 sobre a estrutura periódica, enquanto usei uma distribuição derivada para espalhar essas moléculas nas estruturas hexagonais.
 
-| ![](assets/g5-150.png) | ![](assets/ac-200-v.png) | 
+| ![](assets/g5-150.png) | ![](assets/g1_s4-100.png) | 
 | - | - |
-| ![](assets/g1_s1-005.png) | ![](assets/g1_s4-100.png) |
+| ![](assets/g1_s1-005.png) | ![](assets/lin_reg.png) |
 
 ## Relatório de otimização <a name="relatorio"></a>
 
 Modelo de relatório do estado das otimizações:
 
 ```
-graphene-ac-B-B6 - Converged      | Last step: 34
-graphene-ac-B-B7 - Converged      | Last step: 36
-graphene-ac-B-B8 - Converged      | Last step: 36
+graphene-B-ac-B-B6 - Converged      | Last step: 34
+graphene-B-ac-B-B7 - Converged      | Last step: 36
+graphene-B-ac-B-B8 - Converged      | Last step: 36
 
         Not converged SCC's: [0] => 2.8% of total
 
-graphene-ac-B-B9 - Converged      | Last step: 39
-graphene-ac-B-B10 - Converged      | Last step: 39
-graphene-ac-B-B11 - Converged      | Last step: 40
-graphene-ac-B-B12 - Converged      | Last step: 41
+graphene-B-ac-B9 - Converged      | Last step: 39
+graphene-B-ac-B10 - Converged      | Last step: 39
+graphene-B-ac-B11 - Converged      | Last step: 40
+graphene-B-ac-B12 - Converged      | Last step: 41
 
         Not converged SCC's: [1, 2] => 4.9% of total
 
-graphene-ac-B-B13 - Converged      | Last step: 36
+graphene-B-ac-B13 - Converged      | Last step: 36
 
         Not converged SCC's: [0] => 2.8% of total
 
-graphene-ac-B-B14 - Converged      | Last step: 45
-graphene-ac-B-B15 - Converged      | Last step: 43
-graphene-ac-B-B16 - Converged      | Last step: 59
+graphene-B-ac-B14 - Converged      | Last step: 45
+graphene-B-ac-B15 - Converged      | Last step: 43
+graphene-B-ac-B16 - Converged      | Last step: 59
 ```
 
 ## Resultados <a name="resultados"></a>
@@ -121,6 +121,31 @@ Gráfico que relaciona a energia do HOMO e do LUMO em um mesmo sítio de dopagem
 
 | ![](assets/frame-tree.png) |
 |-| 
+
+## Estrutura do programa
+
+### Classes principais:
+
+* Atom - Descreve um átomo.
+* Structure - Descreve uma estrutura, tendo uma lista de átomos, além de outros dados.
+* DopingSet - Descreve um conjunto de dopagens.
+
+### Classes de métodos estáticos:
+
+* StructRead - Métodos para extrair dados dos arquivos de saída do DFTB+.
+* StructViz - Métodos que geram vizualizações da estrutura.
+* SetViz - Métodos que geram vizualizações de um conjunto de estruturas.
+* GraphineCalcs - Métodos que provêm cálculos extras focados nas particulariedades do grafino.
+* H2Gen - Métodos que geram versões de estruturas adsorvidas com H2.
+
+### Arquivos de configurações e dados para os processos:
+
+* Configurações das vizualizações.
+* Dados de diretórios,
+* Dados do conjunto de dopagens,
+* Dados dos átomos de cada elemento,
+* Dados da geração de H2,
+* Dados extras dos grafinos,
 
 ## Uso
 
