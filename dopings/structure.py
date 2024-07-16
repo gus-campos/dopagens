@@ -170,7 +170,7 @@ class Structure:
             Se dados devem ser lidos do diretório ou não.
             Se True, dir deve ser passada.
 
-        force_read_source : deafault=False
+        force_read_source : deafaultprint(self.dir)=False
             Se True, lê dos arquivo originais e escreve objeto no 
             armazenamento, mesmo que ele já esteja escrito. Também 
             sobrescreve versão escrita.
@@ -237,6 +237,9 @@ class Structure:
         name = self.name()
         stored_path = dirs_data["stored_structs"] / f"{name}.pkl"
         
+        #print(stored_path, stored_path.is_file())
+        #input("")
+
         # Se pediu pra ler dos arquivos
         if read_from_dir:
             
@@ -262,9 +265,9 @@ class Structure:
             else:
                 raise ValueError("If read_from_dir True, dir must be given.")
 
-        # Se o structure não está salvo, salvar
-        if not stored_path.is_file() or force_read_source:
-            self.write_struct_pickle(stored_path)            
+            # Se o structure não está salvo, salvar
+            if (self.name() is not None) and (not stored_path.is_file() or force_read_source):
+                self.write_struct_pickle(stored_path)            
                 
     ############# Adicionar novos átomos à estrutura - Sem dados obrigatórios
              
@@ -1235,7 +1238,7 @@ class Structure:
         if any([att is None for att in atts]):
             return None
         else:
-            return f"{self.material}-{self.base}-{self.dop_elem}-{self.site}"
+            return f"{self.material}-{self.dop_elem}-{self.base}-{self.site}"
         
     def write_struct_pickle(self, pkl_path: str|Path) -> None:
         """
