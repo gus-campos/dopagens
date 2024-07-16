@@ -762,11 +762,13 @@ class Structure:
                 Passos onde o SCC não convergiu. 
             """
 
+            id = self.name() if self.name() is not None else self.dir
+
             messages = []
 
             # Se arquivo não existe, imprimir que não existe
             if not exists:
-                messages.append(f"{self.dir} - the output file doesn't exists")
+                messages.append(f"{id} - the output file doesn't exists")
 
             # Se arquivo existe
             else:
@@ -775,13 +777,13 @@ class Structure:
                 if converged:
                     
                     # Adicionar às mensagens que convergiu
-                    messages.append(f"{self.dir} - {'Converged':<14} | Last step: {steps_written[-1]}")
+                    messages.append(f"{id} - {'Converged':<14} | Last step: {steps_written[-1]}")
                 
                 # Se foi EXPLICITAMENTE encontrado que não convergiu
                 elif not_converged:
 
                     # Reportat a não convergência
-                    messages.append(f"{self.dir} - {'NOT converged':<14} | Last step: {steps_written[-1]}")
+                    messages.append(f"{iid} - {'NOT converged':<14} | Last step: {steps_written[-1]}")
 
                 # Se não convergiu, mas não foi explicitamente encontrado que não convergiu
                 else:
@@ -790,13 +792,13 @@ class Structure:
                     if len(steps_written) > 0:
                     
                         # Relatar que está indefinido
-                        messages.append(f"{self.dir} - {'Undefined':<14} | Last step: {steps_written[-1]}")
+                        messages.append(f"{id} - {'Undefined':<14} | Last step: {steps_written[-1]}")
 
                     # Se nenhum passo foi escrito no arquivo, reportar   
                     else:
 
                         # Relatar que está indefinido
-                        messages.append(f"{self.dir} - {'Undefined':<14} | No steps written to file")
+                        messages.append(f"{id} - {'Undefined':<14} | No steps written to file")
 
                 # Se houve SCC não convergente
                 if len(not_conv_SCC) != 0 and verbose:

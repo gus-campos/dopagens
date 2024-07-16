@@ -208,7 +208,11 @@ dirs = [
 ]
 
 
-
+"""# Concatenando os frames
+for dir in dirs:
+    for file_name in (dir).glob("*"):
+        with open(file_name) as file:
+            print(file.read())"""
 
 ###############################################################################
 
