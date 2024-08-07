@@ -172,15 +172,10 @@ for p_struct in p_structs:
     area = np.linalg.norm(np.cross(p_struct.vectors[0], p_struct.vectors[1]))
 
     # Máximo de H2, arredondando e transformando em inteiro
-    import math
-    max_H2_count = int(math.ceil(max_H2_density * area))
+    max_H2_count = int(np.ceil(max_H2_density * area))
 
     # Gerar para cada quantidade de H2
     for H2_count in range(max_H2_count + 1):
-
-        # Log
-        iterations += 1
-        print("\n\n", p_struct.name, "|", iterations, "/", 3166, "\n\n")
     
         # Nome do arquivo .xyz de saída
         output_name = f"{p_struct.name}-{f'{H2_count:03d}'}{'.xyz'}"
@@ -214,5 +209,11 @@ for p_struct in p_structs:
         
         gen_H2_periodic(p_struct, H2_count, output_path, vertical=False, 
                         both_sides=True, plot=False)
+        
+        #######################################################################
+
+        # Log
+        iterations += 1
+        print("\n\n", p_struct.name, "|", iterations, "/", 3166, "\n\n")
         
 ###############################################################################
