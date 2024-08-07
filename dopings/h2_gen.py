@@ -240,7 +240,7 @@ class H2Gen:
         plt.clf()
 
     @staticmethod
-    def to_CM(struct : "Structure"):
+    def to_CM(struct: "Structure"):
         """
         Recebe uma estrutura e retorna a mesma movida para o seu centro 
         de massa. Só considera os carbonos no cálculo do centro de 
@@ -286,7 +286,7 @@ class H2Gen:
         return struct
 
     @staticmethod
-    def gen_arrays(struct : "Structure"):
+    def gen_arrays(struct: "Structure"):
         """
         Gera arrays xs, ys, zs das coordenadas dos átomos de uma 
         estrutura.

@@ -16,7 +16,7 @@ from pathlib import Path
 ###############################################################################
 
 def gen_H2_periodic(p_struct: "PeriodicStructure", 
-                    nH2: int, output_path: str|Path, both_sides:bool=False, 
+                    H2_count: int, output_path: str|Path, both_sides:bool=False, 
                     vertical: bool=False, plot: bool=False):
 
     """
@@ -28,7 +28,7 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
     p_struct : PeriodicStructure
         Objeto que representa uma estrutura periódica.
 
-    nH2 : int
+    H2_count : int
         Número máximo de moléculas de H2 a serem adicionadas na 
         estrutura.
 
@@ -48,11 +48,15 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
         ser gerada.
     """
 
-    # Copiando e movendo CM pro (0,0,0)
+    # Copiando struct
     struct = p_struct.struct.copy()
 
+    # Movendo célula pro (0,0,0)
+    for i in range(struct.size):
+        struct.atoms[i].coord -= p_struct.initial_vec
+
     # Gerando coordenadas de pontos distribuídos no plano XY
-    R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, nH2)
+    R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, H2_count)
 
     # Gerando coeficientes que ajustam a curva aos átomos
     struct_coords = H2Gen.gen_arrays(struct)
@@ -69,7 +73,7 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
     if both_sides:
 
         # Gerar mais pontos espalhados no plano
-        R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, nH2)
+        R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, H2_count)
         
         # Gerar pontos espalhados sobre o outro lado da estrura
         R3_H2_coords_otherside = H2Gen.gen_R3_H2(R2_H2_coords, C, 
@@ -90,8 +94,7 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
     
     # Se for para plotar, gerar visualização interativa da estrutura com curva
     if plot:
-        radius = H2Gen.graphine_radius(struct)
-        H2Gen.plot(*struct_coords, radius=radius, C=C)
+        H2Gen.plot(struct, C=C)
 
 ###############################################################################
 
@@ -110,62 +113,79 @@ class PeriodicStructure:
         Objeto que representa a estrutura, em si, desta estrutura 
         periódica.
 
-    nH2 : int
-        Número máximo de H2 a ser gerado para a estrutura.
-
     vectors : list[np.ndarray[float]]
         Lista com dois vetores no R3 que delimitam a célula unitária.
     """
-    def __init__(self, name=None, nH2=None, vectors=None):
+    def __init__(self, name=None, struct=None, vectors=None, 
+                initial_vec=None):
         
         "Construtor do objeto periodic Structure."
     
         self.name=name
-        self.struct=None
-        self.nH2=nH2
+        self.struct=struct
         self.vectors=vectors
+        self.initial_vec = initial_vec
 
-# Listando estruturas periódicas
+root_dir = Path("../input/bases/periodic")
+
 p_structs = []
 
-# Dados da geração periódica
-h2_gen_data = h2_gen_data["periodic"]
+for base_name in ["g2", "g3", "g4", "g5"]:
+    for cell_size in ["s1", "s2", "s3", "s4"]:
 
-# Para cada estrutura
-for name in ["g1_s1", "g1_s2", "g1_s3", "g1_s4"]:
-    
-    # Criar estrutura periódica
-    p_struct = PeriodicStructure(
-            
-                            name=name, 
-                            nH2=h2_gen_data[name]["nH2"],
-                            vectors=[np.array(h2_gen_data[name]["vectors"][0]),
-                                     np.array(h2_gen_data[name]["vectors"][1])]
-                        )
-        
-    # Acumular na lista de estruturas periódicas
-    p_structs.append(p_struct)
+        base = f"{base_name}_{cell_size}"
+        dir = root_dir / base
+        struct = Structure(dir=dir, read_from_dir=True)
 
-# Para cada estrutura e seu índice
-for i, p_struct in enumerate(p_structs):
+        # Encontrando vetores e criando p_struct
+        with open(dir / "geo_end.gen") as file:
 
-    # Ler estrutura correspondente e adicionar como sua propriedade
-    p_structs[i].struct = Structure(dir=dirs_data["bases"] / "g1-periodic" / p_struct.name, 
-                                    read_from_dir=True).copy()
+            # Linhas
+            lines = file.read().splitlines()
+
+            # Vetores
+            vec0 = np.array([float(coord) for coord in lines[-3].split()])
+            vec1 = np.array([float(coord) for coord in lines[-2].split()])
+            initial_vec = np.array([float(coord) for coord in lines[-4].split()])
+
+        # p_struct
+        p_structs.append(PeriodicStructure(name=base, 
+                                           struct=struct,
+                                           vectors=[vec0, vec1],
+                                           initial_vec=initial_vec))
 
 ###############################################################################
 
 # Para cada estrutura periódica
+soma = 0
 for p_struct in p_structs:
     
     # Caminho de saída raíz
     output_path_root = dirs_data["h2_gen_output"] / "periodic"
 
-    # De 0, até o número máximo de H2 a serem adicionados
-    for nH2 in range(p_struct.nH2 + 1):
-        
+    # Densidade máxima de H2
+    max_H2_density = 0.16
+
+    # Número de H2 baseado na área da célula
+    area = np.linalg.norm(np.cross(p_struct.vectors[0], p_struct.vectors[1]))
+
+    # Máximo de H2, arredondando e transformando em inteiro
+    import math
+    max_H2_count = int(math.ceil(max_H2_density * area))
+
+
+    #if True:
+    #    H2_count = max_H2_count
+    for H2_count in range(max_H2_count + 1):
+
+        soma += 1
+
+        print(2*"\n")
+        print(p_struct.name, "|", soma, "/", 3166)
+        print(2*"\n")
+
         # Nome do arquivo .xyz de saída
-        output_name = f"{p_struct.name}-{f'{nH2:03d}'}{'.xyz'}"
+        output_name = f"{p_struct.name}-{f'{H2_count:03d}'}{'.xyz'}"
 
         ############### Vertical Mono
 
@@ -173,46 +193,28 @@ for p_struct in p_structs:
         output_path = output_path_root / "vertical-mono" / output_name
 
         # Gerar estrutura .xyz da estrutura periódica com "i" moléculas de H2
-        gen_H2_periodic(p_struct, nH2, output_path, vertical=True, 
+        gen_H2_periodic(p_struct, H2_count, output_path, vertical=True, 
                         both_sides=False, plot=False)
         
         ############### Vertical Dual
 
         output_path = output_path_root / "vertical-dual" / output_name
 
-        gen_H2_periodic(p_struct, nH2, output_path, vertical=True, 
+        gen_H2_periodic(p_struct, H2_count, output_path, vertical=True, 
                         both_sides=True, plot=False)
         
         ############### Horizontal Mono
 
         output_path = output_path_root / "horizontal-mono" / output_name
 
-        gen_H2_periodic(p_struct, nH2, output_path, vertical=False, 
+        gen_H2_periodic(p_struct, H2_count, output_path, vertical=False, 
                         both_sides=False, plot=False)
         
         ############### Horizontal Dual
 
         output_path = output_path_root / "horizontal-dual" / output_name
         
-        gen_H2_periodic(p_struct, nH2, output_path, vertical=False, 
+        gen_H2_periodic(p_struct, H2_count, output_path, vertical=False, 
                         both_sides=True, plot=False)
-    
-# Juntando todos os frames
-output_path_root = dirs_data["h2_gen_output"] / "periodic"
-
-dirs = [ 
-    output_path_root / "vertical-mono",
-    output_path_root / "vertical-dual",
-    output_path_root / "horizontal-mono",
-    output_path_root / "horizontal-dual"
-]
-
-
-"""# Concatenando os frames
-for dir in dirs:
-    for file_name in (dir).glob("*"):
-        with open(file_name) as file:
-            print(file.read())"""
-
+        
 ###############################################################################
-
