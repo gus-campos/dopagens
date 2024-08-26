@@ -713,14 +713,7 @@ class H2Gen:
 
             # Centro no R3
             center = np.array([R2_posic[0], R2_posic[1], 0.0])
-
-            if vertical:
-                plane_distance += 0.5 * H2_bond_length
             
-            # Quanto mais inclinado, maior a contribuição
-            elif random_rot:
-                plane_distance += 0.3 * H2_bond_length
-
             # Componente Z  
             if otherside:
                 z = g(center[0], center[1], C) - plane_distance
