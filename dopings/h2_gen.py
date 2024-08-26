@@ -661,6 +661,8 @@ class H2Gen:
             """
             Return the rotation matrix associated with counterclockwise rotation about
             the given axis by theta radians.
+
+            Fonte do algoritmo: https://stackoverflow.com/questions/6802577/rotation-of-3d-vector 
             """
             axis = np.asarray(axis)
             axis = axis / math.sqrt(np.dot(axis, axis))
