@@ -620,7 +620,7 @@ class H2Gen:
     #######################  Posicionador no R3  ##################################
 
     @staticmethod
-    def gen_R3_H2(R2_coords, C, otherside=False, vertical=False):
+    def gen_R3_H2(R2_coords, C, otherside=False, vertical=False, random_rot=False):
         """
         Recebe pontos espalhados sobre um plano, e retorna pontos 
         espalhados sobre uma superfície ajustada sobre os átomos da 
@@ -654,13 +654,28 @@ class H2Gen:
             com posição ajustada de acordo com a curvatura da estrutura.
         """
 
+        import numpy as np
+        import math
+
+        def rotation_matrix(axis, theta):
+            """
+            Return the rotation matrix associated with counterclockwise rotation about
+            the given axis by theta radians.
+            """
+            axis = np.asarray(axis)
+            axis = axis / math.sqrt(np.dot(axis, axis))
+            a = math.cos(theta / 2.0)
+            b, c, d = -axis * math.sin(theta / 2.0)
+            aa, bb, cc, dd = a * a, b * b, c * c, d * d
+            bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
+            return np.array([[aa + bb - cc - dd, 2 * (bc + ad), 2 * (bd - ac)],
+                            [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
+                            [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
+
         import math
 
         plane_distance = 2.7
         H2_bond_length = 0.7
-        
-        if vertical:
-            plane_distance += H2_bond_length / 2
 
         # Posições do H
         H_coords = []
@@ -668,27 +683,55 @@ class H2Gen:
         # Para cada posição na lista
         for R2_posic in R2_coords:
 
+            #################### Vetor axis ###################################
+
+            H2_axis = np.array([0,1,0])
+
+            # Rotação aletória em todos os eixos
+            if random_rot:
+
+                alpha = np.random.uniform(0, 2*np.pi)
+                H2_axis = np.dot(rotation_matrix([1,0,0], alpha), H2_axis)
+
+                alpha = np.random.uniform(0, 2*np.pi)
+                H2_axis = np.dot(rotation_matrix([0,1,0], alpha), H2_axis)
+
+                alpha = np.random.uniform(0, 2*np.pi)
+                H2_axis = np.dot(rotation_matrix([0,0,1], alpha), H2_axis)
+            
+            # Vertical, deixando vertical, rotação fixa
+            elif vertical:
+                alpha = np.pi/2
+                H2_axis = np.dot(rotation_matrix([1,0,0], alpha), H2_axis)
+
+            # Rotação horizontal aleatória
+            else:
+                alpha = np.random.uniform(0, 2*np.pi)
+                H2_axis = np.dot(rotation_matrix([0,0,1], alpha), H2_axis)
+            
+            #####################################
+
             # Centro no R3
             center = np.array([R2_posic[0], R2_posic[1], 0.0])
+
+            if vertical:
+                plane_distance += 0.5 * H2_bond_length
+            
+            # Quanto mais inclinado, maior a contribuição
+            elif random_rot:
+                plane_distance += 0.3 * H2_bond_length
 
             # Componente Z  
             if otherside:
                 z = g(center[0], center[1], C) - plane_distance
-
             else:
                 z = g(center[0], center[1], C) + plane_distance
-            
+
+            # Escalonando
+            H2_axis = (H2_bond_length / 2) * H2_axis
+
             # Vetor distância do plano 
             plane_dist_vec = np.array([0.0, 0.0, z], dtype=float)
-            
-            # Meio eixo do H2
-            if vertical:
-                alpha = np.radians(45)
-                H2_axis = (H2_bond_length / 2) * np.array([0.0, 0.0, 1.0])
-
-            else:
-                alpha = np.random.uniform(0, 2*np.pi)
-                H2_axis = (H2_bond_length / 2) * np.array([math.cos(alpha), math.sin(alpha), 0.0])
 
             # Posição dos dois H - centro, mais distância do plano, +/- meio eixo do H2
             posic1 = center + plane_dist_vec + H2_axis 
