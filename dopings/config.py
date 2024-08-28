@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 # Para build local dos docs
-config_files_dir = Path("input/config_files").resolve()
+config_files_dir = Path("input/config_files")
 
 # Para build no Read The Docs
 #config_files_dir = Path("../../input/config_files")
