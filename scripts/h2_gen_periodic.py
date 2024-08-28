@@ -17,7 +17,7 @@ from pathlib import Path
 
 def gen_H2_periodic(p_struct: "PeriodicStructure", 
                     H2_count: int, output_path: str|Path, both_sides:bool=False, 
-                    vertical: bool=False, plot: bool=False):
+                    vertical: bool=False, random_rot=False, plot: bool=False):
 
     """
     Gera um arquivo .xyz da estrutura já adicionada de moléculas de H2.
@@ -55,8 +55,11 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
     for i in range(struct.size):
         struct.atoms[i].coord -= p_struct.initial_vec
 
+    # Se both sides, distribuir contagem dos dois lados
+    H2_gen_count =  (H2_count//2) if (both_sides) else (H2_count)
+
     # Gerando coordenadas de pontos distribuídos no plano XY
-    R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, H2_count)
+    R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, H2_gen_count)
 
     # Gerando coeficientes que ajustam a curva aos átomos
     struct_coords = H2Gen.gen_arrays(struct)
@@ -65,20 +68,25 @@ def gen_H2_periodic(p_struct: "PeriodicStructure",
     # Transformando pontos distribuídos no plano, em átomos de H distribuídos 
     # sobre a estrutura
     R3_H2_coords = H2Gen.gen_R3_H2(R2_H2_coords, C, otherside=False, 
-                                    vertical=vertical)
+                                   vertical=vertical, random_rot=random_rot)
 
     ########################## GERANDO PRO OUTRO LADO #########################
+
 
     # Se for para gerar H2 nos dois lados da estrutura
     if both_sides:
 
+        # Se both sides, distribuir contagem dos dois lados
+        H2_gen_count =  (H2_count//2 + H2_count%2) if (both_sides) else (H2_count)
+        
         # Gerar mais pontos espalhados no plano
-        R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, H2_count)
+        R2_H2_coords = H2Gen.gen_R2_coords_periodic(p_struct, H2_count//2 + H2_count%2)
         
         # Gerar pontos espalhados sobre o outro lado da estrura
         R3_H2_coords_otherside = H2Gen.gen_R3_H2(R2_H2_coords, C, 
                                                   otherside=True, 
-                                                  vertical=vertical)
+                                                  vertical=vertical,
+                                                  random_rot=random_rot)
         
         # Juntar listas de H dos dois lados
         R3_H2_coords += R3_H2_coords_otherside
@@ -130,8 +138,8 @@ root_dir = Path("../input/bases/periodic")
 
 p_structs = []
 
-for base_name in ["g2", "g3", "g4", "g5"]:
-    for cell_size in ["s1", "s2", "s3", "s4"]:
+for base_name in ["g1", "g2", "g3", "g4", "g5"]:
+    for cell_size in ["s2"]:
 
         base = f"{base_name}_{cell_size}"
         dir = root_dir / base
@@ -176,9 +184,16 @@ for p_struct in p_structs:
 
     # Gerar para cada quantidade de H2
     for H2_count in range(max_H2_count + 1):
-    
+        
         # Nome do arquivo .xyz de saída
         output_name = f"{p_struct.name}-{f'{H2_count:03d}'}{'.xyz'}"
+
+        ############### Random Rot Mono #######################################
+
+        output_path = output_path_root / "random-mono" / output_name
+        
+        gen_H2_periodic(p_struct, H2_count, output_path, random_rot=True, 
+                        both_sides=False, plot=False)
 
         ############### Vertical Mono #########################################
 
@@ -189,19 +204,36 @@ for p_struct in p_structs:
         gen_H2_periodic(p_struct, H2_count, output_path, vertical=True, 
                         both_sides=False, plot=False)
         
-        ############### Vertical Dual #########################################
-
-        output_path = output_path_root / "vertical-dual" / output_name
-
-        gen_H2_periodic(p_struct, H2_count, output_path, vertical=True, 
-                        both_sides=True, plot=False)
-        
         ############### Horizontal Mono #######################################
 
         output_path = output_path_root / "horizontal-mono" / output_name
 
         gen_H2_periodic(p_struct, H2_count, output_path, vertical=False, 
                         both_sides=False, plot=False)
+        
+        # Log
+        iterations += 1
+        print("\n\n", p_struct.name, "|", "mono: ", iterations, "\n\n")
+
+    # Gerar até o dobro da quantidade de H2
+    for H2_count in range(2*max_H2_count + 1):
+
+        # Nome do arquivo .xyz de saída
+        output_name = f"{p_struct.name}-{f'{H2_count:03d}'}{'.xyz'}"
+                
+        ############### Random Rot Dual #######################################
+
+        output_path = output_path_root / "random-dual" / output_name
+        
+        gen_H2_periodic(p_struct, H2_count, output_path, random_rot=True, 
+                        both_sides=True, plot=False)
+
+        ############### Vertical Dual #########################################
+
+        output_path = output_path_root / "vertical-dual" / output_name
+
+        gen_H2_periodic(p_struct, H2_count, output_path, vertical=True, 
+                        both_sides=True, plot=False)
         
         ############### Horizontal Dual #######################################
 
@@ -214,6 +246,6 @@ for p_struct in p_structs:
 
         # Log
         iterations += 1
-        print("\n\n", p_struct.name, "|", iterations, "/", 3166, "\n\n")
+        print("\n\n", p_struct.name, "|", "dual: ", iterations, "\n\n")
         
 ###############################################################################

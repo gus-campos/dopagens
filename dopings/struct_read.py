@@ -211,6 +211,78 @@ class StructRead:
             raise AssertionError("Energies not found in file.")
     
     @staticmethod
+    def read_time(struct: "Structure", cpu=False, restart=False) -> float:
+        """
+        Retorna os tempos de otimização.
+
+        Parameters
+        ----------
+
+        struct : Structure
+            Estrutura para a qual se deseja ler os dados.
+
+        cpu : bool, default = False
+            Se invés do tempo de wall, deve ser exibido o tempo de cpu.
+
+        Returns
+        -------
+
+        float
+            Tempo em segundos.
+
+        Raises
+        ------
+
+        AssertionError
+            Time not found in file.
+        """
+
+        times = []
+
+        # Diretório
+        if restart:
+            dir = struct.dir / "before_restart" / main_config["output_name"]
+        else:   
+            dir = struct.dir / main_config["output_name"] 
+
+        # Se não encontrar arquivo, retornar None
+        if not dir.is_file():
+            return None
+
+        # No arquivo, varrer de trás pra frente em busca de ocorrência do termo.
+        # Retornar o primeiro que encontrar
+        with open(dir) as file:
+                    
+            # Pra cada linha do arquivo, na ordem inversa
+            for linha in list(file)[::-1]:
+
+                terms = linha.split()
+
+                # Se for encontrado tal trecho
+                if "Total" in terms  and "=" in terms != -1:
+
+                    if cpu:
+                        times.append(terms[2])                
+                        break
+                    else:
+                        times.append(terms[4])
+                        break
+            
+            # Se n tiver no restart e for tiver pasta de restart
+            # Observação: Apenas captura o último restart
+            if not restart and (struct.dir/"before_restart").is_dir():
+                times.append(StructRead.read_time(struct, restart=True))
+
+            # Tentar converter pra float e juntar tudo
+            try:
+                total = 0
+                for time in times:
+                    total += float(time)
+                return total
+            except:
+                return None
+
+    @staticmethod
     def read_bands(struct: "Structure") -> tuple[float, float]:
         """
         Lê o arquivo band.out da estrutura e retorna a energia do HOMO e
