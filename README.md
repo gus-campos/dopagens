@@ -153,6 +153,6 @@ Uso no próprio diretório, sem necessidade de instalação através da execuç�
 
 ## Documentação <a name="docs"></a>
 
-A documentação está hospedada no Read the Docs e pode ser acessada pelo link abaixo:
+A documentação está hospedada na seguinte github page:
 
-https://dopagens.readthedocs.io/
+https://gus-campos.github.io/dopings-docs.github.io/
