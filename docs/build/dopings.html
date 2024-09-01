@@ -151,6 +151,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id21"><code class="docutils literal notranslate"><span class="pre">StructRead.read_dipole()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id22"><code class="docutils literal notranslate"><span class="pre">StructRead.read_energy()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id23"><code class="docutils literal notranslate"><span class="pre">StructRead.read_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dopings.struct_read.StructRead.read_time"><code class="docutils literal notranslate"><span class="pre">StructRead.read_time()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1007,7 +1008,7 @@ para as moléculas de H2.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id15">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R3_H2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen_R3_H2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R2_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_rot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
 <dd><p>Recebe pontos espalhados sobre um plano, e retorna pontos
 espalhados sobre uma superfície ajustada sobre os átomos da
 estrutura.</p>
@@ -1084,7 +1085,7 @@ curva do tipo:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id18">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
 <dd><p>Gera um plot interativo de todos os átomos, dadas as coordenadas de
 todos eles. Se for passada uma matriz de coeficientes, plota também
 a curva ajustada.</p>
@@ -1424,6 +1425,29 @@ data[1][2] -&gt; 5.091</p>
 <li><p><strong>AssertionError</strong> – The file has no data lines.</p></li>
 <li><p><strong>AssertionError</strong> – Unexpected number of data in geometry file.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dopings.struct_read.StructRead.read_time">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">struct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dopings.structure.Structure" title="dopings.structure.Structure"><span class="pre">Structure</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#dopings.struct_read.StructRead.read_time" title="Link to this definition"></a></dt>
+<dd><p>Retorna os tempos de otimização.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>struct</strong> (<a class="reference internal" href="#dopings.structure.Structure" title="dopings.structure.Structure"><em>Structure</em></a>) – Estrutura para a qual se deseja ler os dados.</p></li>
+<li><p><strong>cpu</strong> (<em>bool</em><em>, </em><em>default = False</em>) – Se invés do tempo de wall, deve ser exibido o tempo de cpu.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tempo em segundos.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – Time not found in file.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1822,12 +1846,15 @@ otimização, energia média de formação por átomo.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id30">
-<span class="sig-name descname"><span class="pre">frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id30" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_charges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id30" title="Link to this definition"></a></dt>
 <dd><p>Gera e escreve o arquivo xyz do último frame da estrutura.
 Cria diretórios necessários caso não existam.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>frame_out</strong> (<em>str</em><em> or </em><em>Path</em>) – Endereço de saída do frame.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frame_out</strong> (<em>str</em><em> or </em><em>Path</em>) – Endereço de saída do frame.</p></li>
+<li><p><strong>ignore_charges</strong> (<em>bool</em><em>, </em><em>default = False</em>) – Se True as cargas não são escritas.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -1924,7 +1951,7 @@ passado.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dopings.structure.Structure.read_struct_pickle">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_struct_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkl_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dopings.structure.Structure.read_struct_pickle" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_struct_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkl_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dopings.structure.Structure" title="dopings.structure.Structure"><span class="pre">Structure</span></a></span></span><a class="headerlink" href="#dopings.structure.Structure.read_struct_pickle" title="Link to this definition"></a></dt>
 <dd><p>Lê um arquivo pickle onde foi escrito um objeto Strucutre,
 cria tal objeto e o retorna.</p>
 <dl class="field-list simple">

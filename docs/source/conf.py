@@ -4,7 +4,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
 
-# sphinx-build -M html docs/source/ docs/build/
+# sphinx-build -b html docs/source/ docs/build/
 
 # Configuration file for the Sphinx documentation builder.
 #
